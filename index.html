@@ -4347,15 +4347,34 @@ function calcTrad(perDayOff, disableDiscounts = false){
   }
 
   let delta = des - atual;
+let desCalculo = des;
 
-  if(atual < 4000 && delta < 500){
-    delta = 500;
-    $("tradAlert").textContent =
-      "⚠️ Pedido mínimo para contas abaixo de 4.000 MMR é 500 MMR.";
-  }
+// bloqueia valores abaixo de 500 MMR para contas abaixo de 4000
+if(atual < 4000 && delta < 500){
+  $("tradRes").innerHTML = `
+  <strong>Delta considerado:</strong>
+  <span style="color:var(--danger);font-weight:800;">${delta} MMR</span>
+  <span style="color:var(--danger);font-weight:800;">(valor inválido)</span><br>
+  <strong>Preço:</strong> <span style="color:var(--danger);font-weight:800;">INVÁLIDO</span>
+`;
 
-  // valor base original do serviço
-  const base = calcTradBaseProgressivo(atual, des);
+  $("tradAlert").textContent =
+    "🔴 Para contas abaixo de 4.000 MMR, o pedido mínimo é de 500 MMR.";
+
+  return {
+    selected:true,
+    ok:false,
+    total:0,
+    totalNoPromo:0,
+    superPromoApplied:false,
+    superPromoDiscount:0,
+    superPromoPct:0
+  };
+}
+
+// valor base original do serviço
+const base = calcTradBaseProgressivo(atual, desCalculo);
+
 
     // desconto normal do serviço
   let pct = 0;
@@ -4462,7 +4481,7 @@ function calcTrad(perDayOff, disableDiscounts = false){
     details:
 `🆙 BOOST TRADICIONAL
 • MMR atual: ${atual}
-• MMR desejado: ${des}
+• MMR desejado: ${desCalculo}
 • Quantidade: ${delta} MMR
 • Valor base: ${money(base)}
 • Desconto padrão do site: ${pct > 0 ? Math.round(pct * 100) + "% OFF" : "Nenhum"}
