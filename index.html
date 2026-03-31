@@ -3595,29 +3595,47 @@ Aqui meu foco é oferecer um serviço sério e confiável, sempre com transparê
 
 /* ========= CUPONS ========= */
 const COUPONS = {
-  "25%OFF92067906": 0.25,
-  "20%OFF92067906": 0.20,
-  "15%OFF92067906": 0.15,
-  "10%OFF92067906": 0.10,
-  "5%OFF92067906":  0.05
+  "25%OFFBOLA1234": 0.25,
+  "20%OFFBOLA1234": 0.20,
+  "15%OFFBOLA1234": 0.15,
+  "10%OFFBOLA1234": 0.10,
+  "5%OFFBOLA1234":  0.05
 };
+
+const TRAD_ONLY_COUPONS = {
+  "TRADICIONAL5%OFFBOLA1234": 0.05,
+  "TRADICIONAL10%OFFBOLA1234": 0.10,
+  "TRADICIONAL15%OFFBOLA1234": 0.15,
+  "TRADICIONAL20%OFFBOLA1234": 0.20,
+  "TRADICIONAL25%OFFBOLA1234": 0.25
+};
+
+const RECA_ONLY_COUPONS = {
+  "RECALIBRA5%OFFBOLA1234": 0.05,
+  "RECALIBRA10%OFFBOLA1234": 0.10,
+  "RECALIBRA15%OFFBOLA1234": 0.15,
+  "RECALIBRA20%OFFBOLA1234": 0.20,
+  "RECALIBRA25%OFFBOLA1234": 0.25
+};
+
 let activeCoupon = null;
 let couponDiscount = 0;
 
-let activePromo = null;
-let promoMessage = "";
-let discountPct = 0;
+let activeTradCoupon = null;
+let tradCouponDiscount = 0;
+
+let activeRecaCoupon = null;
+let recaCouponDiscount = 0;
 
 
   /* ========= CONTROLE GLOBAL DE PROMOÇÕES ========= */
 
 
 /* ========= aqui e a promoçao 10% 15% e 25% SUPER PROMO BOOST TRADICIONAL para desativar substitua true por false ========= */
-const SUPER_PROMO_ENABLED = false; 
+const SUPER_PROMO_ENABLED = true; 
 
 
 // troque para false quando não quiser mostrar a promoção
-
 function getTradSuperPromoPct(mmrAtual){
   if(mmrAtual >= 0 && mmrAtual < 4000) return 0.10;
   if(mmrAtual >= 4000 && mmrAtual < 5000) return 0.15;
@@ -4232,29 +4250,114 @@ function checkCoupon() {
   if (!input) {
     activeCoupon = null;
     couponDiscount = 0;
+
+    activeTradCoupon = null;
+    tradCouponDiscount = 0;
+
+    activeRecaCoupon = null;
+    recaCouponDiscount = 0;
+
     msg.style.display = "none";
+    msg.style.color = "var(--success)";
     updateAll();
     return;
   }
 
+  // 1) CUPONS ANTIGOS / GERAIS
   if (COUPONS[input]) {
     activeCoupon = input;
     couponDiscount = COUPONS[input];
 
-    msg.style.display = "block";
-    msg.textContent = `✅ Cupom aplicado: ${input} (${Math.round(couponDiscount*100)}% OFF)`;
+    activeTradCoupon = null;
+    tradCouponDiscount = 0;
 
-  } else {
+    activeRecaCoupon = null;
+    recaCouponDiscount = 0;
+
+    msg.style.display = "block";
+    msg.style.color = "var(--success)";
+    msg.textContent = `✅ Cupom aplicado: ${input} (${Math.round(couponDiscount * 100)}% OFF)`;
+    updateAll();
+    return;
+  }
+
+  // 2) CUPONS SOMENTE DO BOOST TRADICIONAL
+  if (TRAD_ONLY_COUPONS[input]) {
+    if (!$("useTrad").checked) {
+      activeCoupon = null;
+      couponDiscount = 0;
+      activeTradCoupon = null;
+      tradCouponDiscount = 0;
+      activeRecaCoupon = null;
+      recaCouponDiscount = 0;
+
+      msg.style.display = "block";
+      msg.style.color = "var(--danger)";
+      msg.textContent = "❌ Esse cupom é válido apenas para o Boost Tradicional.";
+      updateAll();
+      return;
+    }
+
     activeCoupon = null;
     couponDiscount = 0;
 
+    activeTradCoupon = input;
+    tradCouponDiscount = TRAD_ONLY_COUPONS[input];
+
+    activeRecaCoupon = null;
+    recaCouponDiscount = 0;
+
     msg.style.display = "block";
-    msg.style.color = "var(--danger)";
-    msg.textContent = "❌ Cupom inválido";
+    msg.style.color = "var(--success)";
+    msg.textContent = `✅ Cupom do Boost Tradicional aplicado: ${input} (${Math.round(tradCouponDiscount * 100)}% OFF)`;
+    updateAll();
+    return;
   }
 
+  // 3) CUPONS SOMENTE DA RECALIBRAÇÃO
+  if (RECA_ONLY_COUPONS[input]) {
+    if (!$("useRecal").checked) {
+      activeCoupon = null;
+      couponDiscount = 0;
+      activeTradCoupon = null;
+      tradCouponDiscount = 0;
+      activeRecaCoupon = null;
+      recaCouponDiscount = 0;
+
+      msg.style.display = "block";
+      msg.style.color = "var(--danger)";
+      msg.textContent = "❌ Esse cupom é válido apenas para Recalibração.";
+      updateAll();
+      return;
+    }
+
+    activeCoupon = null;
+    couponDiscount = 0;
+    activeTradCoupon = null;
+    tradCouponDiscount = 0;
+
+    activeRecaCoupon = input;
+    recaCouponDiscount = RECA_ONLY_COUPONS[input];
+
+    msg.style.display = "block";
+    msg.style.color = "var(--success)";
+    msg.textContent = `✅ Cupom da Recalibração aplicado: ${input} (${Math.round(recaCouponDiscount * 100)}% OFF)`;
+    updateAll();
+    return;
+  }
+
+  // 4) INVÁLIDO
+  activeCoupon = null;
+  couponDiscount = 0;
+  activeTradCoupon = null;
+  tradCouponDiscount = 0;
+  activeRecaCoupon = null;
+  recaCouponDiscount = 0;
+
+  msg.style.display = "block";
+  msg.style.color = "var(--danger)";
+  msg.textContent = "❌ Cupom inválido";
   updateAll();
-  syncSelectedCards();
 }
 
 
@@ -5609,6 +5712,10 @@ if(couponBox){
   couponBox.style.display = selectedAny ? "block" : "none";
 }
 
+if(!$("useTrad").checked){
+  activeTradCoupon = null;
+  tradCouponDiscount = 0;
+}
 
 // mostrar confirmação somente se houver item no carrinho
 const confirmBox = $("confirmBox");
@@ -5689,17 +5796,51 @@ let offTotal = 0;
   
 // ===== calcula porcentagem de desconto FINAL =====
 
-// 🔥 CUPOM TEM PRIORIDADE TOTAL
+// 🔥 CUPOM GERAL TEM PRIORIDADE TOTAL
 if (!disableAllDiscounts && activeCoupon && couponDiscount > 0) {
   total = totalNoPromo * (1 - couponDiscount);
   discountPct = Math.round(couponDiscount * 100);
+
+// 🔥 CUPOM NOVO DO BOOST TRADICIONAL afeta só o Tradicional
+} else if (
+  !disableAllDiscounts &&
+  activeTradCoupon &&
+  tradCouponDiscount > 0 &&
+  trad.selected &&
+  trad.ok &&
+  !trad.superPromoApplied
+) {
+  const descontoTrad = trad.totalNoPromo * tradCouponDiscount;
+  total -= descontoTrad;
+
+  discountPct = totalNoPromo > 0
+    ? Math.round((1 - total / totalNoPromo) * 100)
+    : 0;
+
+  items.push(`• Boost Tradicional — cupom ${activeTradCoupon}: -${money(descontoTrad)}`);
+
+// 🔥 CUPOM NOVO DA RECALIBRAÇÃO afeta só a Recalibração
+} else if (
+  !disableAllDiscounts &&
+  activeRecaCoupon &&
+  recaCouponDiscount > 0 &&
+  rec.selected &&
+  rec.ok
+) {
+  const descontoReca = rec.totalNoPromo * recaCouponDiscount;
+  total -= descontoReca;
+
+  discountPct = totalNoPromo > 0
+    ? Math.round((1 - total / totalNoPromo) * 100)
+    : 0;
+
+  items.push(`• Recalibração — cupom ${activeRecaCoupon}: -${money(descontoReca)}`);
 } else {
   // ❌ sem cupom → desconto vem das promoções normais
   discountPct = totalNoPromo > 0
     ? Math.round((1 - total / totalNoPromo) * 100)
     : 0;
 }
-
 
 
 
@@ -5822,11 +5963,18 @@ const msg = encodeURIComponent(
     : ""
   ) +
 
-  (activeCoupon
+  (
+  activeCoupon
     ? "\n• Cupom aplicado: " + activeCoupon +
       " (" + Math.round(couponDiscount * 100) + "% OFF)"
+    : activeTradCoupon
+    ? "\n• Cupom Boost Tradicional aplicado: " + activeTradCoupon +
+      " (" + Math.round(tradCouponDiscount * 100) + "% OFF)"
+    : activeRecaCoupon
+    ? "\n• Cupom Recalibração aplicado: " + activeRecaCoupon +
+      " (" + Math.round(recaCouponDiscount * 100) + "% OFF)"
     : ""
-  ) +
+) +
 
   "\n\n💵 *TOTAL FINAL:* " + money(total) +
   "\n\nObs.: Datas e horários serão combinados via WhatsApp após a confirmação do pagamento."
