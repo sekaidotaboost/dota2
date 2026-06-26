@@ -2237,77 +2237,47 @@ input[type=text]:focus{
    DARK CARNIVAL
 ===========================*/
 
-.service-card[data-service="dark"] .pill:last-child{
+.service-card[data-service="dark"]{
+    position:relative;
+    border:1px solid rgba(255,210,80,.35);
+    box-shadow:
+        0 0 10px rgba(255,210,80,.10),
+        0 0 25px rgba(255,180,40,.06);
+    transition:.25s ease;
+}
 
-    background:linear-gradient(135deg,#ffdc73d7,#d89d09);
-    color:#2b1700;
-
-    font-weight:800;
+.service-card[data-service="dark"]:hover{
+    border-color:rgba(255,220,120,.65);
 
     box-shadow:
-        0 0 8px rgba(255,210,90,.45),
-        0 0 20px rgba(255,180,40,.20);
+        0 0 14px rgba(255,220,120,.18),
+        0 0 35px rgba(255,180,40,.14);
 
-    position:relative;
-
-    overflow:visible;
-
-    animation:darkGlow 2.5s infinite;
+    transform:translateY(-2px);
 }
 
-.service-card[data-service="dark"] .pill:last-child::after{
 
-    content:"✨";
-
+.service-card[data-service="dark"]::before{
+    content:"";
     position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:3px;
 
-    right:-12px;
-    top:-10px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #ffd86b,
+        #fff3b0,
+        #ffd86b,
+        transparent
+    );
 
-    font-size:15px;
+    border-radius:24px 24px 0 0;
 
-    animation:darkStar 3s infinite ease-in-out;
-
+    box-shadow:0 0 12px rgba(255,215,90,.55);
 }
-
-@keyframes darkGlow{
-
-    0%{
-        box-shadow:0 0 6px rgba(255,215,70,.25);
-    }
-
-    50%{
-        box-shadow:
-            0 0 15px rgba(255, 219, 90, 0.555),
-            0 0 30px rgba(255,170,20,.45);
-    }
-
-    100%{
-        box-shadow:0 0 6px rgba(255,215,70,.25);
-    }
-
-}
-
-@keyframes darkStar{
-
-    0%{
-        transform:translateY(0) rotate(0deg);
-        opacity:.3;
-    }
-
-    50%{
-        transform:translateY(-8px) rotate(180deg);
-        opacity:1;
-    }
-
-    100%{
-        transform:translateY(0) rotate(360deg);
-        opacity:.3;
-    }
-
-}
-
-
 
 
 
@@ -3866,12 +3836,12 @@ const money = (n) => "R$ " + n.toFixed(2).replace(".", ",");
 const clampInt = (v, min, max) => (isNaN(v) ? null : Math.min(Math.max(v, min), max));
 
 const SERVICE_CATEGORIES = {
-  all: ["trad","double","casual","rolefarm","recal","replay","coach","low","turbo"],
+  all: ["trad","double","casual","rolefarm","recal","replay","coach","low","turbo","dark"],
   aulas: ["replay","coach"],
   boost: ["trad","double","casual"],
   economico: ["casual","recal"],
   penalidade: ["low","rolefarm"],
-  evento: ["turbo"]
+  evento: ["turbo","dark"]
 };
 
 function isValidCustomerName(name){
@@ -4243,6 +4213,9 @@ function initNewTopMenu(){
 }
 
 function setActiveCategory(category){
+
+  console.log("Categoria clicada:", category);
+
   const buttons = document.querySelectorAll(".categoryBtn");
   let finalCategory = category;
 
@@ -4259,11 +4232,26 @@ function setActiveCategory(category){
   document.querySelectorAll(".service-card").forEach(card => {
     const service = card.dataset.service;
     const show = allowed.includes(service);
+
+    console.log(service, "→", show);
+
     card.classList.toggle("hiddenByFilter", !show);
   });
 
   syncBodies();
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 function ensureOneCategoryActive(){
   const activeBtn = document.querySelector(".categoryBtn.active");
@@ -6237,19 +6225,19 @@ $("zapBtn").disabled = !canZap;
 $("zapBtn").onclick = () => {
   let detalhes = [];
 
-    [trad,dbl,cas,rolefarm,rec,rep,coach,low,turbo].forEach(obj => {
+    [trad,dbl,cas,rolefarm,rec,rep,coach,low,turbo,dark].forEach(obj => {
     if(obj.selected && obj.ok && obj.details){
-      detalhes.push(obj.details);
+        detalhes.push(obj.details);
     }
-  });
+});
   let offLines = [];
 let offTotal = 0;
 
-[trad,dbl,cas,rolefarm,rec,rep,coach,low,turbo].forEach(obj => {
-  if(obj.selected && obj.ok && obj.offValue > 0){
-    offLines.push(`• ${obj.offLabel}: ${money(obj.offValue)}`);
-    offTotal += obj.offValue;
-  }
+[trad,dbl,cas,rolefarm,rec,rep,coach,low,turbo,dark].forEach(obj => {
+    if(obj.selected && obj.ok && obj.offValue > 0){
+        offLines.push(`• ${obj.offLabel}: ${money(obj.offValue)}`);
+        offTotal += obj.offValue;
+    }
 });
 
 
