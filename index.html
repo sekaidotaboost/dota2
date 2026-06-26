@@ -2231,6 +2231,86 @@ input[type=text]:focus{
 
 
 
+
+
+/* ===========================
+   DARK CARNIVAL
+===========================*/
+
+.service-card[data-service="dark"] .pill:last-child{
+
+    background:linear-gradient(135deg,#ffdc73d7,#d89d09);
+    color:#2b1700;
+
+    font-weight:800;
+
+    box-shadow:
+        0 0 8px rgba(255,210,90,.45),
+        0 0 20px rgba(255,180,40,.20);
+
+    position:relative;
+
+    overflow:visible;
+
+    animation:darkGlow 2.5s infinite;
+}
+
+.service-card[data-service="dark"] .pill:last-child::after{
+
+    content:"✨";
+
+    position:absolute;
+
+    right:-12px;
+    top:-10px;
+
+    font-size:15px;
+
+    animation:darkStar 3s infinite ease-in-out;
+
+}
+
+@keyframes darkGlow{
+
+    0%{
+        box-shadow:0 0 6px rgba(255,215,70,.25);
+    }
+
+    50%{
+        box-shadow:
+            0 0 15px rgba(255, 219, 90, 0.555),
+            0 0 30px rgba(255,170,20,.45);
+    }
+
+    100%{
+        box-shadow:0 0 6px rgba(255,215,70,.25);
+    }
+
+}
+
+@keyframes darkStar{
+
+    0%{
+        transform:translateY(0) rotate(0deg);
+        opacity:.3;
+    }
+
+    50%{
+        transform:translateY(-8px) rotate(180deg);
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(0) rotate(360deg);
+        opacity:.3;
+    }
+
+}
+
+
+
+
+
 </style>
 </head>
 <body>
@@ -5971,7 +6051,7 @@ let offLines = [];
 let offTotal = 0;
 
 
-    [trad,dbl,cas,rec,rep,coach,low,turbo,dark,rolefarm].forEach(obj => {
+    [trad,dbl,cas,rolefarm,rec,rep,coach,low,turbo,dark].forEach(obj => {
   if(obj.selected){
     if(!obj.ok){
       invalid.push("⚠️ Corrija os dados de um dos serviços selecionados.");
@@ -6413,6 +6493,10 @@ heroImages.forEach(img => {
   });
 
 });
+
+
+
+
 
 
 
