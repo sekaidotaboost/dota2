@@ -1714,6 +1714,24 @@ input[type=range]::-moz-range-thumb{
 }
 
 
+.service-card:not([data-service="dark"]):hover{
+
+    border-color:rgba(34,197,94,.45);
+
+    box-shadow:
+        0 0 18px rgba(34,197,94,.18),
+        0 0 36px rgba(34,197,94,.10);
+
+    background:linear-gradient(
+        180deg,
+        rgba(24,40,28,.35),
+        rgba(18,24,22,.25)
+    );
+
+    transition:.22s;
+}
+
+
 .check{
   display:flex;
   align-items:center;
@@ -2201,85 +2219,60 @@ input[type=text]:focus{
   }
 }
 
-
-
-/* ============================= */
-/* DARK CARNIVAL - BILHETES      */
-/* ============================= */
-
-.dark-carnival-tickets{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(60px,1fr));
-    gap:12px;
-    margin-top:12px;
-    justify-items:center;
-}
-
-.dark-carnival-tickets img{
-    width:56px;
-    height:56px;
-    object-fit:contain;
-    border-radius:10px;
-    transition:all .25s ease;
-    cursor:pointer;
-}
-
-.dark-carnival-tickets img:hover{
-    transform:translateY(-4px) scale(1.10);
-    filter:drop-shadow(0 0 10px rgba(180,90,255,.8));
-}
-
-
-
-
-
 /* ===========================
    DARK CARNIVAL
 ===========================*/
 
 .service-card[data-service="dark"]{
     position:relative;
-    border:1px solid rgba(255,210,80,.35);
+    border:1px solid #d8b34b;
     box-shadow:
-        0 0 10px rgba(255,210,80,.10),
-        0 0 25px rgba(255,180,40,.06);
-    transition:.25s ease;
+        0 0 12px rgba(255,215,90,.12);
 }
 
 .service-card[data-service="dark"]:hover{
-    border-color:rgba(255,220,120,.65);
+    border-color:#ffd86b;
 
     box-shadow:
-        0 0 14px rgba(255,220,120,.18),
-        0 0 35px rgba(255,180,40,.14);
-
-    transform:translateY(-2px);
+        0 0 14px rgba(255, 219, 120, 0.904),
+        0 0 35px rgba(255,180,40,.12);
 }
 
+.service-card[data-service="dark"].is-selected{
+    border-color:#ffd86b;
 
-.service-card[data-service="dark"]::before{
+    background:linear-gradient(
+        180deg,
+        rgba(55,35,10,.35),
+        rgba(20,18,12,.25)
+    );
+
+    box-shadow:
+        0 0 20px rgba(255,215,90,.18),
+        0 0 40px rgba(255,180,40,.12);
+}
+
+.service-card[data-service="dark"].is-selected::before{
     content:"";
     position:absolute;
-    top:0;
     left:0;
+    top:0;
     width:100%;
     height:3px;
+
+    border-radius:24px 24px 0 0;
 
     background:linear-gradient(
         90deg,
         transparent,
         #ffd86b,
-        #fff3b0,
+        #fff7c7,
         #ffd86b,
         transparent
     );
 
-    border-radius:24px 24px 0 0;
-
-    box-shadow:0 0 12px rgba(255,215,90,.55);
+    box-shadow:0 0 12px rgba(255,215,90,.6);
 }
-
-
 
 </style>
 </head>
@@ -4213,9 +4206,6 @@ function initNewTopMenu(){
 }
 
 function setActiveCategory(category){
-
-  console.log("Categoria clicada:", category);
-
   const buttons = document.querySelectorAll(".categoryBtn");
   let finalCategory = category;
 
@@ -4232,26 +4222,11 @@ function setActiveCategory(category){
   document.querySelectorAll(".service-card").forEach(card => {
     const service = card.dataset.service;
     const show = allowed.includes(service);
-
-    console.log(service, "→", show);
-
     card.classList.toggle("hiddenByFilter", !show);
   });
 
   syncBodies();
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 function ensureOneCategoryActive(){
   const activeBtn = document.querySelector(".categoryBtn.active");
@@ -5114,7 +5089,19 @@ function calcRoleFarm(disableDiscounts = false){
   };
 }
 
+function updateDarkPreview() {
 
+    const days = Number(document.getElementById("darkDays")?.value || 1);
+
+    const details = document.getElementById("darkPreviewDetails");
+
+    if(details){
+        details.innerHTML =
+            "Total de partidas: " + (days * 8) +
+            "<br>Diárias contratadas: " + days;
+    }
+
+}
 
 
 /* ========= Recalibração ========= */
@@ -6483,7 +6470,28 @@ heroImages.forEach(img => {
 });
 
 
+// ===============================
+// Seleção visual do Dark Carnival
+// ===============================
+const useDark = document.getElementById("useDark");
+const darkCard = document.querySelector('[data-service="dark"]');
 
+if (useDark && darkCard) {
+
+    function atualizarDarkCard() {
+
+        if (useDark.checked) {
+            darkCard.classList.add("is-selected");
+        } else {
+            darkCard.classList.remove("is-selected");
+        }
+
+    }
+
+    useDark.addEventListener("change", atualizarDarkCard);
+
+    atualizarDarkCard();
+}
 
 
 
