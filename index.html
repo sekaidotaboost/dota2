@@ -2202,6 +2202,35 @@ input[type=text]:focus{
 }
 
 
+
+/* ============================= */
+/* DARK CARNIVAL - BILHETES      */
+/* ============================= */
+
+.dark-carnival-tickets{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(60px,1fr));
+    gap:12px;
+    margin-top:12px;
+    justify-items:center;
+}
+
+.dark-carnival-tickets img{
+    width:56px;
+    height:56px;
+    object-fit:contain;
+    border-radius:10px;
+    transition:all .25s ease;
+    cursor:pointer;
+}
+
+.dark-carnival-tickets img:hover{
+    transform:translateY(-4px) scale(1.10);
+    filter:drop-shadow(0 0 10px rgba(180,90,255,.8));
+}
+
+
+
 </style>
 </head>
 <body>
@@ -3087,6 +3116,114 @@ input[type=text]:focus{
 
   
 
+
+<!-- Farm de Bilhetes - Dark Carnival -->
+<div class="card service-card" data-service="dark">
+  <h2>
+    <span>Farm de Bilhetes - Dark Carnival</span>
+    <span class="pill">🎟️ Evento</span>
+    <span class="pill">
+      <label class="check" style="margin:0">
+        <input type="checkbox" id="useDark">
+        Incluir
+      </label>
+    </span>
+  </h2>
+
+  <div class="serviceBody" id="bodyDark">
+
+    <p style="font-size:13px;line-height:1.5">
+      • <strong>1 diária</strong> representa <strong>8 partidas de Turbo</strong><br>
+      • Cada diária custa <strong>R$ 100,00</strong><br>
+      • O objetivo é acumular <strong>Bilhetes do Dark Carnival</strong><br>
+      • O serviço é vendido <strong>por diária</strong>, não por vitória
+    </p>
+
+    <label>Diárias de serviço (1 a 30)</label>
+    <input
+      type="number"
+      id="darkDays"
+      min="1"
+      max="30"
+      value="1"
+      disabled>
+
+    <div class="servicePreviewBox" id="darkPreviewBox">
+      <img id="darkPreviewImg" src="medalhas/darkcarnival.png" alt="Dark Carnival">
+
+      <div class="servicePreviewText">
+        <span>Serviço selecionado</span>
+
+        <strong>Farm de Bilhetes</strong>
+
+        <div id="darkPreviewDetails">
+          Total de partidas: 8<br>
+          Diárias contratadas: 1
+        </div>
+      </div>
+    </div>
+
+    
+
+    <details>
+      <summary>🎴 Saiba mais sobre o Farm de Bilhetes</summary>
+
+      <p>
+        O objetivo deste serviço é acumular <strong>Bilhetes do evento Dark Carnival</strong>
+        através de partidas no modo Turbo.
+      </p>
+
+      <ul>
+        <li>✅ Cada diária corresponde a <strong>8 partidas</strong>.</li>
+        <li>✅ Cada vitória concede <strong>2 bilhetes</strong>.</li>
+        <li>❌ Derrotas não concedem bilhetes.</li>
+        <li>❌ Vitórias não são garantidas.</li>
+        <li>❌ Não é possível escolher heróis.</li>
+        <li>❌ Não é possível escolher quais bilhetes serão obtidos.</li>
+        <li>✅ Serão utilizados heróis que melhor se encaixarem em cada partida para aumentar as chances de vitória.</li>
+        <li>✅ Os bilhetes podem ser utilizados posteriormente no sistema oficial de trocas do evento.</li>
+      </ul>
+
+      <h4 style="margin-top:18px">🎟️ Bilhetes que podem ser obtidos</h4>
+
+      <div class="dark-carnival-tickets">
+
+        <img src="bilhetes/png_bilhete_o_louco.png" title="O Louco">
+
+        <img src="bilhetes/png_bilhete_o_mago.png" title="O Mago">
+
+        <img src="bilhetes/png_bilhete_a_sacerdotisa.png" title="A Sacerdotisa">
+
+        <img src="bilhetes/png_bilhete_o_diabo.png" title="O Diabo">
+
+        <img src="bilhetes/png_bilhete_o_imperador.png" title="O Imperador">
+
+        <img src="bilhetes/png_bilhete_os_enamorados.png" title="Os Enamorados">
+
+        <img src="bilhetes/png_bilhete_a_forca.png" title="A Força">
+
+        <img src="bilhetes/png_bilhete_o_eremita.png" title="O Eremita">
+
+        <img src="bilhetes/png_bilhete_a_estrela.png" title="A Estrela">
+
+        <img src="bilhetes/png_bilhete_a_roda_da_fortuna.png" title="A Roda da Fortuna">
+
+        <img src="bilhetes/png_bilhete_a_morte.png" title="A Morte">
+
+      </div>
+
+    </details>
+
+    <div class="result" id="darkRes">
+      Selecione as opções para ver o valor.
+    </div>
+
+    <div class="alert" id="darkAlert"></div>
+
+  </div>
+</div>
+
+
     <!-- Total -->
     <div class="card big" id="summaryCard">
       <h2><span>Resumo do pacote</span><span class="pill">Total final</span></h2>
@@ -3819,6 +3956,9 @@ limitInput("repDias", 1, 6, 6);
 limitInput("turboDays", 1, 30, 30);
 limitInput("turboSimDays", 1, 30, 30);
 
+// DARK CARNIVAL
+limitInput("darkDays", 1, 30, 30);
+
 
 function getRankByMMR(mmr){
   const safeMMR = Math.max(0, Number(mmr) || 0);
@@ -4212,6 +4352,7 @@ function syncBodies(){
     ["useCoach","bodyCoach"],
     ["useLow","bodyLow"],
     ["useTurbo","bodyTurbo"],
+    ["useDark","bodyDark"],
   ];
 
   const activeCategoryBtn = document.querySelector(".categoryBtn.active");
@@ -4240,7 +4381,7 @@ function enableGroup(useId, fields){
 }
 
 function countBoostSelected(){
-  return ["useTrad","useDouble","useCasual"].filter(id => $(id).checked).length;
+  return ["useTrad","useDouble","useCasual","useDark"].filter(id => $(id).checked).length;
 }
 
 function checkCoupon() {
@@ -5389,6 +5530,94 @@ function calcTurboXP(){
     blocksDiscounts:true
   };
 }
+
+  /* ========= Dark Carnival ========= */
+function calcDarkCarnival(){
+
+  if(!$("useDark").checked){
+    $("darkRes").innerHTML = "Selecione as opções para ver o valor.";
+    $("darkAlert").textContent = "";
+
+    return{
+      selected:false,
+      ok:true,
+      total:0,
+      totalNoPromo:0,
+      text:"",
+      details:"",
+      blocksDiscounts:true
+    };
+  }
+
+  const days = clampInt(Number($("darkDays").value),1,30);
+  const off = false;
+
+  $("darkAlert").textContent = "";
+
+  if(days === null){
+
+    $("darkRes").innerHTML = "<strong>Preço: INVÁLIDO</strong>";
+    $("darkAlert").textContent = "🔴 Quantidade de diárias inválida.";
+
+    return{
+      selected:true,
+      ok:false,
+      total:0,
+      totalNoPromo:0,
+      text:"",
+      details:"",
+      blocksDiscounts:true
+    };
+  }
+
+  const PRICE_DAY = 100;
+
+const base = days * PRICE_DAY;
+const total = base;
+
+  $("darkRes").innerHTML = `
+    <strong>📆 Diárias contratadas:</strong> ${days}<br>
+    <strong>🎮 Total de partidas:</strong> ${days*8}<br>
+    <strong>🎟️ Bilhetes por vitória:</strong> 2<br>
+<div class="hr"></div>
+    <strong>Total:</strong>
+    <span class="newPrice">${money(total)}</span>
+  `;
+
+  return{
+
+    selected:true,
+    ok:true,
+
+    total,
+    totalNoPromo:total,
+
+    baseValue: base,
+offValue: 0,
+
+offLabel: "",
+
+    text:`Dark Carnival: ${days} diária(s) | Total: ${money(total)}`,
+
+    details:
+`🎴 FARM DE BILHETES - DARK CARNIVAL
+• Diárias: ${days}
+• Partidas: ${days * 8}
+• Valor do serviço: ${money(total)}
+
+Observação:
+• Serviço vendido por diária.
+• Cada diária inclui 8 partidas de Turbo.
+• Cada vitória concede 2 bilhetes.
+• Não há garantia de vitórias.
+• Não é possível escolher heróis.
+• Os bilhetes obtidos são aleatórios.`,
+
+    blocksDiscounts:true
+
+  };
+
+}
 function updateDoublePreview(){
   const mmr = Number($("doubleMMR")?.value || 0);
   const rank = getRankByMMR(mmr);
@@ -5623,6 +5852,7 @@ if(tradRankSelectors){
   enableGroup("useLow",    ["lowQty","lowOff"]);
   enableGroup("useRoleFarm", ["roleFarmMMR","roleFarmDays","roleFarmOff"]);
   enableGroup("useTurbo", ["turboDays","turboOff","turboWins","turboSimDays"]);
+  enableGroup("useDark", ["darkDays"]);
 
   // 🔒 REGRA REPLAY: dias não podem ultrapassar análises
 if($("useReplay").checked){
@@ -5648,16 +5878,19 @@ if($("useReplay").checked){
 
   const low = calcLowPriority();
 const turbo = calcTurboXP();
+const dark = calcDarkCarnival();
 
 const disableAllDiscounts =
   (low.selected && low.ok) ||
-  (turbo.selected && turbo.ok);
+  (turbo.selected && turbo.ok) ||
+  (dark.selected && dark.ok);
 
 const trad = calcTrad(perDayOff, disableAllDiscounts);
 const dbl  = calcDouble(disableAllDiscounts);
 const cas  = calcCasual(disableAllDiscounts);
 const rec  = calcRecal();
 const rep  = calcReplay(disableAllDiscounts);
+
 
 const rolefarm = calcRoleFarm(disableAllDiscounts);
 
@@ -5698,7 +5931,7 @@ const noDiscountServiceActive = disableAllDiscounts;
 
 
 // verifica se existe pelo menos 1 item no carrinho
-const selectedAny = [trad,dbl,cas,rolefarm,rec,rep,coach,low,turbo].some(x => x.selected);
+const selectedAny = [trad,dbl,cas,rolefarm,rec,rep,coach,low,turbo,dark].some(x => x.selected);
 
 // mostrar nome do cliente somente se houver item no carrinho
 const customerBox = $("customerBox");
@@ -5738,7 +5971,7 @@ let offLines = [];
 let offTotal = 0;
 
 
-    [trad,dbl,cas,rec,rep,coach,low,turbo,rolefarm].forEach(obj => {
+    [trad,dbl,cas,rec,rep,coach,low,turbo,dark,rolefarm].forEach(obj => {
   if(obj.selected){
     if(!obj.ok){
       invalid.push("⚠️ Corrija os dados de um dos serviços selecionados.");
@@ -5759,6 +5992,7 @@ let offTotal = 0;
       if(obj === coach) floatItems.push("Coach");
       if(obj === low) floatItems.push("Low Priority");
       if(obj === turbo) floatItems.push("Turbo Evento de XP");
+      if(obj === dark) floatItems.push("Dark Carnival");
 
       // ✅ DESCONTO DE VOLUME DO REPLAY (AQUI 👇)
       if(obj.descontoReplay && obj.descontoReplay > 0){
@@ -6020,7 +6254,7 @@ if(floatBox && ftItemsEl && ftPrice && ftDisc){
 
 [
 
-  "recalMode1","recalMode2","recalMode3","useTrad","useDouble","useCasual","useRoleFarm","useRecal","useReplay","useCoach","useLow","useTurbo",
+  "recalMode1","recalMode2","recalMode3","useTrad","useDouble","useCasual","useRoleFarm","useRecal","useReplay","useCoach","useLow","useTurbo","useDark",
   "tradAtual","tradDesejado","tradOff","tradSuperPromo",
   "doubleMMR","doubleDays","doubleOff",
 "casualMMR","casualDays","casualOff",
@@ -6030,6 +6264,7 @@ if(floatBox && ftItemsEl && ftPrice && ftDisc){
   "coachP1","coachP2","coachOff",
   "lowQty","lowOff",
   "turboDays","turboOff","turboWins","turboSimDays",
+  "darkDays",
   "packTerms","globalBS",
   "tradSuggest","tradBudget"
 ]
@@ -6052,6 +6287,7 @@ updateCasualPreview();
 updateCasualOffText();
 updateRoleFarmOffText();
 updateTurboPreview();
+updateDarkPreview();
 updateCoachCards();
 initCategoryFilters();
 initPromoToggle();
@@ -6139,16 +6375,17 @@ $("roleFarmDays")?.addEventListener("input", () => {
 
 function syncSelectedCards(){
   const map = [
-    ["useTrad", "trad"],
-    ["useDouble", "double"],
-    ["useCasual", "casual"],
-    ["useRoleFarm", "rolefarm"],
-    ["useRecal", "recal"],
-    ["useReplay", "replay"],
-    ["useCoach", "coach"],
-    ["useLow", "low"],
-    ["useTurbo", "turbo"]
-  ];
+  ["useTrad", "trad"],
+  ["useDouble", "double"],
+  ["useCasual", "casual"],
+  ["useRoleFarm", "rolefarm"],
+  ["useRecal", "recal"],
+  ["useReplay", "replay"],
+  ["useCoach", "coach"],
+  ["useLow", "low"],
+  ["useTurbo", "turbo"],
+  ["useDark", "dark"]
+];
 
   map.forEach(([inputId, serviceName]) => {
     const checkbox = $(inputId);
