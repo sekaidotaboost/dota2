@@ -5396,8 +5396,9 @@ function calcCoach(tradEligible, disableDiscounts = false){
 
 /* ========= Combo controlado ========= */
 function comboCasualReplay(cas, rep, disableDiscounts = false){
+
   // 🔥 Combo: Boost Casual + Replay
-    if(
+  if(
     !disableDiscounts &&
     activePromo === null &&
     cas.selected && cas.ok &&
@@ -5409,11 +5410,16 @@ function comboCasualReplay(cas, rep, disableDiscounts = false){
     activePromo = "Boost Casual + Replay";
     promoMessage = "🔥 Desconto da promoção Boost Casual + Replay ativada.";
 
-    const normal = cas.total + rep.total;
-    return { active:true, delta:(155 - normal) };
+    return {
+      active: true,
+      delta: -10
+    };
   }
 
-  return { active:false, delta:0 };
+  return {
+    active: false,
+    delta: 0
+  };
 }
 
 
@@ -6113,7 +6119,7 @@ let offTotal = 0;
     $("comboBadge").style.display = "block";
     total += combo.delta;
     // totalNoPromo não muda aqui (mantém sem combo)
-    items.push("• Promoção combo: Boost Casual (1 dia) + 2 Replays (1 dia) → R$ 155,00");
+    items.push("• Promoção combo: Boost Casual (1 dia) + 2 Replays (1 dia) → R$ 10,00 de desconto");
   } else {
     $("comboBadge").style.display = "none";
   }
