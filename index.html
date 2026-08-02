@@ -2558,43 +2558,53 @@ input[type=text]:focus{
 
 
         <!-- SAIBA MAIS -->
-        <details>
+<details>
   <summary>Saiba mais sobre o Boost Tradicional</summary>
 
-  <p><strong>🎖️ Sobre medalhas</strong></p>
-<ul>
-  <li>As medalhas exibidas na calculadora são apenas ilustrativas.</li>
-  <li>O serviço é contratado e calculado com base no <strong>MMR</strong>, não na medalha.</li>
-  <li>Pequenas variações de medalha podem ocorrer dependendo da calibragem do sistema do jogo.</li>
-  <li>O que garantimos é o <strong>MMR contratado</strong>, independentemente da medalha exibida.</li>
-</ul>
-
-  <p><strong>🔽 Abaixo de 4.000 MMR (valor fixo)</strong></p>
+  <p><strong>🎖️ Sobre as medalhas</strong></p>
   <ul>
-    <li>Serviço para contas abaixo de 4.000 MMR</li>
-    <li>Pedido mínimo: 500 MMR</li>
-    <li>💰 Valor: R$ 200,00 a cada 500 MMR</li>
+    <li>As medalhas exibidas na calculadora são apenas ilustrativas.</li>
+    <li>O cálculo do serviço é realizado exclusivamente pelo <strong>MMR</strong>.</li>
+    <li>O sistema de medalhas da Valve pode sofrer pequenas variações.</li>
+    <li>Garantimos o <strong>MMR contratado</strong>, independentemente da medalha exibida.</li>
   </ul>
 
-  <p><strong>🔼 Acima de 4.000 MMR</strong></p>
+  <p><strong>💰 Como funciona a cobrança</strong></p>
   <ul>
-    <li>O valor passa a ser calculado de forma personalizada</li>
-    <li>Basta informar o MMR atual para cálculo exato</li>
+    <li>O valor é calculado progressivamente conforme cada faixa de MMR.</li>
+    <li>Cada faixa possui um preço por MMR diferente.</li>
+    <li>Quanto maior o MMR, maior o nível de dificuldade e, consequentemente, o valor do serviço.</li>
   </ul>
 
-  <p><strong>🔄 Margem de erro</strong></p>
+  <p><strong>📋 Pedido mínimo por faixa</strong></p>
   <ul>
-    <li>Ajuste gratuito de até ±100 MMR</li>
-    <li>Acima disso, o valor será recalculado</li>
+    <li><strong>0 a 2000 MMR:</strong> mínimo de 500 MMR</li>
+    <li><strong>2001 a 2500 MMR:</strong> mínimo de 400 MMR</li>
+    <li><strong>2501 a 3000 MMR:</strong> mínimo de 350 MMR</li>
+    <li><strong>3001 a 3500 MMR:</strong> mínimo de 250 MMR</li>
+    <li><strong>3501 a 4000 MMR:</strong> mínimo de 200 MMR</li>
+    <li><strong>4001 a 4500 MMR:</strong> mínimo de 150 MMR</li>
+    <li><strong>4501 a 5000 MMR:</strong> mínimo de 100 MMR</li>
+    <li><strong>5001 a 5500 MMR:</strong> mínimo de 50 MMR</li>
+    <li><strong>5501 a 6000 MMR:</strong> mínimo de 25 MMR</li>
   </ul>
 
-  <p><strong>📌 Como contratar:</strong><br>
-  Utilize nossa calculadora para gerar seu orçamento.</p>
+  <p><strong>🔄 Alterações no pedido</strong></p>
+  <ul>
+    <li>Após o início do serviço, alterações no MMR contratado poderão gerar recálculo do orçamento.</li>
+    <li>Ajustes de até <strong>±100 MMR</strong> poderão ser avaliados sem custo adicional, conforme o andamento do serviço.</li>
+  </ul>
+
+  <p><strong>📌 Como contratar</strong></p>
+  <ul>
+    <li>Informe seu MMR atual e o MMR desejado.</li>
+    <li>A calculadora exibirá automaticamente o valor exato do serviço.</li>
+  </ul>
+
 </details>
 
-
-        <div class="result" id="tradRes">Preencha os dados para ver o valor.</div>
-        <div class="alert" id="tradAlert"></div>
+<div class="result" id="tradRes">Preencha os dados para ver o valor.</div>
+<div class="alert" id="tradAlert"></div>
       </div>
     </div>
 
@@ -2612,7 +2622,7 @@ input[type=text]:focus{
 
       <div class="serviceBody" id="bodyDouble">
         <label>MMR Atual</label>
-<input type="number" id="doubleMMR" min="1" max="8500" placeholder="Ex: 3200" disabled>
+<input type="number" id="doubleMMR" min="1" max="6000" placeholder="Ex: 3200" disabled>
 
 <div class="servicePreviewBox" id="doublePreviewBox">
   <img id="doublePreviewImg" src="medalhas/SeasonalRank1-1.png" alt="Medalha Double MMR">
@@ -2643,10 +2653,11 @@ input[type=text]:focus{
 
   <p><strong>💰 Preço por faixa de MMR</strong></p>
   <ul>
-    <li>🟢 <strong>1 a 4.000 MMR</strong> → R$ 70,00 por dia</li>
-<li>🟡 <strong>4.001 a 5.000 MMR</strong> → R$ 122,50 por dia</li>
-<li>🟠 <strong>5.001 a 6.000 MMR</strong> → R$ 245,00 por dia</li>
-<li>🔴 <strong>6.001 a 8.500 MMR</strong> → R$ 500,00 por dia</li>
+    <li>🟢 <strong>1 a 2.000 MMR</strong> → R$ 70,00 por dia</li>
+<li>🔵 <strong>2.001 a 3.000 MMR</strong> → R$ 100,00 por dia</li>
+<li>🟣 <strong>3.001 a 4.000 MMR</strong> → R$ 125,00 por dia</li>
+<li>🟠 <strong>4.001 a 5.000 MMR</strong> → R$ 250,00 por dia</li>
+<li>🔴 <strong>5.001 a 6.000 MMR</strong> → R$ 500,00 por dia</li>
   </ul>
 
   <p><strong>⚠️ Importante</strong></p>
@@ -2826,35 +2837,57 @@ input[type=text]:focus{
     
         <div class="coachGrid">
 
-<label class="coachCard" id="recalCard1">
-  <input type="radio" name="recalMode" id="recalMode1" disabled>
-  <img src="medalhas/recalibracao1.png">
-  <div class="coachCardTitle">Modo de serviço</div>
-  <div class="coachCardDesc">
-    Recalibração para contas<br>
-    <strong>0 a 4000 MMR</strong>
-  </div>
-</label>
+  <!-- 0 a 2000 -->
+  <label class="coachCard" id="recalCard1">
+    <input type="radio" name="recalMode" id="recalMode1" disabled>
+    <img src="medalhas/recalibracao1.png">
+    <div class="coachCardTitle">Modo de serviço</div>
+    <div class="coachCardDesc">
+      Recalibração para contas<br>
+      <strong>0 a 2000 MMR</strong><br>
+      <strong>15 partidas</strong><br>
+      R$ 200,00
+    </div>
+  </label>
 
-<label class="coachCard" id="recalCard2">
-  <input type="radio" name="recalMode" id="recalMode2" disabled>
-  <img src="medalhas/recalibracao2.png">
-  <div class="coachCardTitle">Modo de serviço</div>
-  <div class="coachCardDesc">
-    Recalibração para contas<br>
-    <strong>4001 a 6000 MMR</strong>
-  </div>
-</label>
+  <!-- 2001 a 4000 -->
+  <label class="coachCard" id="recalCard2">
+    <input type="radio" name="recalMode" id="recalMode2" disabled>
+    <img src="medalhas/recalibracao2.png">
+    <div class="coachCardTitle">Modo de serviço</div>
+    <div class="coachCardDesc">
+      Recalibração para contas<br>
+      <strong>2001 a 4000 MMR</strong><br>
+      <strong>15 partidas</strong><br>
+      R$ 250,00
+    </div>
+  </label>
 
-<label class="coachCard" id="recalCard3">
-  <input type="radio" name="recalMode" id="recalMode3" disabled>
-  <img src="medalhas/recalibracao3.png">
-  <div class="coachCardTitle">Modo de serviço</div>
-  <div class="coachCardDesc">
-    Recalibração para contas<br>
-    <strong>6001 a 8500 MMR</strong>
-  </div>
-</label>
+  <!-- 4001 a 6000 -->
+  <label class="coachCard" id="recalCard3">
+    <input type="radio" name="recalMode" id="recalMode3" disabled>
+    <img src="medalhas/recalibracao3.png">
+    <div class="coachCardTitle">Modo de serviço</div>
+    <div class="coachCardDesc">
+      Recalibração para contas<br>
+      <strong>4001 a 6000 MMR</strong><br>
+      <strong>15 partidas</strong><br>
+      R$ 300,00
+    </div>
+  </label>
+
+  <!-- 6001+ -->
+  <label class="coachCard" id="recalCard4">
+    <input type="radio" name="recalMode" id="recalMode4" disabled>
+    <img src="medalhas/recalibracao4.png">
+    <div class="coachCardTitle">Modo de serviço</div>
+    <div class="coachCardDesc">
+      Recalibração para contas<br>
+      <strong>6001+ MMR</strong><br>
+      <strong>15 partidas</strong><br>
+      R$ 400,00
+    </div>
+  </label>
 
 </div>
 
@@ -2867,32 +2900,62 @@ input[type=text]:focus{
 </label>
 
         <!-- SAIBA MAIS -->
-        <details>
+<details>
   <summary>Saiba mais sobre a Recalibração</summary>
 
-  <p><strong>🔄 Recalibração Simples</strong></p>
+  <p><strong>🔄 Como funciona a Recalibração?</strong></p>
+
   <ul>
-    <li>15 a 16 partidas</li>
-    <li>Possível ganho médio entre 700 e 1100 MMR</li>
-    <li>Indicada para contas entre 0 e 4.000 MMR</li>
+    <li>O serviço inclui <strong>15 partidas de recalibração</strong>.</li>
+    <li>Buscamos obter o melhor desempenho possível durante todas as partidas.</li>
+    <li>O resultado final depende exclusivamente do sistema de recalibração da Valve.</li>
+    <li>Caso a Valve exija partidas extras, será cobrado apenas o valor correspondente à sua faixa de MMR.</li>
   </ul>
 
-  <p><strong>🔄 Recalibração Avançada</strong></p>
+  <hr>
+
+  <p><strong>💰 Tabela de Preços</strong></p>
+
   <ul>
-    <li>Mesma quantidade de partidas</li>
-    <li>Indicada para contas entre 4.000 e 6.000 MMR</li>
-    <li>Resultado pode variar conforme a conta</li>
+    <li>
+      <strong>0 a 2000 MMR</strong><br>
+      ✔️ 15 partidas — <strong>R$ 200,00</strong><br>
+      ✔️ Partida adicional: <strong>R$ 14,00</strong>
+    </li>
+    <br>
+
+    <li>
+      <strong>2001 a 4000 MMR</strong><br>
+      ✔️ 15 partidas — <strong>R$ 250,00</strong><br>
+      ✔️ Partida adicional: <strong>R$ 17,00</strong>
+    </li>
+    <br>
+
+    <li>
+      <strong>4001 a 6000 MMR</strong><br>
+      ✔️ 15 partidas — <strong>R$ 300,00</strong><br>
+      ✔️ Partida adicional: <strong>R$ 20,00</strong>
+    </li>
+    <br>
+
+    <li>
+      <strong>6001+ MMR</strong><br>
+      ✔️ 15 partidas — <strong>R$ 400,00</strong><br>
+      ✔️ Partida adicional: <strong>R$ 25,00</strong>
+    </li>
   </ul>
 
-  <p><strong>🔄 Recalibração Elite</strong></p>
-<ul>
-  <li>Mesma quantidade de partidas</li>
-  <li>Indicada para contas entre 6.001 e 8.500 MMR</li>
-  <li>Valor fixo de R$ 600,00</li>
-  <li>Resultado pode variar conforme a conta</li>
-</ul>
+  <hr>
 
-  <p><strong>⚠️ Não há garantia de MMR final.</strong></p>
+  <p><strong>⚠️ Informações importantes</strong></p>
+
+  <ul>
+    <li>O pacote cobre até <strong>15 partidas</strong>.</li>
+    <li>Se forem necessárias partidas adicionais, elas serão cobradas conforme o valor da sua faixa de MMR.</li>
+    <li>Não garantimos um MMR específico ao final da recalibração.</li>
+    <li>O desempenho da conta e o sistema da Valve influenciam diretamente no resultado.</li>
+  </ul>
+
 </details>
 
 
@@ -4014,11 +4077,11 @@ function limitInput(id, min, max, fallback = max){
 /* ========= APLICAÇÃO DOS LIMITES ========= */
 
 // BOOST TRADICIONAL
-limitInput("tradAtual", 0, 8500, 8500);
-limitInput("tradDesejado", 0, 8500, 8500);
+limitInput("tradAtual", 0, 6000, 6000);
+limitInput("tradDesejado", 0, 6000, 6000);
 
 // DOUBLE MMR
-limitInput("doubleMMR", 1, 8500, 8500);
+limitInput("doubleMMR", 1, 6000, 6000);
 limitInput("doubleDays", 1, 7, 7);
 
 // BOOST CASUAL
@@ -4591,16 +4654,15 @@ function checkCoupon() {
 // cálculo progressivo por faixa
 function calcTradBaseProgressivo(mmrAtual, mmrDesejado){
   const TABELA_PRECOS = [
-    { min: 0,    max: 4000, preco: 0.40 },
-    { min: 4001, max: 4500, preco: 0.65 },
-    { min: 4501, max: 5000, preco: 0.75 },
-    { min: 5001, max: 5500, preco: 1.10 },
-    { min: 5501, max: 6000, preco: 2.10 },
-    { min: 6001, max: 6500, preco: 3.20 },
-    { min: 6501, max: 7000, preco: 3.80 },
-    { min: 7001, max: 7500, preco: 4.75 },
-    { min: 7501, max: 8000, preco: 7.60 },
-    { min: 8001, max: 8500, preco: 8.50 }
+    { min: 0,    max: 2000, preco: 0.40 },
+    { min: 2001, max: 2500, preco: 0.50 },
+    { min: 2501, max: 3000, preco: 0.65 },
+    { min: 3001, max: 3500, preco: 0.80 },
+    { min: 3501, max: 4000, preco: 1.00 },
+    { min: 4001, max: 4500, preco: 1.50 },
+    { min: 4501, max: 5000, preco: 2.25 },
+    { min: 5001, max: 5500, preco: 5.60 },
+    { min: 5501, max: 6000, preco: 8.50 }
   ];
 
   let precoTotal = 0;
@@ -4653,12 +4715,28 @@ function calcTrad(perDayOff, disableDiscounts = false){
     };
   }
 
-  const atual = clampInt(Number($("tradAtual").value), 0, 8500);
-  const des   = clampInt(Number($("tradDesejado").value), 0, 8500);
+  const atual = clampInt(Number($("tradAtual").value), 0, 6000);
+  const des   = clampInt(Number($("tradDesejado").value), 0, 6000);
   const off   = $("tradOff").checked;
   const superPromoChecked = SUPER_PROMO_ENABLED && $("tradSuperPromo") && $("tradSuperPromo").checked;
 
   $("tradAlert").textContent = "";
+
+  if(des > 6000){
+  $("tradRes").innerHTML = "<strong>Preço: INVÁLIDO</strong>";
+  $("tradAlert").textContent =
+    "🔴 Atualmente atendemos apenas até 6000 MMR.";
+
+  return {
+    selected:true,
+    ok:false,
+    total:0,
+    totalNoPromo:0,
+    superPromoApplied:false,
+    superPromoDiscount:0,
+    superPromoPct:0
+  };
+}
 
   if(atual === null || des === null || des <= atual){
     $("tradRes").innerHTML = "<strong>Preço: INVÁLIDO</strong>";
@@ -4678,16 +4756,41 @@ function calcTrad(perDayOff, disableDiscounts = false){
 let desCalculo = des;
 
 // bloqueia valores abaixo de 500 MMR para contas abaixo de 4000
-if(atual < 4000 && delta < 500){
+const REGRAS_MINIMAS = [
+  { min: 0,    max: 2000, minimo: 500 },
+  { min: 2001, max: 2500, minimo: 400 },
+  { min: 2501, max: 3000, minimo: 350 },
+  { min: 3001, max: 3500, minimo: 250 },
+  { min: 3501, max: 4000, minimo: 200 },
+  { min: 4001, max: 4500, minimo: 150 },
+  { min: 4501, max: 5000, minimo: 100 },
+  { min: 5001, max: 5500, minimo: 50 },
+  { min: 5501, max: 6000, minimo: 25 }
+];
+
+const regra = REGRAS_MINIMAS.find(
+  r => atual >= r.min && atual <= r.max
+);
+
+if(regra && delta < regra.minimo){
+
   $("tradRes").innerHTML = `
-  <strong>Delta considerado:</strong>
-  <span style="color:var(--danger);font-weight:800;">${delta} MMR</span>
-  <span style="color:var(--danger);font-weight:800;">(valor inválido)</span><br>
-  <strong>Preço:</strong> <span style="color:var(--danger);font-weight:800;">INVÁLIDO</span>
-`;
+    <strong>Delta considerado:</strong>
+    <span style="color:var(--danger);font-weight:800;">
+      ${delta} MMR
+    </span>
+    <span style="color:var(--danger);font-weight:800;">
+      (valor inválido)
+    </span><br>
+
+    <strong>Preço:</strong>
+    <span style="color:var(--danger);font-weight:800;">
+      INVÁLIDO
+    </span>
+  `;
 
   $("tradAlert").textContent =
-    "🔴 Para contas abaixo de 4.000 MMR, o pedido mínimo é de 500 MMR.";
+    `🔴 Para esta faixa o pedido mínimo é de ${regra.minimo} MMR.`;
 
   return {
     selected:true,
@@ -4823,10 +4926,11 @@ const base = calcTradBaseProgressivo(atual, desCalculo);
 
 /* ========= Double MMR ========= */
 function doubleBaseByMMR(mmr){
-  if(mmr >= 1 && mmr <= 4000) return 70;
-  if(mmr >= 4001 && mmr <= 5000) return 122.5;
-  if(mmr >= 5001 && mmr <= 6000) return 245;
-  if(mmr >= 6001 && mmr <= 8500) return 500;
+  if(mmr >= 1 && mmr <= 2000) return 70;
+  if(mmr >= 2001 && mmr <= 3000) return 100;
+  if(mmr >= 3001 && mmr <= 4000) return 125;
+  if(mmr >= 4001 && mmr <= 5000) return 250;
+  if(mmr >= 5001 && mmr <= 6000) return 500;
   return null;
 }
 
@@ -5160,50 +5264,108 @@ function updateDarkPreview() {
 
 /* ========= Recalibração ========= */
 function calcRecal(){
+
   if(!$("useRecal").checked){
     $("recalRes").innerHTML = "Preencha os dados para ver o valor.";
-    return { selected:false, ok:true, total:0, totalNoPromo:0 };
+    $("recalAlert").textContent = "";
+
+    return {
+      selected:false,
+      ok:true,
+      total:0,
+      totalNoPromo:0
+    };
   }
 
-  const mmr  = clampInt(Number($("recalMMR").value), 0, 8500);
-  const off  = $("recalOff").checked;
+  const mmr = clampInt(Number($("recalMMR").value), 0, 99999);
+  const off = $("recalOff").checked;
+
+  $("recalAlert").textContent = "";
 
   if(mmr === null){
-    $("recalRes").innerHTML = "Digite o MMR para calcular.";
-    return { selected:true, ok:false, total:0, totalNoPromo:0 };
+    $("recalRes").innerHTML = "<strong>Preço: INVÁLIDO</strong>";
+    $("recalAlert").textContent = "🔴 Informe um MMR válido.";
+
+    return {
+      selected:true,
+      ok:false,
+      total:0,
+      totalNoPromo:0
+    };
   }
 
   let baseValue = 0;
+  let extraGame = 0;
 
-  if(mmr <= 4000){
+  // Define o pacote conforme o MMR
+  if(mmr <= 2000){
+
     baseValue = 200;
-  }else if(mmr <= 6000){
+    extraGame = 14;
+
+  }else if(mmr <= 4000){
+
     baseValue = 250;
-  }else if(mmr <= 8500){
-    baseValue = 600;
+    extraGame = 17;
+
+  }else if(mmr <= 6000){
+
+    baseValue = 300;
+    extraGame = 20;
+
   }else{
-    $("recalRes").innerHTML = "<strong>Preço: INVÁLIDO</strong>";
-    $("recalAlert").textContent = "🚫 Esse MMR não é compatível com a Recalibração.";
-    return { selected:true, ok:false, total:0, totalNoPromo:0 };
+
+    baseValue = 400;
+    extraGame = 25;
+
   }
 
+  // Off Stream
   const offOriginal = off ? 40 : 0;
   const offValue = offOriginal;
+
   const total = baseValue + offValue;
 
-  $("recalRes").innerHTML =
-    `<strong>MMR atual:</strong> ${mmr}<br>
-     <strong>Valor do serviço:</strong> ${money(baseValue)}<br>
-     <strong>Off stream:</strong> ${off ? money(offValue) : money(0)}<br>
-     <strong>Total:</strong> ${money(total)}`;
+  $("recalRes").innerHTML = `
+    <strong>MMR atual:</strong> ${mmr}<br>
+
+    <strong>Pacote contratado:</strong> 15 partidas de recalibração<br>
+
+    <strong>Valor do serviço:</strong>
+    <span class="newPrice">${money(baseValue)}</span><br>
+
+    <strong>Partida adicional (caso necessário):</strong>
+    <span style="color:#ffc857;font-weight:700;">
+      ${money(extraGame)} por partida
+    </span><br>
+
+    <strong>Off Stream:</strong>
+    ${off ? money(offValue) : money(0)}<br>
+
+    <strong>Total:</strong>
+    <span class="newPrice">${money(total)}</span>
+
+    <br><br>
+
+    <small class="muted">
+      ✔ O pacote inclui até <strong>15 partidas</strong>.<br>
+      ✔ Caso a Valve solicite partidas adicionais durante a recalibração,
+      cada partida extra será cobrada em
+      <strong>${money(extraGame)}</strong>.
+    </small>
+  `;
 
   return {
+
     selected:true,
     ok:true,
 
     baseValue,
+    extraGame,
+
     offOriginal,
     offValue,
+
     promoApplied:false,
     offPromoText:"",
     offLabel:"Recalibração",
@@ -5211,17 +5373,19 @@ function calcRecal(){
     total,
     totalNoPromo: baseValue + offOriginal,
 
-    text:`Recalibração | Total: ${money(baseValue)}`,
+    text:`Recalibração (15 partidas) | Total: ${money(baseValue)}`,
 
     details:
 `🔄 RECALIBRAÇÃO
+
 • MMR atual: ${mmr}
+• Pacote: 15 partidas
 • Valor do serviço: ${money(baseValue)}
-• Off stream: ${off ? money(offValue) : "Não"}
+• Partida adicional: ${money(extraGame)}
+• Off Stream: ${off ? money(offValue) : "Não"}
 • Total: ${money(total)}`
   };
 }
-
 
 /* ========= Replay (CORRIGIDO) ========= */
 function calcReplay(disableDiscounts = false){
@@ -5844,53 +6008,105 @@ function updateLowPreview(){
 }
 
 function updateRecalCards(fromClick = false){
+
   const c1 = $("recalCard1");
   const c2 = $("recalCard2");
   const c3 = $("recalCard3");
+  const c4 = $("recalCard4");
 
   const r1 = $("recalMode1");
   const r2 = $("recalMode2");
   const r3 = $("recalMode3");
+  const r4 = $("recalMode4");
+
   const mmrInput = $("recalMMR");
 
-  if(!r1 || !r2 || !r3 || !mmrInput) return;
+  if(!r1 || !r2 || !r3 || !r4 || !mmrInput) return;
+
 
   let mmr = Number(mmrInput.value || 0);
 
+
+  // Clique nos cards
   if(fromClick){
+
     if(r1.checked){
+      mmrInput.value = 1000;
+      mmr = 1000;
+
+    }else if(r2.checked){
+
       mmrInput.value = 3000;
       mmr = 3000;
-    }else if(r2.checked){
+
+    }else if(r3.checked){
+
       mmrInput.value = 5000;
       mmr = 5000;
-    }else if(r3.checked){
-      mmrInput.value = 7000;
-      mmr = 7000;
+
+    }else if(r4.checked){
+
+      mmrInput.value = 6500;
+      mmr = 6500;
+
     }
+
+
   }else{
-    if(mmr >= 1 && mmr <= 4000){
+
+    // Digitação manual do MMR
+
+    if(mmr >= 0 && mmr <= 2000){
+
       r1.checked = true;
       r2.checked = false;
       r3.checked = false;
-    }else if(mmr >= 4001 && mmr <= 6000){
+      r4.checked = false;
+
+
+    }else if(mmr >= 2001 && mmr <= 4000){
+
       r1.checked = false;
       r2.checked = true;
       r3.checked = false;
-    }else if(mmr >= 6001 && mmr <= 8500){
+      r4.checked = false;
+
+
+    }else if(mmr >= 4001 && mmr <= 6000){
+
       r1.checked = false;
       r2.checked = false;
       r3.checked = true;
-    }else{
+      r4.checked = false;
+
+
+    }else if(mmr >= 6001){
+
       r1.checked = false;
       r2.checked = false;
       r3.checked = false;
+      r4.checked = true;
+
+
+    }else{
+
+      r1.checked = false;
+      r2.checked = false;
+      r3.checked = false;
+      r4.checked = false;
+
     }
+
   }
+
+
+  // efeito visual dos cards
 
   if(c1) c1.classList.toggle("active", r1.checked);
   if(c2) c2.classList.toggle("active", r2.checked);
   if(c3) c3.classList.toggle("active", r3.checked);
+  if(c4) c4.classList.toggle("active", r4.checked);
+
 }
 
 function updateCoachCards(){
@@ -6369,7 +6585,7 @@ if(floatBox && ftItemsEl && ftPrice && ftDisc){
 
 [
 
-  "recalMode1","recalMode2","recalMode3","useTrad","useDouble","useCasual","useRoleFarm","useRecal","useReplay","useCoach","useLow","useTurbo","useDark",
+  "recalMode1","recalMode2","recalMode3","recalMode4","useTrad","useDouble","useCasual","useRoleFarm","useRecal","useReplay","useCoach","useLow","useTurbo","useDark",
   "tradAtual","tradDesejado","tradOff","tradSuperPromo",
   "doubleMMR","doubleDays","doubleOff",
 "casualMMR","casualDays","casualOff",
