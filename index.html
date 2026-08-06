@@ -2579,14 +2579,14 @@ input[type=text]:focus{
   <p><strong>📋 Pedido mínimo por faixa</strong></p>
   <ul>
     <li><strong>0 a 2000 MMR:</strong> mínimo de 500 MMR</li>
-    <li><strong>2001 a 2500 MMR:</strong> mínimo de 400 MMR</li>
-    <li><strong>2501 a 3000 MMR:</strong> mínimo de 350 MMR</li>
-    <li><strong>3001 a 3500 MMR:</strong> mínimo de 250 MMR</li>
-    <li><strong>3501 a 4000 MMR:</strong> mínimo de 200 MMR</li>
-    <li><strong>4001 a 4500 MMR:</strong> mínimo de 150 MMR</li>
-    <li><strong>4501 a 5000 MMR:</strong> mínimo de 100 MMR</li>
-    <li><strong>5001 a 5500 MMR:</strong> mínimo de 50 MMR</li>
-    <li><strong>5501 a 6000 MMR:</strong> mínimo de 25 MMR</li>
+    <li><strong>2001 a 2500 MMR:</strong> mínimo de 450 MMR</li>
+    <li><strong>2501 a 3000 MMR:</strong> mínimo de 400 MMR</li>
+    <li><strong>3001 a 3500 MMR:</strong> mínimo de 370 MMR</li>
+    <li><strong>3501 a 4000 MMR:</strong> mínimo de 340 MMR</li>
+    <li><strong>4001 a 4500 MMR:</strong> mínimo de 270 MMR</li>
+    <li><strong>4501 a 5000 MMR:</strong> mínimo de 240 MMR</li>
+    <li><strong>5001 a 5500 MMR:</strong> mínimo de 160 MMR</li>
+    <li><strong>5501 a 6000 MMR:</strong> mínimo de  90 MMR</li>
   </ul>
 
   <p><strong>🔄 Alterações no pedido</strong></p>
@@ -2654,10 +2654,10 @@ input[type=text]:focus{
   <p><strong>💰 Preço por faixa de MMR</strong></p>
   <ul>
     <li>🟢 <strong>1 a 2.000 MMR</strong> → R$ 70,00 por dia</li>
-<li>🔵 <strong>2.001 a 3.000 MMR</strong> → R$ 100,00 por dia</li>
-<li>🟣 <strong>3.001 a 4.000 MMR</strong> → R$ 125,00 por dia</li>
-<li>🟠 <strong>4.001 a 5.000 MMR</strong> → R$ 250,00 por dia</li>
-<li>🔴 <strong>5.001 a 6.000 MMR</strong> → R$ 500,00 por dia</li>
+<li>🔵 <strong>2.001 a 3.000 MMR</strong> → R$ 95,00 por dia</li>
+<li>🟣 <strong>3.001 a 4.000 MMR</strong> → R$ 140,00 por dia</li>
+<li>🟠 <strong>4.001 a 5.000 MMR</strong> → R$ 195,00 por dia</li>
+<li>🔴 <strong>5.001 a 6.000 MMR</strong> → R$ 235,00 por dia</li>
   </ul>
 
   <p><strong>⚠️ Importante</strong></p>
@@ -2779,7 +2779,7 @@ input[type=text]:focus{
     <div id="roleFarmPreviewDetails">
   Quantidade de partidas ranked: 7<br>
   Dias contratados: 1<br>
-  Fichas farmadas: 28
+  Fichas farmadas: 14 a 28
 </div>
   </div>
 </div>
@@ -2796,10 +2796,11 @@ input[type=text]:focus{
 <ul>
 <li>🎮 7 partidas ranked por dia</li>
 <li>❌ Não garanto vitórias</li>
+<li>✔️ Garantido 4 fichas por vitoria e 2 fichas por derrota</li>
 <li>🎯 Heróis escolhidos conforme necessidade</li>
 <li>💰 1 a 6.500 MMR → R$ 120,00 por dia</li>
 <li>💰 6.501 a 8.500 MMR → R$ 280,00 por dia</li>
-<li>😎 28 fichas de função farmadas por dia</li>
+<li>😎 14 a 28 fichas de função farmadas por dia</li>
 </ul>
 
 <p><strong>📌 Regras</strong></p>
@@ -4927,10 +4928,10 @@ const base = calcTradBaseProgressivo(atual, desCalculo);
 /* ========= Double MMR ========= */
 function doubleBaseByMMR(mmr){
   if(mmr >= 1 && mmr <= 2000) return 70;
-  if(mmr >= 2001 && mmr <= 3000) return 100;
-  if(mmr >= 3001 && mmr <= 4000) return 125;
-  if(mmr >= 4001 && mmr <= 5000) return 250;
-  if(mmr >= 5001 && mmr <= 6000) return 500;
+  if(mmr >= 2001 && mmr <= 3000) return 95;
+  if(mmr >= 3001 && mmr <= 4000) return 140;
+  if(mmr >= 4001 && mmr <= 5000) return 195;
+  if(mmr >= 5001 && mmr <= 6000) return 235;
   return null;
 }
 
@@ -5168,7 +5169,8 @@ function calcRoleFarm(disableDiscounts = false){
   $("roleFarmDays").value = days;
 
   const partidas = days * 7;
-  const fichas = days * 28;
+  const fichasMin = days * 14;
+  const fichasMax = days * 28;
 
   let pricePerDay = 120;
   if(mmr >= 6501 && mmr <= 8500){
@@ -5198,13 +5200,13 @@ function calcRoleFarm(disableDiscounts = false){
   $("roleFarmPreviewDetails").innerHTML =
     `Quantidade de partidas ranked: ${partidas}<br>
      Dias contratados: ${days}<br>
-     Fichas farmadas: ${fichas}`;
+     Fichas farmadas: ${fichasMin} até ${fichasMax}`;
 
   $("roleFarmRes").innerHTML =
     `<strong>MMR atual:</strong> ${mmr}<br>
      <strong>Preço por dia:</strong> ${money(pricePerDay)}<br>
      <strong>Dias:</strong> ${days}<br>
-     <strong>Fichas farmadas:</strong> ${fichas}<br>
+     <strong>Fichas farmadas:</strong> ${fichasMin} até ${fichasMax}<br>
      <strong>Valor do serviço:</strong> ${money(baseValue)}<br>
      <strong>Off stream:</strong> ${
        off
@@ -5234,7 +5236,7 @@ function calcRoleFarm(disableDiscounts = false){
 • Preço por dia: ${money(pricePerDay)}
 • Dias contratados: ${days}
 • Partidas: ${partidas}
-• Fichas farmadas: ${fichas}
+• • Fichas farmadas: ${fichasMin} até ${fichasMax}
 • Valor do serviço: ${money(baseValue)}
 • Off stream: ${
   off
