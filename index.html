@@ -4689,13 +4689,13 @@ function calcTradBaseProgressivo(mmrAtual, mmrDesejado){
 
 function tradDiscountPct(mmrAtual, delta){
   // Descontos só para MMR inicial ≥ 4000
-  if(mmrAtual < 4000) return 0;
+  if(mmrAtual < 2000) return 0;
 
-  if(delta >= 1500) return 0.12;
-  if(delta >= 1250) return 0.10;
-  if(delta >= 1000) return 0.08;
-  if(delta >= 750)  return 0.06;
-  if(delta >= 500)  return 0.04;
+  if(delta >= 1500) return 0.10;
+  if(delta >= 1250) return 0.08;
+  if(delta >= 1000) return 0.06;
+  if(delta >= 750)  return 0.04;
+  if(delta >= 500)  return 0.02;
   return 0;
 }
 
@@ -4758,14 +4758,14 @@ let desCalculo = des;
 // bloqueia valores abaixo de 500 MMR para contas abaixo de 4000
 const REGRAS_MINIMAS = [
   { min: 0,    max: 2000, minimo: 500 },
-  { min: 2001, max: 2500, minimo: 400 },
-  { min: 2501, max: 3000, minimo: 350 },
-  { min: 3001, max: 3500, minimo: 250 },
-  { min: 3501, max: 4000, minimo: 200 },
-  { min: 4001, max: 4500, minimo: 150 },
-  { min: 4501, max: 5000, minimo: 100 },
-  { min: 5001, max: 5500, minimo: 50 },
-  { min: 5501, max: 6000, minimo: 25 }
+  { min: 2001, max: 2500, minimo: 450 },
+  { min: 2501, max: 3000, minimo: 400 },
+  { min: 3001, max: 3500, minimo: 370 },
+  { min: 3501, max: 4000, minimo: 340 },
+  { min: 4001, max: 4500, minimo: 270 },
+  { min: 4501, max: 5000, minimo: 240 },
+  { min: 5001, max: 5500, minimo: 160 },
+  { min: 5501, max: 6000, minimo: 90 }
 ];
 
 const regra = REGRAS_MINIMAS.find(
