@@ -2386,6 +2386,8 @@ input[type=text]:focus{
           <div class="heroText">
   Escolha o serviço, ajuste as opções e acompanhe o valor do pacote em tempo real.
 </div>
+
+
         </div>
       </div>
 
@@ -2401,64 +2403,25 @@ input[type=text]:focus{
       </div>
 
       <div class="promoExpandable" id="promoExpandable">
-        <div class="promoSection">
-          
+  <div class="promoSection">
 
-            <div class="promoGrid">
+    <div class="promoCard">
+      <div class="promoIcon">🎁</div>
 
-              <div class="promoCard">
-                <div class="promoIcon">🎓</div>
-                <div class="promoTitle">Coach + Replay</div>
-                <div class="promoDesc">
-                  Contratando <strong>Coach Parte 1</strong> + <strong>1 Análise de Replay</strong>,
-                  a replay recebe <strong>20% OFF</strong>.
-                </div>
-              </div>
+      <div class="promoTitle">Descontos automáticos</div>
 
-              <div class="promoCard">
-                <div class="promoIcon">⚡</div>
-                <div class="promoTitle">Double MMR + Coach</div>
-                <div class="promoDesc">
-                  Contratando <strong>Double MMR</strong> + <strong>1 Coach</strong>,
-                  a taxa off-stream do Double recebe <strong>25% OFF</strong>.
-                </div>
-              </div>
-
-              <div class="promoCard">
-                <div class="promoIcon">📊</div>
-                <div class="promoTitle">Replay por volume</div>
-                <div class="promoDesc">
-                  Fazendo <strong>2 a 3 análises por dia</strong>,
-                  a taxa off-stream recebe <strong>50% OFF</strong>.
-                </div>
-              </div>
-
-              <div class="promoCard">
-                <div class="promoIcon">💰</div>
-                <div class="promoTitle">Boost Casual + Replay</div>
-                <div class="promoDesc">
-                  Contratando <strong>Boost Casual (1 dia)</strong> + <strong>2 Replays</strong>,
-                  as análises recebem <strong>25% OFF</strong>.
-                </div>
-              </div>
-
-              <div class="promoCard">
-                <div class="promoIcon">🔄</div>
-                <div class="promoTitle">Recalibração + Boost Casual</div>
-                <div class="promoDesc">
-                  Contratando <strong>Recalibração</strong> + <strong>Boost Casual (1 dia)</strong>,
-                  o Boost Casual recebe <strong>aprox. 6% OFF</strong>.
-                </div>
-              </div>
-
-            </div>
-
-            <div class="promoNote">
-  Obs.: Cada serviço possui cálculo próprio. As promoções são aplicadas automaticamente quando os critérios são atendidos.
-</div>
-        </div>
+      <div class="promoDesc">
+        A calculadora aplica automaticamente as condições promocionais
+        disponíveis conforme os serviços e quantidades selecionados.
+        <br><br>
+        Assim, o valor apresentado já considera todos os benefícios
+        previstos para cada combinação de serviços.
       </div>
+
     </div>
+
+  </div>
+</div>
 
   
     <div class="grid" id="servicesGrid">
@@ -3877,6 +3840,15 @@ Aqui meu foco é oferecer um serviço sério e confiável, sempre com transparê
 
 
 <script>
+
+  // ==========================================
+// CONFIGURAÇÕES DO SITE
+// ==========================================
+
+// Cupom de desconto
+// true  = mostra o campo de cupom para os clientes
+// false = esconde completamente o campo de cupom
+const CUPOM_ATIVO = false;
 
 /* ========= CUPONS ========= */
 const COUPONS = {
@@ -6274,8 +6246,9 @@ if(customerBox){
 
 // mostrar cupom somente se houver item no carrinho
 const couponBox = $("couponBox");
+
 if(couponBox){
-  couponBox.style.display = selectedAny ? "block" : "none";
+  couponBox.style.display = (CUPOM_ATIVO && selectedAny) ? "block" : "none";
 }
 
 if(!$("useTrad").checked){
