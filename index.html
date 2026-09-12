@@ -5211,7 +5211,7 @@ function checkCoupon() {
   activeCoachBothCoupon = null;
   coachBothCouponDiscount = 0;
 
-  msg.style.display = "block";
+    msg.style.display = "block";
   msg.style.color = "var(--danger)";
   msg.textContent = "❌ Cupom inválido";
 
@@ -5219,7 +5219,243 @@ function checkCoupon() {
 }
 
 
-/* ========= Boost Tradicional (CORRIGIDO) ========= .*/
+/* =====================================================
+   REVALIDAÇÃO AUTOMÁTICA DOS CUPONS
+   ===================================================== */
+
+function revalidateActiveCoupon(){
+
+  const input = $("couponInput");
+
+  if(!input) return;
+
+  const coupon = input.value.trim().toUpperCase();
+
+  if(!coupon) return;
+
+
+  /* =====================================================
+     CUPOM CASUAL
+     ===================================================== */
+
+  if(activeCasualCoupon){
+
+    const config = CASUAL_ONLY_COUPONS[activeCasualCoupon];
+
+    if(!config){
+      activeCasualCoupon = null;
+      casualCouponDiscount = 0;
+      return;
+    }
+
+    if(!$("useCasual").checked){
+
+      activeCasualCoupon = null;
+      casualCouponDiscount = 0;
+
+      return;
+    }
+
+    const mmr = clampInt(
+      Number($("casualMMR").value),
+      1,
+      8500
+    );
+
+    if(
+      mmr === null ||
+      mmr < config.minMMR ||
+      mmr > config.maxMMR
+    ){
+
+      activeCasualCoupon = null;
+      casualCouponDiscount = 0;
+
+      const msg = $("couponMsg");
+
+      if(msg){
+
+        msg.style.display = "block";
+        msg.style.color = "var(--danger)";
+
+        msg.textContent =
+          `❌ Esse cupom não é válido para o MMR atual. Faixa permitida: ${config.minMMR} até ${config.maxMMR} MMR.`;
+      }
+
+      return;
+    }
+
+    /* Continua válido */
+    casualCouponDiscount = config.discount;
+
+    return;
+  }
+
+
+  /* =====================================================
+     COACH PARTE 1
+     ===================================================== */
+
+  if(activeCoachP1Coupon){
+
+    if(
+      !$("useCoach").checked ||
+      !$("coachP1").checked ||
+      $("coachP2").checked
+    ){
+
+      activeCoachP1Coupon = null;
+      coachP1CouponDiscount = 0;
+
+      const msg = $("couponMsg");
+
+      if(msg){
+        msg.style.display = "block";
+        msg.style.color = "var(--danger)";
+        msg.textContent =
+          "❌ Esse cupom é válido somente para o Coach Parte 1.";
+      }
+
+      return;
+    }
+
+    coachP1CouponDiscount =
+      COACH_P1_ONLY_COUPONS[activeCoachP1Coupon];
+
+    return;
+  }
+
+
+  /* =====================================================
+     COACH PARTE 2
+     ===================================================== */
+
+  if(activeCoachP2Coupon){
+
+    if(
+      !$("useCoach").checked ||
+      !$("coachP2").checked ||
+      $("coachP1").checked
+    ){
+
+      activeCoachP2Coupon = null;
+      coachP2CouponDiscount = 0;
+
+      const msg = $("couponMsg");
+
+      if(msg){
+        msg.style.display = "block";
+        msg.style.color = "var(--danger)";
+        msg.textContent =
+          "❌ Esse cupom é válido somente para o Coach Parte 2.";
+      }
+
+      return;
+    }
+
+    coachP2CouponDiscount =
+      COACH_P2_ONLY_COUPONS[activeCoachP2Coupon];
+
+    return;
+  }
+
+
+  /* =====================================================
+     COACH PARTE 1 + PARTE 2
+     ===================================================== */
+
+  if(activeCoachBothCoupon){
+
+    if(
+      !$("useCoach").checked ||
+      !$("coachP1").checked ||
+      !$("coachP2").checked
+    ){
+
+      activeCoachBothCoupon = null;
+      coachBothCouponDiscount = 0;
+
+      const msg = $("couponMsg");
+
+      if(msg){
+        msg.style.display = "block";
+        msg.style.color = "var(--danger)";
+        msg.textContent =
+          "❌ Esse cupom é válido somente quando Parte 1 e Parte 2 do Coach estão contratadas.";
+      }
+
+      return;
+    }
+
+    coachBothCouponDiscount =
+      COACH_BOTH_COUPONS[activeCoachBothCoupon];
+
+    return;
+  }
+
+
+  /* =====================================================
+     CUPOM TRADICIONAL
+     ===================================================== */
+
+  if(activeTradCoupon){
+
+    if(!$("useTrad").checked){
+
+      activeTradCoupon = null;
+      tradCouponDiscount = 0;
+
+      const msg = $("couponMsg");
+
+      if(msg){
+        msg.style.display = "block";
+        msg.style.color = "var(--danger)";
+        msg.textContent =
+          "❌ Esse cupom é válido apenas para o Boost Tradicional.";
+      }
+
+      return;
+    }
+
+    tradCouponDiscount =
+      TRAD_ONLY_COUPONS[activeTradCoupon];
+
+    return;
+  }
+
+
+  /* =====================================================
+     CUPOM RECALIBRAÇÃO
+     ===================================================== */
+
+  if(activeRecaCoupon){
+
+    if(!$("useRecal").checked){
+
+      activeRecaCoupon = null;
+      recaCouponDiscount = 0;
+
+      const msg = $("couponMsg");
+
+      if(msg){
+        msg.style.display = "block";
+        msg.style.color = "var(--danger)";
+        msg.textContent =
+          "❌ Esse cupom é válido apenas para Recalibração.";
+      }
+
+      return;
+    }
+
+    recaCouponDiscount =
+      RECA_ONLY_COUPONS[activeRecaCoupon];
+
+    return;
+  }
+}
+
+
+/* ========= Boost Tradicional (CORRIGIDO) ========= */
 
 // cálculo progressivo por faixa
 function calcTradBaseProgressivo(mmrAtual, mmrDesejado){
@@ -6761,6 +6997,10 @@ function updateAll(){
   // 🔥 RESET GLOBAL DE PROMOÇÕES (OBRIGATÓRIO)
   activePromo = null;
   promoMessage = "";
+
+  // 🔥 REVALIDA O CUPOM AUTOMATICAMENTE
+  // toda vez que updateAll() for executado
+  revalidateActiveCoupon();
 
   syncSelectedCards();
 
