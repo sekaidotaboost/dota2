@@ -3848,7 +3848,7 @@ Aqui meu foco é oferecer um serviço sério e confiável, sempre com transparê
 // Cupom de desconto
 // true  = mostra o campo de cupom para os clientes
 // false = esconde completamente o campo de cupom
-const CUPOM_ATIVO = false;
+const CUPOM_ATIVO = true;
 
 /* ========= CUPONS ========= */
 const COUPONS = {
@@ -3886,6 +3886,274 @@ let recaCouponDiscount = 0;
 
 
   /* ========= CONTROLE GLOBAL DE PROMOÇÕES ========= */
+
+
+
+/* ========= CUPONS SOMENTE DO BOOST CASUAL ========= */
+
+const CASUAL_ONLY_COUPONS = {
+
+  // ===== 1 a 4000 MMR =====
+
+  "CASUAL1A4K5%OFFBOLA1234": {
+    discount: 0.05,
+    minMMR: 1,
+    maxMMR: 4000
+  },
+
+  "CASUAL1A4K10%OFFBOLA1234": {
+    discount: 0.10,
+    minMMR: 1,
+    maxMMR: 4000
+  },
+
+  "CASUAL1A4K15%OFFBOLA1234": {
+    discount: 0.15,
+    minMMR: 1,
+    maxMMR: 4000
+  },
+
+  "CASUAL1A4K20%OFFBOLA1234": {
+    discount: 0.20,
+    minMMR: 1,
+    maxMMR: 4000
+  },
+
+  "CASUAL1A4K25%OFFBOLA1234": {
+    discount: 0.25,
+    minMMR: 1,
+    maxMMR: 4000
+  },
+
+
+  // ===== 4001 a 5000 MMR =====
+
+  "CASUAL4A5K5%OFFBOLA1234": {
+    discount: 0.05,
+    minMMR: 4001,
+    maxMMR: 5000
+  },
+
+  "CASUAL4A5K10%OFFBOLA1234": {
+    discount: 0.10,
+    minMMR: 4001,
+    maxMMR: 5000
+  },
+
+  "CASUAL4A5K15%OFFBOLA1234": {
+    discount: 0.15,
+    minMMR: 4001,
+    maxMMR: 5000
+  },
+
+  "CASUAL4A5K20%OFFBOLA1234": {
+    discount: 0.20,
+    minMMR: 4001,
+    maxMMR: 5000
+  },
+
+  "CASUAL4A5K25%OFFBOLA1234": {
+    discount: 0.25,
+    minMMR: 4001,
+    maxMMR: 5000
+  },
+
+
+  // ===== 5001 a 6000 MMR =====
+
+  "CASUAL5A6K5%OFFBOLA1234": {
+    discount: 0.05,
+    minMMR: 5001,
+    maxMMR: 6000
+  },
+
+  "CASUAL5A6K10%OFFBOLA1234": {
+    discount: 0.10,
+    minMMR: 5001,
+    maxMMR: 6000
+  },
+
+  "CASUAL5A6K15%OFFBOLA1234": {
+    discount: 0.15,
+    minMMR: 5001,
+    maxMMR: 6000
+  },
+
+  "CASUAL5A6K20%OFFBOLA1234": {
+    discount: 0.20,
+    minMMR: 5001,
+    maxMMR: 6000
+  },
+
+  "CASUAL5A6K25%OFFBOLA1234": {
+    discount: 0.25,
+    minMMR: 5001,
+    maxMMR: 6000
+  },
+
+
+  // ===== 6001 a 8500 MMR =====
+
+  "CASUAL6A8K5%OFFBOLA1234": {
+    discount: 0.05,
+    minMMR: 6001,
+    maxMMR: 8500
+  },
+
+  "CASUAL6A8K10%OFFBOLA1234": {
+    discount: 0.10,
+    minMMR: 6001,
+    maxMMR: 8500
+  },
+
+  "CASUAL6A8K15%OFFBOLA1234": {
+    discount: 0.15,
+    minMMR: 6001,
+    maxMMR: 8500
+  },
+
+  "CASUAL6A8K20%OFFBOLA1234": {
+    discount: 0.20,
+    minMMR: 6001,
+    maxMMR: 8500
+  },
+
+  "CASUAL6A8K25%OFFBOLA1234": {
+    discount: 0.25,
+    minMMR: 6001,
+    maxMMR: 8500
+  },
+
+
+  // ===== QUALQUER MMR =====
+
+  "CASUAL5%OFFBOLA1234": {
+    discount: 0.05,
+    minMMR: 1,
+    maxMMR: 8500
+  },
+
+  "CASUAL10%OFFBOLA1234": {
+    discount: 0.10,
+    minMMR: 1,
+    maxMMR: 8500
+  },
+
+  "CASUAL15%OFFBOLA1234": {
+    discount: 0.15,
+    minMMR: 1,
+    maxMMR: 8500
+  },
+
+  "CASUAL20%OFFBOLA1234": {
+    discount: 0.20,
+    minMMR: 1,
+    maxMMR: 8500
+  },
+
+  "CASUAL25%OFFBOLA1234": {
+    discount: 0.25,
+    minMMR: 1,
+    maxMMR: 8500
+  }
+
+};
+
+let activeCasualCoupon = null;
+let casualCouponDiscount = 0;
+
+
+
+/* ========= CUPONS SOMENTE DO COACH ========= */
+
+const COACH_ONLY_COUPONS = {
+
+  // ===== COACH PARTE 1 =====
+  "COACHP1_5OFFBOLA1234": {
+    discount: 0.05,
+    type: "p1"
+  },
+
+  "COACHP1_10OFFBOLA1234": {
+    discount: 0.10,
+    type: "p1"
+  },
+
+  "COACHP1_15OFFBOLA1234": {
+    discount: 0.15,
+    type: "p1"
+  },
+
+  "COACHP1_20OFFBOLA1234": {
+    discount: 0.20,
+    type: "p1"
+  },
+
+  "COACHP1_25OFFBOLA1234": {
+    discount: 0.25,
+    type: "p1"
+  },
+
+
+  // ===== COACH PARTE 2 =====
+  "COACHP2_5OFFBOLA1234": {
+    discount: 0.05,
+    type: "p2"
+  },
+
+  "COACHP2_10OFFBOLA1234": {
+    discount: 0.10,
+    type: "p2"
+  },
+
+  "COACHP2_15OFFBOLA1234": {
+    discount: 0.15,
+    type: "p2"
+  },
+
+  "COACHP2_20OFFBOLA1234": {
+    discount: 0.20,
+    type: "p2"
+  },
+
+  "COACHP2_25OFFBOLA1234": {
+    discount: 0.25,
+    type: "p2"
+  },
+
+
+  // ===== COACH PARTE 1 + PARTE 2 =====
+  "COACHP1P2_5OFFBOLA1234": {
+    discount: 0.05,
+    type: "p1p2"
+  },
+
+  "COACHP1P2_10OFFBOLA1234": {
+    discount: 0.10,
+    type: "p1p2"
+  },
+
+  "COACHP1P2_15OFFBOLA1234": {
+    discount: 0.15,
+    type: "p1p2"
+  },
+
+  "COACHP1P2_20OFFBOLA1234": {
+    discount: 0.20,
+    type: "p1p2"
+  },
+
+  "COACHP1P2_25OFFBOLA1234": {
+    discount: 0.25,
+    type: "p1p2"
+  }
+
+};
+
+let activeCoachCoupon = null;
+let coachCouponDiscount = 0;
+let coachCouponType = null;
+
 
 
 /* ========= aqui e a promoçao 10% 15% e 25% SUPER PROMO BOOST TRADICIONAL para desativar substitua true por false ========= */
@@ -4607,19 +4875,252 @@ function checkCoupon() {
     return;
   }
 
-  // 4) INVÁLIDO
+
+// 4) CUPONS SOMENTE DO BOOST CASUAL
+if (CASUAL_ONLY_COUPONS[input]) {
+
+  const coupon = CASUAL_ONLY_COUPONS[input];
+
+  // Precisa ter Boost Casual selecionado
+  if (!$("useCasual").checked) {
+
+    activeCoupon = null;
+    couponDiscount = 0;
+
+    activeTradCoupon = null;
+    tradCouponDiscount = 0;
+
+    activeRecaCoupon = null;
+    recaCouponDiscount = 0;
+
+    activeCasualCoupon = null;
+    casualCouponDiscount = 0;
+
+    msg.style.display = "block";
+    msg.style.color = "var(--danger)";
+    msg.textContent =
+      "❌ Esse cupom é válido apenas para o Boost Casual.";
+
+    updateAll();
+    return;
+  }
+
+  // Pega o MMR atual do Casual
+  const casualMMR = clampInt(
+    Number($("casualMMR").value),
+    1,
+    8500
+  );
+
+  if (casualMMR === null) {
+
+    activeCasualCoupon = null;
+    casualCouponDiscount = 0;
+
+    msg.style.display = "block";
+    msg.style.color = "var(--danger)";
+    msg.textContent =
+      "❌ Digite o MMR atual do Boost Casual antes de aplicar o cupom.";
+
+    updateAll();
+    return;
+  }
+
+  // Verifica se o MMR está dentro da faixa do cupom
+  if (
+    casualMMR < coupon.minMMR ||
+    casualMMR > coupon.maxMMR
+  ) {
+
+    activeCasualCoupon = null;
+    casualCouponDiscount = 0;
+
+    msg.style.display = "block";
+    msg.style.color = "var(--danger)";
+
+    msg.textContent =
+      `❌ Esse cupom não é válido para ${casualMMR} MMR.`;
+
+    updateAll();
+    return;
+  }
+
+  // Limpa outros cupons específicos
   activeCoupon = null;
   couponDiscount = 0;
+
   activeTradCoupon = null;
   tradCouponDiscount = 0;
+
   activeRecaCoupon = null;
   recaCouponDiscount = 0;
 
+  // Ativa o cupom Casual
+  activeCasualCoupon = input;
+  casualCouponDiscount = coupon.discount;
+
   msg.style.display = "block";
-  msg.style.color = "var(--danger)";
-  msg.textContent = "❌ Cupom inválido";
+  msg.style.color = "var(--success)";
+
+  msg.textContent =
+    `✅ Cupom do Boost Casual aplicado: ${input} (${Math.round(casualCouponDiscount * 100)}% OFF)`;
+
   updateAll();
+  return;
 }
+
+
+
+// 5) CUPONS SOMENTE DO COACH
+if (COACH_ONLY_COUPONS[input]) {
+
+  const coupon = COACH_ONLY_COUPONS[input];
+
+  // Precisa ter o Coach selecionado
+  if (!$("useCoach").checked) {
+
+    activeCoupon = null;
+    couponDiscount = 0;
+
+    activeTradCoupon = null;
+    tradCouponDiscount = 0;
+
+    activeRecaCoupon = null;
+    recaCouponDiscount = 0;
+
+    activeCasualCoupon = null;
+    casualCouponDiscount = 0;
+
+    activeCoachCoupon = null;
+    coachCouponDiscount = 0;
+    coachCouponType = null;
+
+    msg.style.display = "block";
+    msg.style.color = "var(--danger)";
+    msg.textContent =
+      "❌ Esse cupom é válido apenas para o Coach.";
+
+    updateAll();
+    return;
+  }
+
+  // Verifica qual combinação do Coach está selecionada
+  const p1 = $("coachP1")?.checked;
+  const p2 = $("coachP2")?.checked;
+
+  let selectedType = null;
+
+  if (p1 && p2) {
+    selectedType = "p1p2";
+  } else if (p1) {
+    selectedType = "p1";
+  } else if (p2) {
+    selectedType = "p2";
+  }
+
+  // Nenhuma parte selecionada
+  if (!selectedType) {
+
+    activeCoachCoupon = null;
+    coachCouponDiscount = 0;
+    coachCouponType = null;
+
+    msg.style.display = "block";
+    msg.style.color = "var(--danger)";
+    msg.textContent =
+      "❌ Selecione a Parte 1, Parte 2 ou Parte 1 + 2 antes de aplicar o cupom.";
+
+    updateAll();
+    return;
+  }
+
+  // Verifica se o cupom corresponde à combinação selecionada
+  if (coupon.type !== selectedType) {
+
+    activeCoachCoupon = null;
+    coachCouponDiscount = 0;
+    coachCouponType = null;
+
+    msg.style.display = "block";
+    msg.style.color = "var(--danger)";
+
+    if (coupon.type === "p1") {
+      msg.textContent =
+        "❌ Esse cupom é válido apenas para o Coach Parte 1.";
+    } else if (coupon.type === "p2") {
+      msg.textContent =
+        "❌ Esse cupom é válido apenas para o Coach Parte 2.";
+    } else {
+      msg.textContent =
+        "❌ Esse cupom é válido apenas para o Coach Parte 1 + Parte 2.";
+    }
+
+    updateAll();
+    return;
+  }
+
+  // Limpa outros cupons
+  activeCoupon = null;
+  couponDiscount = 0;
+
+  activeTradCoupon = null;
+  tradCouponDiscount = 0;
+
+  activeRecaCoupon = null;
+  recaCouponDiscount = 0;
+
+  activeCasualCoupon = null;
+  casualCouponDiscount = 0;
+
+  // Ativa o cupom do Coach
+  activeCoachCoupon = input;
+  coachCouponDiscount = coupon.discount;
+  coachCouponType = coupon.type;
+
+  msg.style.display = "block";
+  msg.style.color = "var(--success)";
+
+  let coachNome = "";
+
+  if (coupon.type === "p1") {
+    coachNome = "Coach Parte 1";
+  } else if (coupon.type === "p2") {
+    coachNome = "Coach Parte 2";
+  } else {
+    coachNome = "Coach Parte 1 + Parte 2";
+  }
+
+  msg.textContent =
+    `✅ Cupom do ${coachNome} aplicado: ${input} (${Math.round(coachCouponDiscount * 100)}% OFF)`;
+
+  updateAll();
+  return;
+}
+
+
+// 6) INVÁLIDO
+activeCoupon = null;
+couponDiscount = 0;
+
+activeTradCoupon = null;
+tradCouponDiscount = 0;
+
+activeRecaCoupon = null;
+recaCouponDiscount = 0;
+
+activeCasualCoupon = null;
+casualCouponDiscount = 0;
+
+activeCoachCoupon = null;
+coachCouponDiscount = 0;
+coachCouponType = null;
+
+msg.style.display = "block";
+msg.style.color = "var(--danger)";
+msg.textContent = "❌ Cupom inválido";
+
+updateAll();
+
 
 
 /* ========= Boost Tradicional (CORRIGIDO) ========= .*/
@@ -6323,82 +6824,168 @@ let offTotal = 0;
   // ===== calcula porcentagem de desconto total =====
 
 
-  // apply combo casual+replay
-    const combo = comboCasualReplay(cas, rep, disableAllDiscounts);
-  if(combo.active){
-    $("comboBadge").style.display = "block";
-    total += combo.delta;
-    // totalNoPromo não muda aqui (mantém sem combo)
-    items.push("• Promoção combo: Boost Casual (1 dia) + 2 Replays (1 dia) → R$ 10,00 de desconto");
-  } else {
-    $("comboBadge").style.display = "none";
-  }
-  
+// ===== aplica combo Casual + Replay =====
+
+const combo = comboCasualReplay(cas, rep, disableAllDiscounts);
+
+if(combo.active){
+  $("comboBadge").style.display = "block";
+
+  total += combo.delta;
+
+  // totalNoPromo não muda aqui
+  // mantém o valor antes do desconto do combo
+
+  items.push(
+    "• Promoção combo: Boost Casual (1 dia) + 2 Replays (1 dia) → R$ 10,00 de desconto"
+  );
+
+}else{
+  $("comboBadge").style.display = "none";
+}
+
+
 // ===== calcula porcentagem de desconto FINAL =====
 
 // 🔥 CUPOM GERAL TEM PRIORIDADE TOTAL
-if (!disableAllDiscounts && activeCoupon && couponDiscount > 0) {
+
+if(
+  !disableAllDiscounts &&
+  activeCoupon &&
+  couponDiscount > 0
+){
+
   total = totalNoPromo * (1 - couponDiscount);
+
   discountPct = Math.round(couponDiscount * 100);
 
-// 🔥 CUPOM NOVO DO BOOST TRADICIONAL afeta só o Tradicional
-} else if (
+
+// 🔥 CUPOM DO BOOST TRADICIONAL
+// Afeta somente o Boost Tradicional
+
+}else if(
   !disableAllDiscounts &&
   activeTradCoupon &&
   tradCouponDiscount > 0 &&
   trad.selected &&
   trad.ok &&
   !trad.superPromoApplied
-) {
-  const descontoTrad = trad.totalNoPromo * tradCouponDiscount;
+){
+
+  const descontoTrad =
+    trad.totalNoPromo * tradCouponDiscount;
+
   total -= descontoTrad;
 
-  discountPct = totalNoPromo > 0
-    ? Math.round((1 - total / totalNoPromo) * 100)
-    : 0;
+  discountPct =
+    totalNoPromo > 0
+      ? Math.round(
+          (1 - total / totalNoPromo) * 100
+        )
+      : 0;
 
-  items.push(`• Boost Tradicional — cupom ${activeTradCoupon}: -${money(descontoTrad)}`);
+  items.push(
+    `• Boost Tradicional — cupom ${activeTradCoupon}: -${money(descontoTrad)}`
+  );
 
-// 🔥 CUPOM NOVO DA RECALIBRAÇÃO afeta só a Recalibração
-} else if (
+
+// 🔥 CUPOM DA RECALIBRAÇÃO
+// Afeta somente a Recalibração
+
+}else if(
   !disableAllDiscounts &&
   activeRecaCoupon &&
   recaCouponDiscount > 0 &&
   rec.selected &&
   rec.ok
-) {
-  const descontoReca = rec.totalNoPromo * recaCouponDiscount;
+){
+
+  const descontoReca =
+    rec.totalNoPromo * recaCouponDiscount;
+
   total -= descontoReca;
 
-  discountPct = totalNoPromo > 0
-    ? Math.round((1 - total / totalNoPromo) * 100)
-    : 0;
+  discountPct =
+    totalNoPromo > 0
+      ? Math.round(
+          (1 - total / totalNoPromo) * 100
+        )
+      : 0;
 
-  items.push(`• Recalibração — cupom ${activeRecaCoupon}: -${money(descontoReca)}`);
-} else {
-  // ❌ sem cupom → desconto vem das promoções normais
-  discountPct = totalNoPromo > 0
-    ? Math.round((1 - total / totalNoPromo) * 100)
-    : 0;
+  items.push(
+    `• Recalibração — cupom ${activeRecaCoupon}: -${money(descontoReca)}`
+  );
+
+
+// 🔥 CUPOM DO BOOST CASUAL
+// Afeta somente o Boost Casual
+
+}else if(
+  !disableAllDiscounts &&
+  activeCasualCoupon &&
+  casualCouponDiscount > 0 &&
+  cas.selected &&
+  cas.ok
+){
+
+  const descontoCasual =
+    cas.totalNoPromo * casualCouponDiscount;
+
+  total -= descontoCasual;
+
+  discountPct =
+    totalNoPromo > 0
+      ? Math.round(
+          (1 - total / totalNoPromo) * 100
+        )
+      : 0;
+
+  items.push(
+    `• Boost Casual — cupom ${activeCasualCoupon}: -${money(descontoCasual)}`
+  );
+
+
+// ❌ SEM CUPOM
+// O desconto vem somente das promoções normais
+
+}else{
+
+  discountPct =
+    totalNoPromo > 0
+      ? Math.round(
+          (1 - total / totalNoPromo) * 100
+        )
+      : 0;
 }
 
 
+// ===== total UI =====
 
-    // total UI
 if(!selectedAny){
-  $("totalRes").innerHTML = "Selecione serviços para ver o total.";
+
+  $("totalRes").innerHTML =
+    "Selecione serviços para ver o total.";
+
   $("totalAlert").textContent = "";
+
   $("zapBtn").disabled = true;
 
-  const floatBox  = $("floatingTotal");
+  const floatBox = $("floatingTotal");
   const ftItemsEl = $("ftItems");
-  const ftPrice   = $("ftPrice");
-  const ftDisc    = $("ftDiscount");
+  const ftPrice = $("ftPrice");
+  const ftDisc = $("ftDiscount");
 
-  if(floatBox) floatBox.classList.add("hidden");
-  if(ftItemsEl) ftItemsEl.innerHTML = "";
-  if(ftPrice) ftPrice.textContent = "R$ 0,00";
-  if(ftDisc) ftDisc.textContent = "";
+  if(floatBox)
+    floatBox.classList.add("hidden");
+
+  if(ftItemsEl)
+    ftItemsEl.innerHTML = "";
+
+  if(ftPrice)
+    ftPrice.textContent = "R$ 0,00";
+
+  if(ftDisc)
+    ftDisc.textContent = "";
 
   return;
 }
