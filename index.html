@@ -5225,68 +5225,219 @@ function checkCoupon() {
 
 function revalidateActiveCoupon(){
 
-  const input = $("couponInput");
+  const couponInput = $("couponInput");
+  const couponMsg = $("couponMsg");
 
-  if(!input) return;
+  if(!couponInput) return;
 
-  const coupon = input.value.trim().toUpperCase();
+  const code = couponInput.value.trim().toUpperCase();
 
-  if(!coupon) return;
+  /* ========= CUPOM VAZIO ========= */
+  if(!code){
+    activeCoupon = null;
+    couponDiscount = 0;
+
+    activeTradCoupon = null;
+    tradCouponDiscount = 0;
+
+    activeRecaCoupon = null;
+    recaCouponDiscount = 0;
+
+    activeCasualCoupon = null;
+    casualCouponDiscount = 0;
+
+    activeCoachP1Coupon = null;
+    coachP1CouponDiscount = 0;
+
+    activeCoachP2Coupon = null;
+    coachP2CouponDiscount = 0;
+
+    activeCoachBothCoupon = null;
+    coachBothCouponDiscount = 0;
+
+    couponMsg.style.display = "none";
+    couponMsg.textContent = "";
+
+    return;
+  }
+
+  /* ========= LIMPA ESTADOS ANTERIORES ========= */
+
+  activeCoupon = null;
+  couponDiscount = 0;
+
+  activeTradCoupon = null;
+  tradCouponDiscount = 0;
+
+  activeRecaCoupon = null;
+  recaCouponDiscount = 0;
+
+  activeCasualCoupon = null;
+  casualCouponDiscount = 0;
+
+  activeCoachP1Coupon = null;
+  coachP1CouponDiscount = 0;
+
+  activeCoachP2Coupon = null;
+  coachP2CouponDiscount = 0;
+
+  activeCoachBothCoupon = null;
+  coachBothCouponDiscount = 0;
 
 
   /* =====================================================
-     CUPOM CASUAL
-     ===================================================== */
+     CUPONS GERAIS
+  ===================================================== */
 
-  if(activeCasualCoupon){
+  if(COUPONS[code] !== undefined){
 
-    const config = CASUAL_ONLY_COUPONS[activeCasualCoupon];
+    activeCoupon = code;
+    couponDiscount = COUPONS[code];
 
-    if(!config){
-      activeCasualCoupon = null;
-      casualCouponDiscount = 0;
-      return;
+    couponMsg.style.display = "block";
+    couponMsg.style.color = "var(--success)";
+    couponMsg.textContent =
+      "✅ Cupom válido: " +
+      Math.round(couponDiscount * 100) +
+      "% OFF.";
+
+    return;
+  }
+
+
+  /* =====================================================
+     BOOST TRADICIONAL
+  ===================================================== */
+
+  if(TRAD_ONLY_COUPONS[code] !== undefined){
+
+    if($("useTrad").checked){
+
+      activeTradCoupon = code;
+      tradCouponDiscount = TRAD_ONLY_COUPONS[code];
+
+      couponMsg.style.display = "block";
+      couponMsg.style.color = "var(--success)";
+      couponMsg.textContent =
+        "✅ Cupom válido para Boost Tradicional: " +
+        Math.round(tradCouponDiscount * 100) +
+        "% OFF.";
+
+    }else{
+
+      couponMsg.style.display = "block";
+      couponMsg.style.color = "var(--danger)";
+      couponMsg.textContent =
+        "❌ Esse cupom é exclusivo para Boost Tradicional.";
     }
+
+    return;
+  }
+
+
+  /* =====================================================
+     RECALIBRAÇÃO
+  ===================================================== */
+
+  if(RECA_ONLY_COUPONS[code] !== undefined){
+
+    if($("useRecal").checked){
+
+      activeRecaCoupon = code;
+      recaCouponDiscount = RECA_ONLY_COUPONS[code];
+
+      couponMsg.style.display = "block";
+      couponMsg.style.color = "var(--success)";
+      couponMsg.textContent =
+        "✅ Cupom válido para Recalibração: " +
+        Math.round(recaCouponDiscount * 100) +
+        "% OFF.";
+
+    }else{
+
+      couponMsg.style.display = "block";
+      couponMsg.style.color = "var(--danger)";
+      couponMsg.textContent =
+        "❌ Esse cupom é exclusivo para Recalibração.";
+    }
+
+    return;
+  }
+
+
+  /* =====================================================
+     BOOST CASUAL
+  ===================================================== */
+
+  if(CASUAL_ONLY_COUPONS[code] !== undefined){
+
+    const cupom = CASUAL_ONLY_COUPONS[code];
 
     if(!$("useCasual").checked){
 
-      activeCasualCoupon = null;
-      casualCouponDiscount = 0;
+      couponMsg.style.display = "block";
+      couponMsg.style.color = "var(--danger)";
+      couponMsg.textContent =
+        "❌ Esse cupom é exclusivo para Boost Casual.";
 
       return;
     }
 
-    const mmr = clampInt(
-      Number($("casualMMR").value),
-      1,
-      8500
-    );
+    const mmr = Number($("casualMMR").value);
 
-    if(
-      mmr === null ||
-      mmr < config.minMMR ||
-      mmr > config.maxMMR
-    ){
+    /*
+      IMPORTANTE:
+      Se o MMR ainda estiver vazio ou inválido,
+      NÃO descartamos o cupom.
 
-      activeCasualCoupon = null;
-      casualCouponDiscount = 0;
+      Ele continua no campo e será reavaliado
+      automaticamente quando o usuário preencher
+      ou alterar o MMR.
+    */
 
-      const msg = $("couponMsg");
+    if(!Number.isFinite(mmr) || mmr < 1){
 
-      if(msg){
-
-        msg.style.display = "block";
-        msg.style.color = "var(--danger)";
-
-        msg.textContent =
-          `❌ Esse cupom não é válido para o MMR atual. Faixa permitida: ${config.minMMR} até ${config.maxMMR} MMR.`;
-      }
+      couponMsg.style.display = "block";
+      couponMsg.style.color = "var(--danger)";
+      couponMsg.textContent =
+        "⚠️ Digite o MMR atual para validar este cupom.";
 
       return;
     }
 
-    /* Continua válido */
-    casualCouponDiscount = config.discount;
+    /*
+      AQUI ESTÁ A CORREÇÃO PRINCIPAL:
+
+      Toda vez que updateAll() for chamado,
+      o MMR atual é lido novamente.
+    */
+
+    if(mmr >= cupom.minMMR && mmr <= cupom.maxMMR){
+
+      activeCasualCoupon = code;
+      casualCouponDiscount = cupom.discount;
+
+      couponMsg.style.display = "block";
+      couponMsg.style.color = "var(--success)";
+      couponMsg.textContent =
+        "✅ Cupom válido para " +
+        mmr +
+        " MMR: " +
+        Math.round(casualCouponDiscount * 100) +
+        "% OFF.";
+
+    }else{
+
+      couponMsg.style.display = "block";
+      couponMsg.style.color = "var(--danger)";
+      couponMsg.textContent =
+        "❌ Esse cupom não é válido para o MMR atual. " +
+        "Faixa permitida: " +
+        cupom.minMMR +
+        " até " +
+        cupom.maxMMR +
+        " MMR.";
+    }
 
     return;
   }
@@ -5294,33 +5445,33 @@ function revalidateActiveCoupon(){
 
   /* =====================================================
      COACH PARTE 1
-     ===================================================== */
+  ===================================================== */
 
-  if(activeCoachP1Coupon){
+  if(COACH_P1_ONLY_COUPONS[code] !== undefined){
 
     if(
-      !$("useCoach").checked ||
-      !$("coachP1").checked ||
-      $("coachP2").checked
+      $("useCoach").checked &&
+      $("coachP1").checked &&
+      !$("coachP2").checked
     ){
 
-      activeCoachP1Coupon = null;
-      coachP1CouponDiscount = 0;
+      activeCoachP1Coupon = code;
+      coachP1CouponDiscount = COACH_P1_ONLY_COUPONS[code];
 
-      const msg = $("couponMsg");
+      couponMsg.style.display = "block";
+      couponMsg.style.color = "var(--success)";
+      couponMsg.textContent =
+        "✅ Cupom válido para Coach Parte 1: " +
+        Math.round(coachP1CouponDiscount * 100) +
+        "% OFF.";
 
-      if(msg){
-        msg.style.display = "block";
-        msg.style.color = "var(--danger)";
-        msg.textContent =
-          "❌ Esse cupom é válido somente para o Coach Parte 1.";
-      }
+    }else{
 
-      return;
+      couponMsg.style.display = "block";
+      couponMsg.style.color = "var(--danger)";
+      couponMsg.textContent =
+        "❌ Esse cupom é exclusivo para Coach Parte 1.";
     }
-
-    coachP1CouponDiscount =
-      COACH_P1_ONLY_COUPONS[activeCoachP1Coupon];
 
     return;
   }
@@ -5328,33 +5479,33 @@ function revalidateActiveCoupon(){
 
   /* =====================================================
      COACH PARTE 2
-     ===================================================== */
+  ===================================================== */
 
-  if(activeCoachP2Coupon){
+  if(COACH_P2_ONLY_COUPONS[code] !== undefined){
 
     if(
-      !$("useCoach").checked ||
-      !$("coachP2").checked ||
-      $("coachP1").checked
+      $("useCoach").checked &&
+      $("coachP2").checked &&
+      !$("coachP1").checked
     ){
 
-      activeCoachP2Coupon = null;
-      coachP2CouponDiscount = 0;
+      activeCoachP2Coupon = code;
+      coachP2CouponDiscount = COACH_P2_ONLY_COUPONS[code];
 
-      const msg = $("couponMsg");
+      couponMsg.style.display = "block";
+      couponMsg.style.color = "var(--success)";
+      couponMsg.textContent =
+        "✅ Cupom válido para Coach Parte 2: " +
+        Math.round(coachP2CouponDiscount * 100) +
+        "% OFF.";
 
-      if(msg){
-        msg.style.display = "block";
-        msg.style.color = "var(--danger)";
-        msg.textContent =
-          "❌ Esse cupom é válido somente para o Coach Parte 2.";
-      }
+    }else{
 
-      return;
+      couponMsg.style.display = "block";
+      couponMsg.style.color = "var(--danger)";
+      couponMsg.textContent =
+        "❌ Esse cupom é exclusivo para Coach Parte 2.";
     }
-
-    coachP2CouponDiscount =
-      COACH_P2_ONLY_COUPONS[activeCoachP2Coupon];
 
     return;
   }
@@ -5362,96 +5513,46 @@ function revalidateActiveCoupon(){
 
   /* =====================================================
      COACH PARTE 1 + PARTE 2
-     ===================================================== */
+  ===================================================== */
 
-  if(activeCoachBothCoupon){
+  if(COACH_BOTH_COUPONS[code] !== undefined){
 
     if(
-      !$("useCoach").checked ||
-      !$("coachP1").checked ||
-      !$("coachP2").checked
+      $("useCoach").checked &&
+      $("coachP1").checked &&
+      $("coachP2").checked
     ){
 
-      activeCoachBothCoupon = null;
-      coachBothCouponDiscount = 0;
+      activeCoachBothCoupon = code;
+      coachBothCouponDiscount = COACH_BOTH_COUPONS[code];
 
-      const msg = $("couponMsg");
+      couponMsg.style.display = "block";
+      couponMsg.style.color = "var(--success)";
+      couponMsg.textContent =
+        "✅ Cupom válido para Coach Parte 1 + Parte 2: " +
+        Math.round(coachBothCouponDiscount * 100) +
+        "% OFF.";
 
-      if(msg){
-        msg.style.display = "block";
-        msg.style.color = "var(--danger)";
-        msg.textContent =
-          "❌ Esse cupom é válido somente quando Parte 1 e Parte 2 do Coach estão contratadas.";
-      }
+    }else{
 
-      return;
+      couponMsg.style.display = "block";
+      couponMsg.style.color = "var(--danger)";
+      couponMsg.textContent =
+        "❌ Esse cupom exige Coach Parte 1 + Parte 2.";
     }
-
-    coachBothCouponDiscount =
-      COACH_BOTH_COUPONS[activeCoachBothCoupon];
 
     return;
   }
 
 
   /* =====================================================
-     CUPOM TRADICIONAL
-     ===================================================== */
+     CUPOM INVÁLIDO
+  ===================================================== */
 
-  if(activeTradCoupon){
-
-    if(!$("useTrad").checked){
-
-      activeTradCoupon = null;
-      tradCouponDiscount = 0;
-
-      const msg = $("couponMsg");
-
-      if(msg){
-        msg.style.display = "block";
-        msg.style.color = "var(--danger)";
-        msg.textContent =
-          "❌ Esse cupom é válido apenas para o Boost Tradicional.";
-      }
-
-      return;
-    }
-
-    tradCouponDiscount =
-      TRAD_ONLY_COUPONS[activeTradCoupon];
-
-    return;
-  }
-
-
-  /* =====================================================
-     CUPOM RECALIBRAÇÃO
-     ===================================================== */
-
-  if(activeRecaCoupon){
-
-    if(!$("useRecal").checked){
-
-      activeRecaCoupon = null;
-      recaCouponDiscount = 0;
-
-      const msg = $("couponMsg");
-
-      if(msg){
-        msg.style.display = "block";
-        msg.style.color = "var(--danger)";
-        msg.textContent =
-          "❌ Esse cupom é válido apenas para Recalibração.";
-      }
-
-      return;
-    }
-
-    recaCouponDiscount =
-      RECA_ONLY_COUPONS[activeRecaCoupon];
-
-    return;
-  }
+  couponMsg.style.display = "block";
+  couponMsg.style.color = "var(--danger)";
+  couponMsg.textContent =
+    "❌ Cupom inválido ou não reconhecido.";
 }
 
 
