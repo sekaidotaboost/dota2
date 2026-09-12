@@ -7099,10 +7099,6 @@ function updateAll(){
   activePromo = null;
   promoMessage = "";
 
-  // 🔥 REVALIDA O CUPOM AUTOMATICAMENTE
-  // toda vez que updateAll() for executado
-  revalidateActiveCoupon();
-
   syncSelectedCards();
 
   // 🔥 isso garante que promoções antigas morram
@@ -7199,11 +7195,18 @@ const cas  = calcCasual(disableAllDiscounts);
 const rec  = calcRecal();
 const rep  = calcReplay(disableAllDiscounts);
 
-
 const rolefarm = calcRoleFarm(disableAllDiscounts);
 
 const tradEligible = trad.selected && trad.ok && trad.tradSpend >= 200;
 const coach = calcCoach(tradEligible, disableAllDiscounts);
+
+
+/* =====================================================
+   REVALIDAÇÃO AUTOMÁTICA DOS CUPONS
+   ===================================================== */
+
+revalidateActiveCoupon();
+
 
 // 🔒 BLOQUEIO DE CUPOM SE A SUPER PROMO DO TRADICIONAL ESTIVER ATIVA
 const couponInput = $("couponInput");
