@@ -5748,7 +5748,7 @@ const base = calcTradBaseProgressivo(atual, desCalculo);
   // OFF-STREAM
   let offValue = 0;
   if(off){
-    const dias = Math.max(1, Math.floor(delta / 150));
+    const dias = Math.max(1, Math.floor(delta / 125));
     offValue = dias * perDayOff;
   }
 
@@ -7385,6 +7385,13 @@ let offTotal = 0;
 });
 
 
+// =====================================================
+// 🔒 VALOR PROTEGIDO DO OFF-STREAM
+// O cupom nunca aplica desconto sobre essa parte.
+// =====================================================
+
+const serviceTotalNoPromo = Math.max(0, totalNoPromo - offTotal);
+
   // ===== calcula porcentagem de desconto total =====
 
 
@@ -7413,9 +7420,13 @@ if(
   couponDiscount > 0
 ){
 
+  // 🔒 Cupom incide somente sobre os serviços.
+  // Off-stream permanece com 100% do valor.
+  const descontoServicos =
+    serviceTotalNoPromo * couponDiscount;
+
   total =
-    totalNoPromo *
-    (1 - couponDiscount);
+    serviceTotalNoPromo - descontoServicos + offTotal;
 
   discountPct =
     Math.round(couponDiscount * 100);
@@ -7432,22 +7443,25 @@ if(
   !trad.superPromoApplied
 ){
 
-  const descontoTrad =
-    trad.totalNoPromo *
+  const tradServiceNoPromo =
+    Math.max(0, trad.totalNoPromo - (trad.offValue || 0));
+
+const descontoTrad =
+    tradServiceNoPromo *
     tradCouponDiscount;
 
-  total -= descontoTrad;
+total -= descontoTrad;
 
-  discountPct =
-    totalNoPromo > 0
-      ? Math.round(
-          (1 - total / totalNoPromo) * 100
-        )
-      : 0;
+discountPct =
+  totalNoPromo > 0
+    ? Math.round(
+        (1 - total / totalNoPromo) * 100
+      )
+    : 0;
 
-  items.push(
-    `• Boost Tradicional — cupom ${activeTradCoupon}: -${money(descontoTrad)}`
-  );
+items.push(
+  `• Boost Tradicional — cupom ${activeTradCoupon}: -${money(descontoTrad)}`
+);
 
 
 /* ========= CUPOM RECALIBRAÇÃO ========= */
@@ -7460,8 +7474,11 @@ if(
   rec.ok
 ){
 
-  const descontoReca =
-    rec.totalNoPromo *
+  const recaServiceNoPromo =
+    Math.max(0, rec.totalNoPromo - (rec.offValue || 0));
+
+const descontoReca =
+    recaServiceNoPromo *
     recaCouponDiscount;
 
   total -= descontoReca;
@@ -7488,8 +7505,11 @@ if(
   cas.ok
 ){
 
-  const descontoCasual =
-    cas.totalNoPromo *
+  const casualServiceNoPromo =
+    Math.max(0, cas.totalNoPromo - (cas.offValue || 0));
+
+const descontoCasual =
+    casualServiceNoPromo *
     casualCouponDiscount;
 
   total -= descontoCasual;
