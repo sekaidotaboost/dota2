@@ -7175,7 +7175,13 @@ const budgetApplyBtn = $("tradBudgetApplyBtn");
 
 if(sug && box){
 
+  // Mostra/esconde a área da sugestão
   box.style.display = sug.checked ? "block" : "none";
+
+
+  // ==========================================
+  // SUGESTÃO DESATIVADA
+  // ==========================================
 
   if(!sug.checked){
 
@@ -7186,14 +7192,31 @@ if(sug && box){
     if(budgetApplyBtn){
       budgetApplyBtn.style.display = "none";
       budgetApplyBtn.dataset.mmr = "";
+      budgetApplyBtn.dataset.applied = "false";
     }
 
-  }else if(budgetInput && budgetResult){
+  }
 
-    const mmrAtual = Number($("tradAtual")?.value || 0);
-    const budget = Number(budgetInput.value || 0);
 
-    // Limpa a sugestão quando os dados não são válidos
+  // ==========================================
+  // SUGESTÃO ATIVADA
+  // ==========================================
+
+  else if(budgetInput && budgetResult){
+
+    const mmrAtual = Number(
+      $("tradAtual")?.value || 0
+    );
+
+    const budget = Number(
+      budgetInput.value || 0
+    );
+
+
+    // ==========================================
+    // DADOS INVÁLIDOS / VAZIOS
+    // ==========================================
+
     if(
       !Number.isFinite(mmrAtual) ||
       !Number.isFinite(budget) ||
@@ -7205,97 +7228,227 @@ if(sug && box){
       if(budgetApplyBtn){
         budgetApplyBtn.style.display = "none";
         budgetApplyBtn.dataset.mmr = "";
+        budgetApplyBtn.dataset.applied = "false";
       }
 
-    }else{
+    }
 
-      const sugestao = calcTradByBudget(mmrAtual, budget);
 
-      if(sugestao && Number.isFinite(sugestao.mmrFinal)){
+    // ==========================================
+    // CALCULAR MMR PELO ORÇAMENTO
+    // ==========================================
 
-  const mmrSugerido = Math.round(sugestao.mmrFinal);
-        const ganhoMMR = Math.max(0, mmrSugerido - mmrAtual);
+    else{
 
-        // Mantém a regra existente de MMR mínimo.
-        // Aqui NÃO aplicamos automaticamente o valor.
-        const delta = mmrSugerido - mmrAtual;
+      const sugestao =
+        calcTradByBudget(
+          mmrAtual,
+          budget
+        );
+
+
+      if(
+        sugestao &&
+        Number.isFinite(sugestao.mmrFinal)
+      ){
+
+        const mmrSugerido =
+          Math.round(sugestao.mmrFinal);
+
+        const ganhoMMR =
+          Math.max(
+            0,
+            mmrSugerido - mmrAtual
+          );
+
+
+        // ======================================
+        // CALCULA GANHO
+        // ======================================
+
+        const delta =
+          mmrSugerido - mmrAtual;
+
+
+        // ======================================
+        // MMR MÍNIMO NECESSÁRIO
+        // ======================================
 
         let minDelta = 0;
 
-        if(mmrAtual <= 2000) minDelta = 500;
-        else if(mmrAtual <= 2500) minDelta = 450;
-        else if(mmrAtual <= 3000) minDelta = 400;
-        else if(mmrAtual <= 3500) minDelta = 370;
-        else if(mmrAtual <= 4000) minDelta = 340;
-        else if(mmrAtual <= 4500) minDelta = 270;
-        else if(mmrAtual <= 5000) minDelta = 240;
-        else if(mmrAtual <= 5500) minDelta = 160;
-        else if(mmrAtual <= 6000) minDelta = 90;
+        if(mmrAtual <= 2000){
+          minDelta = 500;
+
+        }else if(mmrAtual <= 2500){
+          minDelta = 450;
+
+        }else if(mmrAtual <= 3000){
+          minDelta = 400;
+
+        }else if(mmrAtual <= 3500){
+          minDelta = 370;
+
+        }else if(mmrAtual <= 4000){
+          minDelta = 340;
+
+        }else if(mmrAtual <= 4500){
+          minDelta = 270;
+
+        }else if(mmrAtual <= 5000){
+          minDelta = 240;
+
+        }else if(mmrAtual <= 5500){
+          minDelta = 160;
+
+        }else if(mmrAtual <= 6000){
+          minDelta = 90;
+        }
+
+
+        // ======================================
+        // VERIFICA SE O VALOR É VÁLIDO
+        // ======================================
 
         const valorValido =
           mmrSugerido > mmrAtual &&
           delta >= minDelta &&
           mmrSugerido <= 6000;
 
+
+        // ======================================
+        // VALOR INVÁLIDO
+        // ======================================
+
         if(!valorValido){
 
-  budgetResult.innerHTML = `
-    <strong>Com R$ ${money(budget)} você pode chegar aproximadamente até:</strong>
-    <br>
-
-    <strong style="font-size:18px;color:#fff;">
-      ${mmrSugerido} MMR
-    </strong>
-
-    <br>
-
-    👉 Isso representa um ganho de +${ganhoMMR} MMR
-
-    <br>
-
-    <strong style="color:var(--danger);">
-      ⚠️ Valor inválido para este Boost Tradicional.
-    </strong>
-
-    <br>
-
-    <span style="font-size:12px;color:var(--muted);">
-      O valor informado não permite atingir o MMR mínimo necessário para este Boost Tradicional.
-    </span>
-  `;
-
-  if(budgetApplyBtn){
-    budgetApplyBtn.style.display = "none";
-    budgetApplyBtn.dataset.mmr = "";
-  }
-
-}else{
-
           budgetResult.innerHTML = `
-            <strong>Com R$ ${money(budget)} você pode chegar aproximadamente até:</strong>
+
+            <strong>
+              Com R$ ${money(budget)} você pode
+              chegar aproximadamente até:
+            </strong>
+
             <br>
-            <strong style="font-size:18px;color:#fff;">
+
+            <strong
+              style="
+                font-size:18px;
+                color:#fff;
+              "
+            >
               ${mmrSugerido} MMR
             </strong>
+
             <br>
-            👉 Isso representa um ganho de +${ganhoMMR} MMR
+
+            👉 Isso representa um ganho de
+            +${ganhoMMR} MMR
+
+            <br><br>
+
+            <strong style="color:var(--danger);">
+              ⚠️ Valor inválido para este Boost Tradicional.
+            </strong>
+
             <br>
-            <span style="font-size:12px;color:var(--muted);">
+
+            <span
+              style="
+                font-size:12px;
+                color:var(--muted);
+              "
+            >
+              O valor informado não permite atingir
+              o MMR mínimo necessário para este
+              Boost Tradicional.
+            </span>
+
+          `;
+
+
+          // Não permite aplicar valor inválido
+          if(budgetApplyBtn){
+
+            budgetApplyBtn.style.display = "none";
+            budgetApplyBtn.dataset.mmr = "";
+            budgetApplyBtn.dataset.applied = "false";
+
+          }
+
+        }
+
+
+        // ======================================
+        // VALOR VÁLIDO
+        // ======================================
+
+        else{
+
+          budgetResult.innerHTML = `
+
+            <strong>
+              Com R$ ${money(budget)} você pode
+              chegar aproximadamente até:
+            </strong>
+
+            <br>
+
+            <strong
+              style="
+                font-size:18px;
+                color:#fff;
+              "
+            >
+              ${mmrSugerido} MMR
+            </strong>
+
+            <br>
+
+            👉 Isso representa um ganho de
+            +${ganhoMMR} MMR
+
+            <br>
+
+            <span
+              style="
+                font-size:12px;
+                color:var(--muted);
+              "
+            >
               Estimativa baseada no cálculo atual.
             </span>
+
           `;
+
+
+          // ====================================
+          // MOSTRAR BOTÃO
+          // ====================================
 
           if(budgetApplyBtn){
 
             budgetApplyBtn.style.display = "block";
-            budgetApplyBtn.dataset.mmr = String(mmrSugerido);
 
-            // Evita adicionar vários eventos ao botão
+            budgetApplyBtn.dataset.mmr =
+              String(mmrSugerido);
+
+            budgetApplyBtn.dataset.applied =
+              "false";
+
+
+            // ==================================
+            // CLIQUE NO BOTÃO
+            // ==================================
+
             budgetApplyBtn.onclick = () => {
 
               const mmrParaAplicar =
-                Number(budgetApplyBtn.dataset.mmr);
+                Number(
+                  budgetApplyBtn.dataset.mmr
+                );
 
+
+              // Segurança
               if(
                 !Number.isFinite(mmrParaAplicar) ||
                 mmrParaAplicar <= 0
@@ -7303,32 +7456,96 @@ if(sug && box){
                 return;
               }
 
-              // 🧹 LIMPA O MMR DESEJADO ATUAL
-$("tradDesejado").value = "";
 
-// 🔄 COLOCA O NOVO MMR DESEJADO
-$("tradDesejado").value = mmrParaAplicar;
+              const campoDesejado =
+                $("tradDesejado");
 
-// 🔄 Atualiza a seleção visual da medalha
-setTradMMRFromPicker(
-  "desejado",
-  mmrParaAplicar
-);
 
-// 🔄 Recalcula tudo
-updateAll();
+              if(!campoDesejado){
+                return;
+              }
+
+
+              // =================================
+              // LIBERA TEMPORARIAMENTE O CAMPO
+              // =================================
+
+              campoDesejado.disabled = false;
+
+
+              // =================================
+              // APAGA O MMR DESEJADO ANTIGO
+              // =================================
+
+              campoDesejado.value = "";
+
+
+              // =================================
+              // COLOCA O NOVO MMR
+              // =================================
+
+              campoDesejado.value =
+                mmrParaAplicar;
+
+
+              // =================================
+              // ATUALIZA A MEDALHA
+              // =================================
+
+              setTradMMRFromPicker(
+                "desejado",
+                mmrParaAplicar
+              );
+
+
+              // =================================
+              // MARCA COMO APLICADO
+              // =================================
+
+              budgetApplyBtn.dataset.applied =
+                "true";
+
+
+              // =================================
+              // MANTÉM O CAMPO BLOQUEADO
+              // =================================
+
+              if(sug && sug.checked){
+
+                campoDesejado.disabled = true;
+
+              }
+
+
+              // =================================
+              // ATUALIZA OS CÁLCULOS
+              // =================================
+
+              updateAll();
+
             };
 
           }
+
         }
 
-      }else{
+      }
+
+
+      // ========================================
+      // SEM RESULTADO
+      // ========================================
+
+      else{
 
         budgetResult.innerHTML = "";
 
         if(budgetApplyBtn){
+
           budgetApplyBtn.style.display = "none";
           budgetApplyBtn.dataset.mmr = "";
+          budgetApplyBtn.dataset.applied = "false";
+
         }
 
       }
@@ -7353,11 +7570,15 @@ updateAll();
       tradSuperPromo.checked = false;
     }
   }
-  // 🔒 trava MMR desejado quando sugestão estiver ativa
+  // 🔒 TRAVA MMR DESEJADO ENQUANTO A SUGESTÃO ESTIVER ATIVA
 if(sug && sug.checked){
+
   $("tradDesejado").disabled = true;
+
 }else{
+
   $("tradDesejado").disabled = false;
+
 }
 
 const tradRankSelectors = $("tradRankSelectors");
@@ -7374,15 +7595,55 @@ enableGroup("useTrad", [
   "tradBudget"
 ]);
 
-enableGroup("useDouble", ["doubleMMR","doubleDays","doubleOff"]);
-enableGroup("useCasual", ["casualMMR","casualDays","casualOff"]);
-enableGroup("useRecal", ["recalMMR","recalOff"]);
-enableGroup("useReplay", ["repQtd","repDias","repOff"]);
-enableGroup("useCoach", ["coachP1","coachP2"]);
-enableGroup("useLow", ["lowQty","lowOff"]);
-enableGroup("useRoleFarm", ["roleFarmMMR","roleFarmDays","roleFarmOff"]);
-enableGroup("useTurbo", ["turboDays","turboOff","turboWins","turboSimDays"]);
-enableGroup("useDark", ["darkDays"]);
+enableGroup("useDouble", [
+  "doubleMMR",
+  "doubleDays",
+  "doubleOff"
+]);
+
+enableGroup("useCasual", [
+  "casualMMR",
+  "casualDays",
+  "casualOff"
+]);
+
+enableGroup("useRecal", [
+  "recalMMR",
+  "recalOff"
+]);
+
+enableGroup("useReplay", [
+  "repQtd",
+  "repDias",
+  "repOff"
+]);
+
+enableGroup("useCoach", [
+  "coachP1",
+  "coachP2"
+]);
+
+enableGroup("useLow", [
+  "lowQty",
+  "lowOff"
+]);
+
+enableGroup("useRoleFarm", [
+  "roleFarmMMR",
+  "roleFarmDays",
+  "roleFarmOff"
+]);
+
+enableGroup("useTurbo", [
+  "turboDays",
+  "turboOff",
+  "turboWins",
+  "turboSimDays"
+]);
+
+enableGroup("useDark", [
+  "darkDays"
+]);
 
 // 🔒 REGRA REPLAY: dias não podem ultrapassar análises
 if($("useReplay").checked){
