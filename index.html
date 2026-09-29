@@ -7239,18 +7239,37 @@ if(sug && box){
 
         if(!valorValido){
 
-          budgetResult.innerHTML = `
-            <strong>Valor inválido.</strong>
-            <br>
-            O valor informado não permite atingir o MMR mínimo necessário para este Boost Tradicional.
-          `;
+  budgetResult.innerHTML = `
+    <strong>Com R$ ${money(budget)} você pode chegar aproximadamente até:</strong>
+    <br>
 
-          if(budgetApplyBtn){
-            budgetApplyBtn.style.display = "none";
-            budgetApplyBtn.dataset.mmr = "";
-          }
+    <strong style="font-size:18px;color:#fff;">
+      ${mmrSugerido} MMR
+    </strong>
 
-        }else{
+    <br>
+
+    👉 Isso representa um ganho de +${ganhoMMR} MMR
+
+    <br>
+
+    <strong style="color:var(--danger);">
+      ⚠️ Valor inválido para este Boost Tradicional.
+    </strong>
+
+    <br>
+
+    <span style="font-size:12px;color:var(--muted);">
+      O valor informado não permite atingir o MMR mínimo necessário para este Boost Tradicional.
+    </span>
+  `;
+
+  if(budgetApplyBtn){
+    budgetApplyBtn.style.display = "none";
+    budgetApplyBtn.dataset.mmr = "";
+  }
+
+}else{
 
           budgetResult.innerHTML = `
             <strong>Com R$ ${money(budget)} você pode chegar aproximadamente até:</strong>
@@ -7284,17 +7303,20 @@ if(sug && box){
                 return;
               }
 
-              // Aplica SOMENTE quando o cliente clicar
-              $("tradDesejado").value = mmrParaAplicar;
+              // 🧹 LIMPA O MMR DESEJADO ATUAL
+$("tradDesejado").value = "";
 
-              // Atualiza os seletores de rank
-              setTradMMRFromPicker(
-                "desejado",
-                mmrParaAplicar
-              );
+// 🔄 COLOCA O NOVO MMR DESEJADO
+$("tradDesejado").value = mmrParaAplicar;
 
-              // Recalcula todo o orçamento
-              updateAll();
+// 🔄 Atualiza a seleção visual da medalha
+setTradMMRFromPicker(
+  "desejado",
+  mmrParaAplicar
+);
+
+// 🔄 Recalcula tudo
+updateAll();
             };
 
           }
