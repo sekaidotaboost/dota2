@@ -756,10 +756,122 @@ input[type=range]::-moz-range-thumb{
 }
 
 @media(min-width:700px){
-  .coachGrid{
-    grid-template-columns:repeat(2, 1fr);
-    gap:16px;
+
+  /* =========================================
+     RECalibração - GRID DOS CARDS
+     ========================================= */
+
+  #bodyRecal .coachGrid{
+    display:grid;
+    grid-template-columns:repeat(2, 260px);
+    gap:14px;
+    justify-content:center;
+    margin-top:10px;
   }
+
+
+  /* =========================================
+     CARD
+     ========================================= */
+
+  #bodyRecal .coachCard{
+    padding:10px;
+    min-height:130px;
+
+    display:grid;
+    grid-template-columns:1fr 70px;
+    column-gap:10px;
+
+    align-items:center;
+  }
+
+
+  /* =========================================
+     TÍTULO
+     "Modo de serviço"
+     ========================================= */
+
+  #bodyRecal .coachCardTitle{
+    grid-column:1;
+    grid-row:1;
+
+    text-align:left;
+
+    font-size:15px;
+    font-weight:600;
+    line-height:1.2;
+
+    color:#ffffff98;
+  }
+
+
+  /* =========================================
+     DESCRIÇÃO
+     ========================================= */
+
+  #bodyRecal .coachCardDesc{
+    grid-column:1;
+    grid-row:2;
+
+    text-align:left;
+
+    margin-top:6px;
+
+    font-size:13px;
+    font-weight:600;
+
+    line-height:1.45;
+
+    color:#d6d3e5d2;
+  }
+
+
+  /* =========================================
+     DESTAQUES:
+     0 a 2000 MMR
+     15 partidas
+     ========================================= */
+
+  #bodyRecal .coachCardDesc strong{
+  font-size:13px;
+  font-weight:600;
+  color:#ffffffb9;
+}
+
+
+  /* =========================================
+     PREÇO
+     ========================================= */
+
+  #bodyRecal .recalPrice{
+    display:inline-block;
+
+    margin-top:5px;
+
+    font-size:16px;
+    font-weight:900;
+
+    color:#22c55e;
+  }
+
+
+  /* =========================================
+     ÍCONE DA RECALIBRAÇÃO
+     ========================================= */
+
+  #bodyRecal .coachCard img{
+    width:60px;
+    height:60px;
+    max-width:60px;
+
+    object-fit:contain;
+
+    margin:0 auto;
+
+    grid-column:2;
+    grid-row:1 / span 2;
+  }
+
 }
 
 .coachCard{
@@ -784,6 +896,111 @@ input[type=range]::-moz-range-thumb{
 
 .coachCard input{
   display:none;
+}
+
+/* ==========================================
+   COACH - CONFIGURAÇÃO PRÓPRIA
+   2 COLUNAS
+========================================== */
+
+@media(min-width:700px){
+
+  /* Coach fica 2 por linha */
+  #bodyCoach .coachGrid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:12px;
+    margin-top:10px;
+  }
+
+  /* Card do Coach */
+  #bodyCoach .coachCard{
+    display:block;
+    padding:10px;
+  }
+
+  /* Imagem do Coach fica EM CIMA */
+  #bodyCoach .coachCard img{
+    width:100%;
+    max-width:72px;
+    height:72px;
+    object-fit:contain;
+    display:block;
+    margin:0 auto 8px;
+  }
+
+  /* Título do Coach centralizado */
+  #bodyCoach .coachCardTitle{
+    text-align:center;
+    font-size:14px;
+  }
+
+  /* Descrição do Coach centralizada */
+  #bodyCoach .coachCardDesc{
+    text-align:center;
+    margin-top:6px;
+    font-size:11px;
+    line-height:1.35;
+  }
+
+  /* Preço do Coach */
+  #bodyCoach .coachCardPrice{
+    text-align:center;
+  }
+}
+
+/* ==========================================
+   RECALIBRAÇÃO - CONFIGURAÇÃO PRÓPRIA
+   2x2 + FOTO À DIREITA
+========================================== */
+
+@media(min-width:700px){
+
+  #bodyRecal .coachGrid{
+    display:grid;
+    grid-template-columns:repeat(2, 260px);
+    gap:14px;
+    justify-content:center;
+    margin-top:10px;
+  }
+
+  #bodyRecal .coachCard{
+    display:grid;
+    grid-template-columns:1fr 70px;
+    column-gap:10px;
+    align-items:center;
+    padding:10px;
+  }
+
+  /* Texto à esquerda */
+  #bodyRecal .coachCardTitle{
+    grid-column:1;
+    grid-row:1;
+    text-align:left;
+    font-size:13px;
+  }
+
+  #bodyRecal .coachCardDesc{
+    grid-column:1;
+    grid-row:2;
+    text-align:left;
+    margin-top:4px;
+    font-size:11px;
+    line-height:1.3;
+  }
+
+  /* Foto à direita */
+  #bodyRecal .coachCard img{
+    grid-column:2;
+    grid-row:1 / span 2;
+
+    width:60px;
+    height:60px;
+    max-width:60px;
+    object-fit:contain;
+    display:block;
+    margin:0 auto;
+  }
 }
 
 .coachCard img{
@@ -2858,7 +3075,7 @@ input[type=text]:focus{
   <label class="coachCard" id="recalCard1">
     <input type="radio" name="recalMode" id="recalMode1" disabled>
     <img src="medalhas/recalibracao1.png">
-    <div class="coachCardTitle">Modo de serviço</div>
+    <div class="coachCardTitle">BÁSICA</div>
     <div class="coachCardDesc">
       Recalibração para contas<br>
       <strong>0 a 2000 MMR</strong><br>
@@ -2871,7 +3088,7 @@ input[type=text]:focus{
   <label class="coachCard" id="recalCard2">
     <input type="radio" name="recalMode" id="recalMode2" disabled>
     <img src="medalhas/recalibracao2.png">
-    <div class="coachCardTitle">Modo de serviço</div>
+    <div class="coachCardTitle">INTERMEDIÁRIA</div>
     <div class="coachCardDesc">
       Recalibração para contas<br>
       <strong>2001 a 4000 MMR</strong><br>
@@ -2884,7 +3101,7 @@ input[type=text]:focus{
   <label class="coachCard" id="recalCard3">
     <input type="radio" name="recalMode" id="recalMode3" disabled>
     <img src="medalhas/recalibracao3.png">
-    <div class="coachCardTitle">Modo de serviço</div>
+    <div class="coachCardTitle">AVANÇADA</div>
     <div class="coachCardDesc">
       Recalibração para contas<br>
       <strong>4001 a 6000 MMR</strong><br>
@@ -2897,7 +3114,7 @@ input[type=text]:focus{
   <label class="coachCard" id="recalCard4">
     <input type="radio" name="recalMode" id="recalMode4" disabled>
     <img src="medalhas/recalibracao4.png">
-    <div class="coachCardTitle">Modo de serviço</div>
+    <div class="coachCardTitle">ELITE</div>
     <div class="coachCardDesc">
       Recalibração para contas<br>
       <strong>6001+ MMR</strong><br>
@@ -8503,6 +8720,7 @@ $("recalCard1")?.addEventListener("click", () => {
   $("recalMode1").checked = true;
   $("recalMode2").checked = false;
   $("recalMode3").checked = false;
+  $("recalMode4").checked = false;
 
   updateRecalCards(true);
   updateAll();
@@ -8514,6 +8732,7 @@ $("recalCard2")?.addEventListener("click", () => {
   $("recalMode2").checked = true;
   $("recalMode1").checked = false;
   $("recalMode3").checked = false;
+  $("recalMode4").checked = false;
 
   updateRecalCards(true);
   updateAll();
@@ -8525,6 +8744,19 @@ $("recalCard3")?.addEventListener("click", () => {
   $("recalMode3").checked = true;
   $("recalMode1").checked = false;
   $("recalMode2").checked = false;
+  $("recalMode4").checked = false;
+
+  updateRecalCards(true);
+  updateAll();
+});
+
+$("recalCard4")?.addEventListener("click", () => {
+  if (!$("useRecal").checked) return;
+
+  $("recalMode4").checked = true;
+  $("recalMode1").checked = false;
+  $("recalMode2").checked = false;
+  $("recalMode3").checked = false;
 
   updateRecalCards(true);
   updateAll();
