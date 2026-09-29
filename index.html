@@ -4376,22 +4376,90 @@ function getRankData(rankIndex, star){
   return { rank, starData };
 }
 
-function setTradMMRFromPicker(side){
-  const inputId = side === "atual" ? "tradAtual" : "tradDesejado";
-  const state = rankPickerState[side];
-  const { starData } = getRankData(state.rankIndex, state.star);
+function setTradMMRFromPicker(
+  side,
+  mmrOverride = null
+){
 
-  const input = $(inputId);
-  if(input){
-    input.value = starData.mmr;
+  const inputId =
+    side === "atual"
+      ? "tradAtual"
+      : "tradDesejado";
 
-    input.dispatchEvent(new Event("input", { bubbles: true }));
-    input.dispatchEvent(new Event("change", { bubbles: true }));
+
+  const state =
+    rankPickerState[side];
+
+
+  const input =
+    $(inputId);
+
+
+  if(!input){
+    return;
   }
 
-  updateRankPreview(side);
+
+  // ==========================================
+  // SE VEIO UM MMR ESPECÍFICO
+  // DA SUGESTÃO POR ORÇAMENTO
+  // ==========================================
+
+  if(
+    mmrOverride !== null &&
+    Number.isFinite(
+      Number(mmrOverride)
+    )
+  ){
+
+    input.value =
+      Math.round(
+        Number(mmrOverride)
+      );
+
+  }
+
+
+  // ==========================================
+  // CASO NORMAL DO SELETOR DE MEDALHA
+  // ==========================================
+
+  else{
+
+    const { starData } =
+      getRankData(
+        state.rankIndex,
+        state.star
+      );
+
+    input.value =
+      starData.mmr;
+
+  }
+
+
+  // ==========================================
+  // ATUALIZA O RANK/MEDALHA
+  // ==========================================
+
+  updateRankPreview(
+    side
+  );
+
+
+  // ==========================================
+  // SINCRONIZA OS CARDS
+  // ==========================================
+
   syncSelectedCards();
+
+
+  // ==========================================
+  // RECALCULA TUDO
+  // ==========================================
+
   updateAll();
+
 }
 
 function resetTopDropdownToMain(){
@@ -7378,7 +7446,7 @@ if(sug && box){
         }
 
 
-        // ======================================
+                // ======================================
         // VALOR VÁLIDO
         // ======================================
 
@@ -7432,15 +7500,26 @@ if(sug && box){
             budgetApplyBtn.dataset.mmr =
               String(mmrSugerido);
 
-            budgetApplyBtn.dataset.applied =
-              "false";
-
 
             // ==================================
             // CLIQUE NO BOTÃO
             // ==================================
 
-            budgetApplyBtn.onclick = () => {
+            budgetApplyBtn.onclick = (e) => {
+
+              // Impede o botão de enviar formulário
+              // ou executar qualquer comportamento padrão
+              if(e){
+
+                e.preventDefault();
+                e.stopPropagation();
+
+              }
+
+
+              // ==================================
+              // PEGA O MMR SUGERIDO
+              // ==================================
 
               const mmrParaAplicar =
                 Number(
@@ -7448,49 +7527,45 @@ if(sug && box){
                 );
 
 
-              // Segurança
+              // ==================================
+              // SEGURANÇA
+              // ==================================
+
               if(
                 !Number.isFinite(mmrParaAplicar) ||
                 mmrParaAplicar <= 0
               ){
+
                 return;
+
               }
 
+
+              // ==================================
+              // PEGA O CAMPO MMR DESEJADO
+              // ==================================
 
               const campoDesejado =
                 $("tradDesejado");
 
 
               if(!campoDesejado){
+
                 return;
+
               }
 
 
-              // =================================
+              // ==================================
               // LIBERA TEMPORARIAMENTE O CAMPO
-              // =================================
+              // ==================================
 
               campoDesejado.disabled = false;
 
 
-              // =================================
-              // APAGA O MMR DESEJADO ANTIGO
-              // =================================
-
-              campoDesejado.value = "";
-
-
-              // =================================
-              // COLOCA O NOVO MMR
-              // =================================
-
-              campoDesejado.value =
-                mmrParaAplicar;
-
-
-              // =================================
-              // ATUALIZA A MEDALHA
-              // =================================
+              // ==================================
+              // APLICA O NOVO MMR
+              // ==================================
 
               setTradMMRFromPicker(
                 "desejado",
@@ -7498,28 +7573,48 @@ if(sug && box){
               );
 
 
-              // =================================
+              // ==================================
+              // GARANTE QUE O VALOR FICOU NO INPUT
+              // ==================================
+
+              campoDesejado.value =
+                String(mmrParaAplicar);
+
+
+              // ==================================
+              // ATUALIZA O PREVIEW DA MEDALHA
+              // ==================================
+
+              updateRankPreview(
+                "desejado"
+              );
+
+
+              // ==================================
               // MARCA COMO APLICADO
-              // =================================
+              // ==================================
 
               budgetApplyBtn.dataset.applied =
                 "true";
 
 
-              // =================================
+              // ==================================
               // MANTÉM O CAMPO BLOQUEADO
-              // =================================
+              // ==================================
 
-              if(sug && sug.checked){
+              if(
+                sug &&
+                sug.checked
+              ){
 
                 campoDesejado.disabled = true;
 
               }
 
 
-              // =================================
+              // ==================================
               // ATUALIZA OS CÁLCULOS
-              // =================================
+              // ==================================
 
               updateAll();
 
@@ -7543,8 +7638,14 @@ if(sug && box){
         if(budgetApplyBtn){
 
           budgetApplyBtn.style.display = "none";
+
           budgetApplyBtn.dataset.mmr = "";
-          budgetApplyBtn.dataset.applied = "false";
+
+          budgetApplyBtn.dataset.applied =
+            "false";
+
+          // Remove o evento antigo
+          budgetApplyBtn.onclick = null;
 
         }
 
@@ -7555,29 +7656,73 @@ if(sug && box){
   }
 
 }
-    // 🔥 CONTROLE VISUAL DA SUPER PROMO DO TRADICIONAL
-  const tradSuperPromoWrap = $("tradSuperPromoWrap");
-  const tradSuperPromoInfo = $("tradSuperPromoInfo");
-  const tradSuperPromo = $("tradSuperPromo");
 
-  if(tradSuperPromoWrap && tradSuperPromoInfo && tradSuperPromo){
-    if(SUPER_PROMO_ENABLED){
-      tradSuperPromoWrap.style.display = $("useTrad").checked ? "flex" : "none";
-      tradSuperPromoInfo.style.display = $("useTrad").checked ? "block" : "none";
-    }else{
-      tradSuperPromoWrap.style.display = "none";
-      tradSuperPromoInfo.style.display = "none";
-      tradSuperPromo.checked = false;
-    }
+// ==========================================
+// 🔥 CONTROLE VISUAL DA SUPER PROMO
+//    DO BOOST TRADICIONAL
+// ==========================================
+
+const tradSuperPromoWrap =
+  $("tradSuperPromoWrap");
+
+const tradSuperPromoInfo =
+  $("tradSuperPromoInfo");
+
+const tradSuperPromo =
+  $("tradSuperPromo");
+
+
+if(
+  tradSuperPromoWrap &&
+  tradSuperPromoInfo &&
+  tradSuperPromo
+){
+
+  if(SUPER_PROMO_ENABLED){
+
+    tradSuperPromoWrap.style.display =
+      $("useTrad").checked
+        ? "flex"
+        : "none";
+
+    tradSuperPromoInfo.style.display =
+      $("useTrad").checked
+        ? "block"
+        : "none";
+
+  }else{
+
+    tradSuperPromoWrap.style.display =
+      "none";
+
+    tradSuperPromoInfo.style.display =
+      "none";
+
+    tradSuperPromo.checked =
+      false;
+
   }
-  // 🔒 TRAVA MMR DESEJADO ENQUANTO A SUGESTÃO ESTIVER ATIVA
-if(sug && sug.checked){
 
-  $("tradDesejado").disabled = true;
+}
+
+
+// ==========================================
+// 🔒 TRAVA MMR DESEJADO ENQUANTO
+//    A SUGESTÃO ESTIVER ATIVA
+// ==========================================
+
+if(
+  sug &&
+  sug.checked
+){
+
+  $("tradDesejado").disabled =
+    true;
 
 }else{
 
-  $("tradDesejado").disabled = false;
+  $("tradDesejado").disabled =
+    false;
 
 }
 
