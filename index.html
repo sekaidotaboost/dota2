@@ -2512,6 +2512,18 @@ input[type=text]:focus{
 
 <div id="tradSuggestBox" style="display:none;">
 
+  <label style="margin-top:12px;">
+    Quanto você pretende investir?
+  </label>
+
+  <input
+    type="number"
+    id="tradBudget"
+    min="1"
+    step="0.01"
+    placeholder="Ex: 100"
+  >
+
   <div style="
     margin-top:12px;
     padding:14px;
@@ -2540,7 +2552,11 @@ input[type=text]:focus{
           padding:11px 14px;
           border:1px solid rgba(139,92,246,.35);
           border-radius:12px;
-          background:linear-gradient(180deg,rgba(139,92,246,.20),rgba(109,40,217,.12));
+          background:linear-gradient(
+            180deg,
+            rgba(139,92,246,.20),
+            rgba(109,40,217,.12)
+          );
           color:#fff;
           font-weight:800;
           cursor:pointer;
@@ -2551,7 +2567,6 @@ input[type=text]:focus{
       </button>
 
     </div>
-
   </div>
 
 </div>
@@ -7196,9 +7211,9 @@ if(sug && box){
 
       const sugestao = calcTradByBudget(mmrAtual, budget);
 
-      if(sugestao && sugestao.mmrDesejado){
+      if(sugestao && Number.isFinite(sugestao.mmrFinal)){
 
-        const mmrSugerido = Math.round(sugestao.mmrDesejado);
+  const mmrSugerido = Math.round(sugestao.mmrFinal);
         const ganhoMMR = Math.max(0, mmrSugerido - mmrAtual);
 
         // Mantém a regra existente de MMR mínimo.
@@ -7324,22 +7339,30 @@ if(sug && sug.checked){
 }
 
 const tradRankSelectors = $("tradRankSelectors");
+
 if(tradRankSelectors){
   tradRankSelectors.style.display = $("useTrad").checked ? "grid" : "none";
 }
 
-    enableGroup("useTrad",   ["tradAtual","tradDesejado","tradOff","tradSuperPromo"]);
-  enableGroup("useDouble", ["doubleMMR","doubleDays","doubleOff"]);
-  enableGroup("useCasual", ["casualMMR","casualDays","casualOff"]);
-  enableGroup("useRecal",  ["recalMMR","recalOff"]);
-  enableGroup("useReplay", ["repQtd","repDias","repOff"]);
-  enableGroup("useCoach",  ["coachP1","coachP2"]);
-  enableGroup("useLow",    ["lowQty","lowOff"]);
-  enableGroup("useRoleFarm", ["roleFarmMMR","roleFarmDays","roleFarmOff"]);
-  enableGroup("useTurbo", ["turboDays","turboOff","turboWins","turboSimDays"]);
-  enableGroup("useDark", ["darkDays"]);
+enableGroup("useTrad", [
+  "tradAtual",
+  "tradDesejado",
+  "tradOff",
+  "tradSuperPromo",
+  "tradBudget"
+]);
 
-  // 🔒 REGRA REPLAY: dias não podem ultrapassar análises
+enableGroup("useDouble", ["doubleMMR","doubleDays","doubleOff"]);
+enableGroup("useCasual", ["casualMMR","casualDays","casualOff"]);
+enableGroup("useRecal", ["recalMMR","recalOff"]);
+enableGroup("useReplay", ["repQtd","repDias","repOff"]);
+enableGroup("useCoach", ["coachP1","coachP2"]);
+enableGroup("useLow", ["lowQty","lowOff"]);
+enableGroup("useRoleFarm", ["roleFarmMMR","roleFarmDays","roleFarmOff"]);
+enableGroup("useTurbo", ["turboDays","turboOff","turboWins","turboSimDays"]);
+enableGroup("useDark", ["darkDays"]);
+
+// 🔒 REGRA REPLAY: dias não podem ultrapassar análises
 if($("useReplay").checked){
   let qtd  = Number($("repQtd").value);
   let dias = Number($("repDias").value);
