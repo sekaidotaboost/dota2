@@ -2510,13 +2510,50 @@ input[type=text]:focus{
   <span>💡 Tenho um valor em mente, até onde chego de MMR?</span>
 </div>
 
-<div id="tradSuggestBox" style="display:none">
-  <label>Quanto você quer investir? (R$)</label>
-  <input type="number" id="tradBudget" min="50" placeholder="Ex: 300">
+<div id="tradSuggestBox" style="display:none;">
 
-  <div class="result" id="tradSuggestRes">
-    Preencha o valor para receber uma sugestão.
+  <div style="
+    margin-top:12px;
+    padding:14px;
+    border-radius:14px;
+    background:rgba(139,92,246,.08);
+    border:1px solid rgba(139,92,246,.18);
+  ">
+
+    <div style="
+      font-size:14px;
+      line-height:1.7;
+      color:#d6d3e5;
+    ">
+
+      <div id="tradBudgetResult">
+        <!-- Resultado do orçamento aparece aqui -->
+      </div>
+
+      <button
+        type="button"
+        id="tradBudgetApplyBtn"
+        style="
+          display:none;
+          width:100%;
+          margin-top:12px;
+          padding:11px 14px;
+          border:1px solid rgba(139,92,246,.35);
+          border-radius:12px;
+          background:linear-gradient(180deg,rgba(139,92,246,.20),rgba(109,40,217,.12));
+          color:#fff;
+          font-weight:800;
+          cursor:pointer;
+          transition:.2s;
+        "
+      >
+        👉 Deseja aplicar este MMR como MMR desejado?
+      </button>
+
+    </div>
+
   </div>
+
 </div>
 
 
@@ -7115,12 +7152,155 @@ updateCoachCards();
 updateRecalCards(false);
 
    // 🔮 CONTROLE DA SUGESTÃO POR VALOR
-  const sug = $("tradSuggest");
-  const box = $("tradSuggestBox");
+const sug = $("tradSuggest");
+const box = $("tradSuggestBox");
+const budgetInput = $("tradBudget");
+const budgetResult = $("tradBudgetResult");
+const budgetApplyBtn = $("tradBudgetApplyBtn");
 
-  if(sug && box){
-    box.style.display = sug.checked ? "block" : "none";
+if(sug && box){
+
+  box.style.display = sug.checked ? "block" : "none";
+
+  if(!sug.checked){
+
+    if(budgetResult){
+      budgetResult.innerHTML = "";
+    }
+
+    if(budgetApplyBtn){
+      budgetApplyBtn.style.display = "none";
+      budgetApplyBtn.dataset.mmr = "";
+    }
+
+  }else if(budgetInput && budgetResult){
+
+    const mmrAtual = Number($("tradAtual")?.value || 0);
+    const budget = Number(budgetInput.value || 0);
+
+    // Limpa a sugestão quando os dados não são válidos
+    if(
+      !Number.isFinite(mmrAtual) ||
+      !Number.isFinite(budget) ||
+      budget <= 0
+    ){
+
+      budgetResult.innerHTML = "";
+
+      if(budgetApplyBtn){
+        budgetApplyBtn.style.display = "none";
+        budgetApplyBtn.dataset.mmr = "";
+      }
+
+    }else{
+
+      const sugestao = calcTradByBudget(mmrAtual, budget);
+
+      if(sugestao && sugestao.mmrDesejado){
+
+        const mmrSugerido = Math.round(sugestao.mmrDesejado);
+        const ganhoMMR = Math.max(0, mmrSugerido - mmrAtual);
+
+        // Mantém a regra existente de MMR mínimo.
+        // Aqui NÃO aplicamos automaticamente o valor.
+        const delta = mmrSugerido - mmrAtual;
+
+        let minDelta = 0;
+
+        if(mmrAtual <= 2000) minDelta = 500;
+        else if(mmrAtual <= 2500) minDelta = 450;
+        else if(mmrAtual <= 3000) minDelta = 400;
+        else if(mmrAtual <= 3500) minDelta = 370;
+        else if(mmrAtual <= 4000) minDelta = 340;
+        else if(mmrAtual <= 4500) minDelta = 270;
+        else if(mmrAtual <= 5000) minDelta = 240;
+        else if(mmrAtual <= 5500) minDelta = 160;
+        else if(mmrAtual <= 6000) minDelta = 90;
+
+        const valorValido =
+          mmrSugerido > mmrAtual &&
+          delta >= minDelta &&
+          mmrSugerido <= 6000;
+
+        if(!valorValido){
+
+          budgetResult.innerHTML = `
+            <strong>Valor inválido.</strong>
+            <br>
+            O valor informado não permite atingir o MMR mínimo necessário para este Boost Tradicional.
+          `;
+
+          if(budgetApplyBtn){
+            budgetApplyBtn.style.display = "none";
+            budgetApplyBtn.dataset.mmr = "";
+          }
+
+        }else{
+
+          budgetResult.innerHTML = `
+            <strong>Com R$ ${money(budget)} você pode chegar aproximadamente até:</strong>
+            <br>
+            <strong style="font-size:18px;color:#fff;">
+              ${mmrSugerido} MMR
+            </strong>
+            <br>
+            👉 Isso representa um ganho de +${ganhoMMR} MMR
+            <br>
+            <span style="font-size:12px;color:var(--muted);">
+              Estimativa baseada no cálculo atual.
+            </span>
+          `;
+
+          if(budgetApplyBtn){
+
+            budgetApplyBtn.style.display = "block";
+            budgetApplyBtn.dataset.mmr = String(mmrSugerido);
+
+            // Evita adicionar vários eventos ao botão
+            budgetApplyBtn.onclick = () => {
+
+              const mmrParaAplicar =
+                Number(budgetApplyBtn.dataset.mmr);
+
+              if(
+                !Number.isFinite(mmrParaAplicar) ||
+                mmrParaAplicar <= 0
+              ){
+                return;
+              }
+
+              // Aplica SOMENTE quando o cliente clicar
+              $("tradDesejado").value = mmrParaAplicar;
+
+              // Atualiza os seletores de rank
+              setTradMMRFromPicker(
+                "desejado",
+                mmrParaAplicar
+              );
+
+              // Recalcula todo o orçamento
+              updateAll();
+            };
+
+          }
+        }
+
+      }else{
+
+        budgetResult.innerHTML = "";
+
+        if(budgetApplyBtn){
+          budgetApplyBtn.style.display = "none";
+          budgetApplyBtn.dataset.mmr = "";
+        }
+
+      }
+
+    }
+
   }
+
+}
     // 🔥 CONTROLE VISUAL DA SUPER PROMO DO TRADICIONAL
   const tradSuperPromoWrap = $("tradSuperPromoWrap");
   const tradSuperPromoInfo = $("tradSuperPromoInfo");
