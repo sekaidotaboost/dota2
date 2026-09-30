@@ -7286,7 +7286,7 @@ function calcRecal(){
 • Valor do serviço: ${money(serviceValue)}
 ${
   extrasCheck
-    ? `• Partida adicional (caso necessário): ${money(extraGame)} por partida
+    ? `• Partida adicional <span style="color:#ffc857;font-weight:normal;">(caso necessário)</span>: ${money(extraGame)} por partida
 • Partidas adicionais: ${extraGames > 0
     ? `${extraGames} x ${money(extraGame)} = ${money(extraGamesValue)}`
     : "Nenhuma partida adicional selecionada"}`
@@ -9447,6 +9447,7 @@ $("recalCard1")?.addEventListener("click", () => {
   $("recalMode4").checked = false;
 
   updateRecalCards(true);
+  updateRecalExtras();
   updateAll();
 });
 
@@ -9459,8 +9460,10 @@ $("recalCard2")?.addEventListener("click", () => {
   $("recalMode4").checked = false;
 
   updateRecalCards(true);
+  updateRecalExtras();
   updateAll();
 });
+
 
 $("recalCard3")?.addEventListener("click", () => {
   if (!$("useRecal").checked) return;
@@ -9471,8 +9474,10 @@ $("recalCard3")?.addEventListener("click", () => {
   $("recalMode4").checked = false;
 
   updateRecalCards(true);
+  updateRecalExtras();
   updateAll();
 });
+
 
 $("recalCard4")?.addEventListener("click", () => {
   if (!$("useRecal").checked) return;
@@ -9483,6 +9488,7 @@ $("recalCard4")?.addEventListener("click", () => {
   $("recalMode3").checked = false;
 
   updateRecalCards(true);
+  updateRecalExtras();
   updateAll();
 });
 
@@ -9521,7 +9527,12 @@ function updateRecalExtras(){
     $("recalExtraPrice");
 
 
-  if(!extrasCheck || !options || !existingService || !extraGames){
+  if(
+    !extrasCheck ||
+    !options ||
+    !existingService ||
+    !extraGames
+  ){
     return;
   }
 
@@ -9582,18 +9593,30 @@ function updateRecalExtras(){
 
 
   // ==========================================
-  // DESCOBRIR MMR
+  // DESCOBRIR MMR ATUAL
   // ==========================================
 
-  const mmr = clampInt(
-    Number($("recalMMR").value),
-    0,
-    99999
-  );
+  const mmrInput = $("recalMMR");
 
+  const mmr = mmrInput
+    ? clampInt(
+        Number(mmrInput.value),
+        0,
+        99999
+      )
+    : null;
+
+
+  // ==========================================
+  // VALOR PADRÃO
+  // ==========================================
 
   let extraGame = 12;
 
+
+  // ==========================================
+  // VALOR DA PARTIDA PELO MMR
+  // ==========================================
 
   if(mmr !== null){
 
@@ -9601,7 +9624,7 @@ function updateRecalExtras(){
 
       extraGame = 12;
 
-        }else if(mmr <= 4000){
+    }else if(mmr <= 4000){
 
       extraGame = 17;
 
@@ -9626,14 +9649,19 @@ function updateRecalExtras(){
 
     extraPrice.innerHTML = `
       <span style="font-size:12px;">
+
         Partida adicional
+
         <span style="color:#ffc857;font-weight:800;">
           (caso necessário)
         </span>
+
         : é cobrado
+
         <strong style="color:#ffc857;font-weight:800;">
           ${money(extraGame)} por partida
         </strong>
+
       </span>
     `;
 
@@ -9674,6 +9702,8 @@ $("recalExistingService")?.addEventListener("change", () => {
 
 $("recalExtraGames")?.addEventListener("input", () => {
 
+  updateRecalExtras();
+
   updateAll();
 
 });
@@ -9684,6 +9714,19 @@ $("recalExtraGames")?.addEventListener("input", () => {
 // ==========================================
 
 $("useRecal")?.addEventListener("change", () => {
+
+  updateRecalExtras();
+
+  updateAll();
+
+});
+
+
+// ==========================================
+// ATUALIZA QUANDO O MMR MUDAR
+// ==========================================
+
+$("recalMMR")?.addEventListener("input", () => {
 
   updateRecalExtras();
 
@@ -9712,88 +9755,146 @@ $("exitlagToggleBtn")?.addEventListener("click", () => {
 
   if(!btn || !box) return;
 
-  const aberto = box.classList.toggle("active");
+  const aberto =
+    box.classList.toggle("active");
 
-  btn.classList.toggle("active", aberto);
+  btn.classList.toggle(
+    "active",
+    aberto
+  );
 
 });
 
-/* ===== CONTROLE DE SCROLL DO BALÃO ===== */
+
+// ===============================
+// CONTROLE DE SCROLL DO BALÃO
+// ===============================
+
 let lastScrollY = window.scrollY;
 
 window.addEventListener("scroll", () => {
-  const floatBox = $("floatingTotal");
-  const ftItemsEl = $("ftItems");
+
+  const floatBox =
+    $("floatingTotal");
+
+  const ftItemsEl =
+    $("ftItems");
+
   if(!floatBox || !ftItemsEl) return;
 
-  const currentY = window.scrollY;
-  const hasItems = ftItemsEl.innerHTML.trim() !== "";
+  const currentY =
+    window.scrollY;
+
+  const hasItems =
+    ftItemsEl.innerHTML.trim() !== "";
 
   if(!hasItems){
+
     floatBox.classList.add("hidden");
+
     return;
   }
 
+
   // Rolando para baixo → esconde
+
   if(currentY > lastScrollY + 10){
+
     floatBox.classList.add("hidden");
+
   }
+
 
   // Rolando para cima → mostra
+
   if(currentY < lastScrollY - 10){
+
     floatBox.classList.remove("hidden");
+
   }
 
+
   lastScrollY = currentY;
+
 });
 
+
 $("roleFarmDays")?.addEventListener("input", () => {
-  let v = Number($("roleFarmDays").value);
+
+  let v =
+    Number($("roleFarmDays").value);
 
   if(isNaN(v) || v < 1) v = 1;
+
   if(v > 2) v = 2;
 
   $("roleFarmDays").value = v;
+
 });
 
 
 function syncSelectedCards(){
+
   const map = [
-  ["useTrad", "trad"],
-  ["useDouble", "double"],
-  ["useCasual", "casual"],
-  ["useRoleFarm", "rolefarm"],
-  ["useRecal", "recal"],
-  ["useReplay", "replay"],
-  ["useCoach", "coach"],
-  ["useLow", "low"],
-  ["useTurbo", "turbo"],
-  ["useDark", "dark"]
-];
+    ["useTrad", "trad"],
+    ["useDouble", "double"],
+    ["useCasual", "casual"],
+    ["useRoleFarm", "rolefarm"],
+    ["useRecal", "recal"],
+    ["useReplay", "replay"],
+    ["useCoach", "coach"],
+    ["useLow", "low"],
+    ["useTurbo", "turbo"],
+    ["useDark", "dark"]
+  ];
+
 
   map.forEach(([inputId, serviceName]) => {
-    const checkbox = $(inputId);
-    const card = document.querySelector(`.service-card[data-service="${serviceName}"]`);
+
+    const checkbox =
+      $(inputId);
+
+    const card =
+      document.querySelector(
+        `.service-card[data-service="${serviceName}"]`
+      );
+
     if(!checkbox || !card) return;
 
-    card.classList.toggle("is-selected", checkbox.checked);
+    card.classList.toggle(
+      "is-selected",
+      checkbox.checked
+    );
+
   });
+
 }
 
 
-const heroImages = document.querySelectorAll(".heroSwapImg");
+const heroImages =
+  document.querySelectorAll(".heroSwapImg");
+
 
 heroImages.forEach(img => {
 
-  const staticSrc = img.getAttribute("data-static");
-  const gifSrc = img.getAttribute("data-gif");
+  const staticSrc =
+    img.getAttribute("data-static");
+
+  const gifSrc =
+    img.getAttribute("data-gif");
+
 
   img.addEventListener("mouseenter", () => {
+
     img.src = gifSrc;
+
   });
 
+
   img.addEventListener("mouseleave", () => {
+
     img.src = staticSrc;
+
   });
 
 });
@@ -9802,26 +9903,45 @@ heroImages.forEach(img => {
 // ===============================
 // Seleção visual do Dark Carnival
 // ===============================
-const useDark = document.getElementById("useDark");
-const darkCard = document.querySelector('[data-service="dark"]');
 
-if (useDark && darkCard) {
+const useDark =
+  document.getElementById("useDark");
 
-    function atualizarDarkCard() {
+const darkCard =
+  document.querySelector(
+    '[data-service="dark"]'
+  );
 
-        if (useDark.checked) {
-            darkCard.classList.add("is-selected");
-        } else {
-            darkCard.classList.remove("is-selected");
-        }
+
+if(useDark && darkCard){
+
+  function atualizarDarkCard(){
+
+    if(useDark.checked){
+
+      darkCard.classList.add(
+        "is-selected"
+      );
+
+    }else{
+
+      darkCard.classList.remove(
+        "is-selected"
+      );
 
     }
 
-    useDark.addEventListener("change", atualizarDarkCard);
+  }
 
-    atualizarDarkCard();
+
+  useDark.addEventListener(
+    "change",
+    atualizarDarkCard
+  );
+
+  atualizarDarkCard();
+
 }
-
 
 
 
