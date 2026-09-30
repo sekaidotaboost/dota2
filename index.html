@@ -3210,150 +3210,429 @@ input[type=text]:focus{
 
 
     <!-- Recalibração -->
-   <div class="card service-card" data-service="recal">
-      <h2>
-        <span>Recalibração</span>
-        <span class="pill">🔄 recomendado</span>
+<div class="card service-card" data-service="recal">
 
-        <span class="pill">
-          <label class="check" style="margin:0">
-            <input type="checkbox" id="useRecal"> Incluir
-          </label>
-        </span>
-      </h2>
+  <h2>
+    <span>Recalibração</span>
+    <span class="pill">🔄 recomendado</span>
 
-      <div class="serviceBody" id="bodyRecal">
-    
-        <div class="coachGrid">
+    <span class="pill">
+      <label class="check" style="margin:0">
+        <input type="checkbox" id="useRecal"> Incluir
+      </label>
+    </span>
+  </h2>
 
-  <!-- 0 a 2000 -->
-  <label class="coachCard" id="recalCard1">
-    <input type="radio" name="recalMode" id="recalMode1" disabled>
-    <img src="medalhas/recalibracao1.png">
-    <div class="coachCardTitle">BÁSICA</div>
-    <div class="coachCardDesc">
-      Recalibração para contas<br>
-      <strong>0 a 2000 MMR</strong><br>
-      <strong>15 partidas</strong><br>
-      R$ 200,00
+
+  <div class="serviceBody" id="bodyRecal">
+
+    <div class="coachGrid">
+
+      <!-- 0 a 2000 -->
+      <label class="coachCard" id="recalCard1">
+
+        <input
+          type="radio"
+          name="recalMode"
+          id="recalMode1"
+          disabled
+        >
+
+        <img src="medalhas/recalibracao1.png">
+
+        <div class="coachCardTitle">
+          BÁSICA
+        </div>
+
+        <div class="coachCardDesc">
+          Recalibração para contas<br>
+          <strong>0 a 2000 MMR</strong><br>
+          <strong>15 partidas</strong><br>
+          R$ 200,00
+        </div>
+
+      </label>
+
+
+      <!-- 2001 a 4000 -->
+      <label class="coachCard" id="recalCard2">
+
+        <input
+          type="radio"
+          name="recalMode"
+          id="recalMode2"
+          disabled
+        >
+
+        <img src="medalhas/recalibracao2.png">
+
+        <div class="coachCardTitle">
+          INTERMEDIÁRIA
+        </div>
+
+        <div class="coachCardDesc">
+          Recalibração para contas<br>
+          <strong>2001 a 4000 MMR</strong><br>
+          <strong>15 partidas</strong><br>
+          R$ 250,00
+        </div>
+
+      </label>
+
+
+      <!-- 4001 a 6000 -->
+      <label class="coachCard" id="recalCard3">
+
+        <input
+          type="radio"
+          name="recalMode"
+          id="recalMode3"
+          disabled
+        >
+
+        <img src="medalhas/recalibracao3.png">
+
+        <div class="coachCardTitle">
+          AVANÇADA
+        </div>
+
+        <div class="coachCardDesc">
+          Recalibração para contas<br>
+          <strong>4001 a 6000 MMR</strong><br>
+          <strong>15 partidas</strong><br>
+          R$ 300,00
+        </div>
+
+      </label>
+
+
+      <!-- 6001+ -->
+      <label class="coachCard" id="recalCard4">
+
+        <input
+          type="radio"
+          name="recalMode"
+          id="recalMode4"
+          disabled
+        >
+
+        <img src="medalhas/recalibracao4.png">
+
+        <div class="coachCardTitle">
+          ELITE
+        </div>
+
+        <div class="coachCardDesc">
+          Recalibração para contas<br>
+          <strong>6001+ MMR</strong><br>
+          <strong>15 partidas</strong><br>
+          R$ 400,00
+        </div>
+
+      </label>
+
     </div>
-  </label>
-  
 
-  <!-- 2001 a 4000 -->
-  <label class="coachCard" id="recalCard2">
-    <input type="radio" name="recalMode" id="recalMode2" disabled>
-    <img src="medalhas/recalibracao2.png">
-    <div class="coachCardTitle">INTERMEDIÁRIA</div>
-    <div class="coachCardDesc">
-      Recalibração para contas<br>
-      <strong>2001 a 4000 MMR</strong><br>
-      <strong>15 partidas</strong><br>
-      R$ 250,00
-    </div>
-  </label>
 
-  <!-- 4001 a 6000 -->
-  <label class="coachCard" id="recalCard3">
-    <input type="radio" name="recalMode" id="recalMode3" disabled>
-    <img src="medalhas/recalibracao3.png">
-    <div class="coachCardTitle">AVANÇADA</div>
-    <div class="coachCardDesc">
-      Recalibração para contas<br>
-      <strong>4001 a 6000 MMR</strong><br>
-      <strong>15 partidas</strong><br>
-      R$ 300,00
-    </div>
-  </label>
+    <!-- MMR MANUAL -->
+    <label>
+      Ou digite o MMR manualmente
+    </label>
 
-  <!-- 6001+ -->
-  <label class="coachCard" id="recalCard4">
-    <input type="radio" name="recalMode" id="recalMode4" disabled>
-    <img src="medalhas/recalibracao4.png">
-    <div class="coachCardTitle">ELITE</div>
-    <div class="coachCardDesc">
-      Recalibração para contas<br>
-      <strong>6001+ MMR</strong><br>
-      <strong>15 partidas</strong><br>
-      R$ 400,00
-    </div>
-  </label>
+    <input
+      type="number"
+      id="recalMMR"
+      min="0"
+      max="8500"
+      placeholder="Ex: 3500"
+      disabled
+    >
 
-</div>
 
-<label>Ou digite o MMR manualmente</label>
-<input type="number" id="recalMMR" min="0" max="8500" placeholder="Ex: 3500" disabled>
+    <!-- PARTIDAS ADICIONAIS -->
+    <div class="recalExtras">
 
-        <label class="check premiumCheck">
-  <input type="checkbox" id="recalOff" disabled>
-  <span id="recalOffText">Serviço com live off-stream?</span>
-</label>
+      <label class="check">
+        <input
+          type="checkbox"
+          id="recalExtrasCheck"
+          disabled
+        >
+        Quero partidas adicionais
+      </label>
 
-        <!-- SAIBA MAIS -->
-<details>
-  <summary>Saiba mais sobre a Recalibração</summary>
 
-  <p><strong>🔄 Como funciona a Recalibração?</strong></p>
+      <div id="recalExtrasOptions" style="display:none;">
 
-  <ul>
-    <li>O serviço inclui <strong>15 partidas de recalibração</strong>.</li>
-    <li>Buscamos obter o melhor desempenho possível durante todas as partidas.</li>
-    <li>O resultado final depende exclusivamente do sistema de recalibração da Valve.</li>
-    <li>Caso a Valve exija partidas extras, será cobrado apenas o valor correspondente à sua faixa de MMR.</li>
-  </ul>
+        <!-- PREÇO DA PARTIDA ADICIONAL -->
+        <div
+          id="recalExtraPrice"
+          class="recalExtraPrice"
+        >
+          Partida adicional (caso necessário): é cobrado
+          <strong>R$ 12,00 por partida</strong>
+        </div>
 
-  <hr>
 
-  <p><strong>💰 Tabela de Preços</strong></p>
+        <!-- SERVIÇO JÁ EXISTENTE -->
+        <label class="check">
+          <input
+            type="checkbox"
+            id="recalExistingService"
+            disabled
+          >
+          Você já tem um serviço de recalibração em andamento?
+        </label>
 
-  <ul>
-    <li>
-      <strong>0 a 2000 MMR</strong><br>
-      ✔️ 15 partidas — <strong>R$ 200,00</strong><br>
-      ✔️ Partida adicional: <strong>R$ 14,00</strong>
-    </li>
-    <br>
+        <details class="recalExtrasInfo">
 
-    <li>
-      <strong>2001 a 4000 MMR</strong><br>
-      ✔️ 15 partidas — <strong>R$ 250,00</strong><br>
-      ✔️ Partida adicional: <strong>R$ 17,00</strong>
-    </li>
-    <br>
+  <summary>
+    Saiba mais sobre partidas adicionais
+  </summary>
 
-    <li>
-      <strong>4001 a 6000 MMR</strong><br>
-      ✔️ 15 partidas — <strong>R$ 300,00</strong><br>
-      ✔️ Partida adicional: <strong>R$ 20,00</strong>
-    </li>
-    <br>
+  <div style="margin-top:10px;">
 
-    <li>
-      <strong>6001+ MMR</strong><br>
-      ✔️ 15 partidas — <strong>R$ 400,00</strong><br>
-      ✔️ Partida adicional: <strong>R$ 25,00</strong>
-    </li>
-  </ul>
+    <p>
+      As partidas adicionais são utilizadas caso a Valve
+      exija mais partidas além das 15 incluídas no pacote
+      de recalibração.
+    </p>
 
-  <hr>
+    <p>
+      O valor é cobrado <strong>por partida adicional</strong>
+      e varia de acordo com o MMR da conta:
+    </p>
 
-  <p><strong>⚠️ Informações importantes</strong></p>
+    <p>
+      <strong>0 a 2000 MMR:</strong>
+      R$ 12,00 por partida
+      <br>
 
-  <ul>
-    <li>O pacote cobre até <strong>15 partidas</strong>.</li>
-    <li>Se forem necessárias partidas adicionais, elas serão cobradas conforme o valor da sua faixa de MMR.</li>
-    <li>Não garantimos um MMR específico ao final da recalibração.</li>
-    <li>O desempenho da conta e o sistema da Valve influenciam diretamente no resultado.</li>
-  </ul>
+      <strong>2001 a 4000 MMR:</strong>
+      R$ 17,00 por partida
+      <br>
+
+      <strong>4001 a 6000 MMR:</strong>
+      R$ 20,00 por partida
+      <br>
+
+      <strong>6001+ MMR:</strong>
+      R$ 25,00 por partida
+    </p>
+
+    <p>
+      As partidas adicionais <strong>não são obrigatórias</strong>.
+      Elas somente serão cobradas caso sejam solicitadas
+      ou necessárias para concluir a recalibração.
+    </p>
+
+    <p>
+      <strong>⚠️ Importante:</strong>
+      assim como a taxa <strong>Off-stream</strong>, o serviço
+      de <strong>partidas adicionais não é elegível para
+      descontos, cupons ou promoções</strong>.
+    </p>
+
+  </div>
 
 </details>
 
 
-        <div class="result" id="recalRes">Preencha os dados para ver o valor.</div>
-        <div class="alert" id="recalAlert"></div>
+        <!-- QUANTIDADE -->
+        <label for="recalExtraGames">
+          Quantidade de partidas adicionais
+        </label>
+
+        <input
+          type="number"
+          id="recalExtraGames"
+          min="1"
+          max="100"
+          value="1"
+          placeholder="Ex: 2"
+          disabled
+        >
+
       </div>
+
     </div>
 
+
+    <!-- OFF STREAM -->
+    <label class="check premiumCheck">
+
+      <input
+        type="checkbox"
+        id="recalOff"
+        disabled
+      >
+
+      <span id="recalOffText">
+        Serviço com live off-stream?
+      </span>
+
+    </label>
+
+
+    <!-- SAIBA MAIS -->
+    <details>
+
+      <summary>
+        Saiba mais sobre a Recalibração
+      </summary>
+
+
+      <p>
+        <strong>🔄 Como funciona a Recalibração?</strong>
+      </p>
+
+      <ul>
+
+        <li>
+          O serviço inclui
+          <strong>15 partidas de recalibração</strong>.
+        </li>
+
+        <li>
+          Buscamos obter o melhor desempenho possível
+          durante todas as partidas.
+        </li>
+
+        <li>
+          O resultado final depende exclusivamente
+          do sistema de recalibração da Valve.
+        </li>
+
+        <li>
+          Caso a Valve exija partidas extras,
+          será cobrado apenas o valor correspondente
+          à sua faixa de MMR.
+        </li>
+
+      </ul>
+
+
+      <hr>
+
+
+      <p>
+        <strong>💰 Tabela de Preços</strong>
+      </p>
+
+      <ul>
+
+        <li>
+
+          <strong>0 a 2000 MMR</strong><br>
+
+          ✔️ 15 partidas —
+          <strong>R$ 200,00</strong><br>
+
+          ✔️ Partida adicional:
+          <strong>R$ 12,00</strong>
+
+        </li>
+
+        <br>
+
+
+        <li>
+
+          <strong>2001 a 4000 MMR</strong><br>
+
+          ✔️ 15 partidas —
+          <strong>R$ 250,00</strong><br>
+
+          ✔️ Partida adicional:
+          <strong>R$ 17,00</strong>
+
+        </li>
+
+        <br>
+
+
+        <li>
+
+          <strong>4001 a 6000 MMR</strong><br>
+
+          ✔️ 15 partidas —
+          <strong>R$ 300,00</strong><br>
+
+          ✔️ Partida adicional:
+          <strong>R$ 20,00</strong>
+
+        </li>
+
+        <br>
+
+
+        <li>
+
+          <strong>6001+ MMR</strong><br>
+
+          ✔️ 15 partidas —
+          <strong>R$ 400,00</strong><br>
+
+          ✔️ Partida adicional:
+          <strong>R$ 25,00</strong>
+
+        </li>
+
+      </ul>
+
+
+      <hr>
+
+
+      <p>
+        <strong>⚠️ Informações importantes</strong>
+      </p>
+
+      <ul>
+
+        <li>
+          O pacote cobre até
+          <strong>15 partidas</strong>.
+        </li>
+
+        <li>
+          Se forem necessárias partidas adicionais,
+          elas serão cobradas conforme o valor
+          da sua faixa de MMR.
+        </li>
+
+        <li>
+          Não garantimos um MMR específico ao final
+          da recalibração.
+        </li>
+
+        <li>
+          O desempenho da conta e o sistema da Valve
+          influenciam diretamente no resultado.
+        </li>
+
+      </ul>
+
+    </details>
+
+
+    <!-- RESULTADO -->
+    <div
+      class="result"
+      id="recalRes"
+    >
+      Preencha os dados para ver o valor.
+    </div>
+
+
+    <div
+      class="alert"
+      id="recalAlert"
+    ></div>
+
+  </div>
+
+</div>
 <!-- Low Priority -->
 <div class="card service-card" data-service="low">
   <h2>
@@ -6669,8 +6948,15 @@ function updateDarkPreview() {
 /* ========= Recalibração ========= */
 function calcRecal(){
 
+  // ==========================================
+  // RECALIBRAÇÃO NÃO SELECIONADA
+  // ==========================================
+
   if(!$("useRecal").checked){
-    $("recalRes").innerHTML = "Preencha os dados para ver o valor.";
+
+    $("recalRes").innerHTML =
+      "Preencha os dados para ver o valor.";
+
     $("recalAlert").textContent = "";
 
     return {
@@ -6681,14 +6967,51 @@ function calcRecal(){
     };
   }
 
-  const mmr = clampInt(Number($("recalMMR").value), 0, 99999);
+
+  // ==========================================
+  // DADOS
+  // ==========================================
+
+  const mmr = clampInt(
+    Number($("recalMMR").value),
+    0,
+    99999
+  );
+
   const off = $("recalOff").checked;
+
+  // Novos campos
+  const extrasCheck =
+    $("recalExtrasCheck")?.checked || false;
+
+  const existingService =
+    $("recalExistingService")?.checked || false;
+
+  let extraGames = Number(
+    $("recalExtraGames")?.value || 0
+  );
+
+  if(!Number.isFinite(extraGames) || extraGames < 0){
+    extraGames = 0;
+  }
+
+  extraGames = Math.floor(extraGames);
+
 
   $("recalAlert").textContent = "";
 
+
+  // ==========================================
+  // MMR INVÁLIDO
+  // ==========================================
+
   if(mmr === null){
-    $("recalRes").innerHTML = "<strong>Preço: INVÁLIDO</strong>";
-    $("recalAlert").textContent = "🔴 Informe um MMR válido.";
+
+    $("recalRes").innerHTML =
+      "<strong>Preço: INVÁLIDO</strong>";
+
+    $("recalAlert").textContent =
+      "🔴 Informe um MMR válido.";
 
     return {
       selected:true,
@@ -6698,98 +7021,280 @@ function calcRecal(){
     };
   }
 
+
+  // ==========================================
+  // VALORES CONFORME O MMR
+  // ==========================================
+
   let baseValue = 0;
   let extraGame = 0;
 
-  // Define o pacote conforme o MMR
+
+  // 0 a 2000
   if(mmr <= 2000){
 
     baseValue = 200;
-    extraGame = 14;
+    extraGame = 12;
 
-  }else if(mmr <= 4000){
+  }
+
+  // 2001 a 4000
+  else if(mmr <= 4000){
 
     baseValue = 250;
     extraGame = 17;
 
-  }else if(mmr <= 6000){
+  }
+
+  // 4001 a 6000
+  else if(mmr <= 6000){
 
     baseValue = 300;
     extraGame = 20;
 
-  }else{
+  }
+
+  // 6001+
+  else{
 
     baseValue = 400;
     extraGame = 25;
 
   }
 
-  // Off Stream
-  const offOriginal = off ? 40 : 0;
-  const offValue = offOriginal;
 
-  const total = baseValue + offValue;
+  // ==========================================
+  // PARTIDAS ADICIONAIS
+  // ==========================================
+
+  // Só cobra partidas adicionais se o usuário
+  // marcou "Quero partidas adicionais".
+
+  if(!extrasCheck){
+
+    extraGames = 0;
+
+  }
+
+
+  const extraGamesValue =
+    extraGames * extraGame;
+
+
+  // ==========================================
+  // SERVIÇO JÁ EM ANDAMENTO
+  // ==========================================
+
+  /*
+     Se o cliente já possui uma recalibração
+     em andamento:
+
+     - não cobra o pacote de 15 partidas
+     - valor do serviço = R$ 0,00
+     - cobra somente as partidas adicionais
+  */
+
+  const serviceValue =
+    existingService
+      ? 0
+      : baseValue;
+
+
+  // ==========================================
+  // OFF STREAM
+  // ==========================================
+
+  /*
+     Mantém exatamente o funcionamento anterior.
+  */
+
+  const offOriginal =
+    off ? 40 : 0;
+
+  const offValue =
+    offOriginal;
+
+
+  // ==========================================
+  // TOTAL
+  // ==========================================
+
+  const total =
+    serviceValue +
+    extraGamesValue +
+    offValue;
+
+
+  // ==========================================
+  // TEXTO DAS PARTIDAS ADICIONAIS
+  // ==========================================
+
+  let extraGamesText = "";
+
+  if(extrasCheck && extraGames > 0){
+
+    extraGamesText = `
+      <strong>Valor das partidas adicionais:</strong>
+      ${extraGames} ${extraGames === 1 ? "partida adicional" : "partidas adicionais"}
+      <span class="newPrice">
+        ${money(extraGamesValue)}
+      </span><br>
+    `;
+
+  }
+
+
+  // ==========================================
+  // TEXTO DO PACOTE
+  // ==========================================
+
+  const packageGames =
+    existingService
+      ? 0
+      : 15;
+
+
+  // ==========================================
+  // RESULTADO NA TELA
+  // ==========================================
 
   $("recalRes").innerHTML = `
-    <strong>MMR atual:</strong> ${mmr}<br>
 
-    <strong>Pacote contratado:</strong> 15 partidas de recalibração<br>
+    <strong>MMR atual:</strong>
+    ${mmr}
+    <br>
+
+
+    <strong>Pacote contratado:</strong>
+    ${packageGames} partidas de recalibração
+    <br>
+
 
     <strong>Valor do serviço:</strong>
-    <span class="newPrice">${money(baseValue)}</span><br>
+    <span class="newPrice">
+      ${money(serviceValue)}
+    </span>
+    <br>
 
-    <strong>Partida adicional (caso necessário):</strong>
-    <span style="color:#ffc857;font-weight:700;">
-      ${money(extraGame)} por partida
-    </span><br>
+
+    ${extraGamesText}
+
 
     <strong>Off Stream:</strong>
-    ${off ? money(offValue) : money(0)}<br>
+    ${off ? money(offValue) : money(0)}
+    <br>
+
 
     <strong>Total:</strong>
-    <span class="newPrice">${money(total)}</span>
+    <span class="newPrice">
+      ${money(total)}
+    </span>
+
 
     <br><br>
 
-<small class="muted">
-  ✔ O pacote inclui até <strong>15 partidas</strong>.<br>
-  ✔ A Valve poderá exigir mais de 15 partidas em casos específicos, como contas inativas.<br>
-  ✔ Caso sejam necessárias partidas adicionais, cada partida extra será cobrada no valor de 
-  <strong>${money(extraGame)}</strong>.<br>
-  ✔ Partidas adicionais não são elegíveis para descontos, cupons ou promoções.
-</small>
+
+    <small class="muted">
+
+      ✔ O pacote inclui até
+      <strong>15 partidas</strong>.<br>
+
+      ✔ A Valve poderá exigir mais de 15 partidas
+      em casos específicos, como contas inativas.<br>
+
+      ✔ Caso sejam necessárias partidas adicionais,
+      cada partida extra será cobrada no valor de
+      <strong>${money(extraGame)}</strong>.<br>
+
+      ✔ Partidas adicionais não são elegíveis
+      para descontos, cupons ou promoções.
+
+    </small>
+
   `;
+
+
+  // ==========================================
+  // RETORNO
+  // ==========================================
 
   return {
 
     selected:true,
+
     ok:true,
 
+
+    // Valor original da faixa
     baseValue,
+
+
+    // Preço de cada partida adicional
     extraGame,
 
+
+    // Quantidade de partidas adicionais
+    extraGames,
+
+
+    // Valor total das partidas adicionais
+    extraGamesValue,
+
+
+    // Se já tinha serviço, fica 0
+    serviceValue,
+
+
+    // Informação se já tinha serviço
+    existingService,
+
+
+    // Off Stream
     offOriginal,
     offValue,
 
+
     promoApplied:false,
+
     offPromoText:"",
+
     offLabel:"Recalibração",
 
+
+    // Total final
     total,
-    totalNoPromo: baseValue + offOriginal,
 
-    text:`Recalibração (15 partidas) | Total: ${money(baseValue)}`,
 
+    // Total sem promoção
+    totalNoPromo:
+      serviceValue +
+      extraGamesValue +
+      offOriginal,
+
+
+    // Texto resumido
+    text:
+      `Recalibração (${packageGames} partidas) | Total: ${money(total)}`,
+
+
+    // Detalhes para a comanda/pedido
     details:
 `🔄 RECALIBRAÇÃO
-
 • MMR atual: ${mmr}
-• Pacote: 15 partidas
-• Valor do serviço: ${money(baseValue)}
-• Partida adicional: ${money(extraGame)}
+• Pacote: ${packageGames} partidas
+• Valor do serviço: ${money(serviceValue)}
+${
+  extrasCheck
+    ? `• Partida adicional (caso necessário): ${money(extraGame)} por partida
+• Partidas adicionais: ${extraGames > 0
+    ? `${extraGames} x ${money(extraGame)} = ${money(extraGamesValue)}`
+    : "Nenhuma partida adicional selecionada"}`
+    : ""
+}
 • Off Stream: ${off ? money(offValue) : "Não"}
 • Total: ${money(total)}`
   };
+
 }
 
 /* ========= Replay (CORRIGIDO) ========= */
@@ -8361,6 +8866,8 @@ let offTotal = 0;
       // item principal
       items.push("• " + obj.text);
 
+      
+
       // nomes para o mini carrinho
       if(obj === trad) floatItems.push("Boost Tradicional");
       if(obj === dbl) floatItems.push("Double MMR");
@@ -8394,11 +8901,21 @@ let offTotal = 0;
 
 
 // =====================================================
-// 🔒 VALOR PROTEGIDO DO OFF-STREAM
-// O cupom nunca aplica desconto sobre essa parte.
+// 🔒 VALORES PROTEGIDOS CONTRA CUPOM
+// Off-stream + partidas adicionais da Recalibração
+// nunca recebem desconto.
 // =====================================================
 
-const serviceTotalNoPromo = Math.max(0, totalNoPromo - offTotal);
+const recalExtrasValue =
+  rec.selected && rec.ok
+    ? (rec.extraGamesValue || 0)
+    : 0;
+
+const protectedTotal =
+  offTotal + recalExtrasValue;
+
+const serviceTotalNoPromo =
+  Math.max(0, totalNoPromo - protectedTotal);
 
   // ===== calcula porcentagem de desconto total =====
 
@@ -8433,8 +8950,11 @@ if(
   const descontoServicos =
     serviceTotalNoPromo * couponDiscount;
 
-  total =
-    serviceTotalNoPromo - descontoServicos + offTotal;
+total =
+    serviceTotalNoPromo
+    - descontoServicos
+    + offTotal
+    + recalExtrasValue;
 
   discountPct =
     Math.round(couponDiscount * 100);
@@ -8483,13 +9003,18 @@ items.push(
 ){
 
   const recaServiceNoPromo =
-    Math.max(0, rec.totalNoPromo - (rec.offValue || 0));
+    Math.max(
+      0,
+      rec.totalNoPromo
+      - (rec.offValue || 0)
+      - (rec.extraGamesValue || 0)
+    );
 
 const descontoReca =
     recaServiceNoPromo *
     recaCouponDiscount;
 
-  total -= descontoReca;
+total -= descontoReca;
 
   discountPct =
     totalNoPromo > 0
@@ -8671,19 +9196,59 @@ const priceLine = hasPromo
      </div>`;
 
 
-  $("totalRes").innerHTML =
+  // ==========================================
+// RESUMO VISUAL DO PACOTE
+// ==========================================
+
+// Partidas adicionais da Recalibração
+let recalExtrasLines = "";
+
+if(
+  rec.selected &&
+  rec.ok &&
+  rec.extraGames &&
+  rec.extraGames > 0
+){
+  recalExtrasLines = `
+    <br><br>
+    <strong>Partidas Adicionais:</strong><br>
+    • jogos adicionais:(${rec.extraGames} ${
+      rec.extraGames === 1
+        ? "partida"
+        : "partidas"
+    }) | Total: ${money(rec.extraGamesValue)}
+  `;
+}
+
+
+// Taxas Off-stream
+let offStreamLines = "";
+
+if(offLines.length){
+  offStreamLines = `
+    <br><br>
+    <strong>📡 Taxas Off-stream:</strong><br>
+    ${offLines.join("<br>")}
+    <br>
+    <strong>Total Off-stream:</strong>
+    ${money(offTotal)}
+  `;
+}
+
+
+// Monta o resumo completo
+$("totalRes").innerHTML =
+
   `<strong>Itens selecionados:</strong><br>
    ${items.join("<br>")}
-   
-   ${
-     offLines.length
-       ? `<br><br><strong>📡 Taxas Off-stream:</strong><br>
-          ${offLines.join("<br>")}
-          <br><strong>Total Off-stream:</strong> ${money(offTotal)}`
-       : ""
-   }
 
-   <br><br><strong>💵 Total final:</strong>${priceLine}`;
+   ${recalExtrasLines}
+
+   ${offStreamLines}
+
+   <br><br>
+   <strong>💵 Total final:</strong>
+   ${priceLine}`;
 
    // 🔔 MENSAGEM DE PROMOÇÃO ATIVA
 const promoBox = $("promoMessageBox");
@@ -8921,9 +9486,216 @@ $("recalCard4")?.addEventListener("click", () => {
 });
 
 $("recalMMR")?.addEventListener("input", () => {
+
   updateRecalCards(false);
+
+  updateRecalExtras();
+
   updateAll();
+
 });
+
+// ==========================================
+// RECALIBRAÇÃO - PARTIDAS ADICIONAIS
+// ==========================================
+
+function updateRecalExtras(){
+
+  const useRecal =
+    $("useRecal")?.checked || false;
+
+  const extrasCheck =
+    $("recalExtrasCheck");
+
+  const options =
+    $("recalExtrasOptions");
+
+  const existingService =
+    $("recalExistingService");
+
+  const extraGames =
+    $("recalExtraGames");
+
+  const extraPrice =
+    $("recalExtraPrice");
+
+
+  if(!extrasCheck || !options || !existingService || !extraGames){
+    return;
+  }
+
+
+  // ==========================================
+  // RECALIBRAÇÃO DESATIVADA
+  // ==========================================
+
+  if(!useRecal){
+
+    extrasCheck.checked = false;
+    extrasCheck.disabled = true;
+
+    options.style.display = "none";
+
+    existingService.checked = false;
+    existingService.disabled = true;
+
+    extraGames.disabled = true;
+    extraGames.value = 1;
+
+    return;
+  }
+
+
+  // ==========================================
+  // RECALIBRAÇÃO ATIVADA
+  // ==========================================
+
+  extrasCheck.disabled = false;
+
+
+  // ==========================================
+  // PARTIDAS ADICIONAIS DESATIVADAS
+  // ==========================================
+
+  if(!extrasCheck.checked){
+
+    options.style.display = "none";
+
+    existingService.checked = false;
+    existingService.disabled = true;
+
+    extraGames.disabled = true;
+
+    return;
+  }
+
+
+  // ==========================================
+  // PARTIDAS ADICIONAIS ATIVADAS
+  // ==========================================
+
+  options.style.display = "block";
+
+  existingService.disabled = false;
+  extraGames.disabled = false;
+
+
+  // ==========================================
+  // DESCOBRIR MMR
+  // ==========================================
+
+  const mmr = clampInt(
+    Number($("recalMMR").value),
+    0,
+    99999
+  );
+
+
+  let extraGame = 12;
+
+
+  if(mmr !== null){
+
+    if(mmr <= 2000){
+
+      extraGame = 12;
+
+        }else if(mmr <= 4000){
+
+      extraGame = 17;
+
+    }else if(mmr <= 6000){
+
+      extraGame = 20;
+
+    }else{
+
+      extraGame = 25;
+
+    }
+
+  }
+
+
+  // ==========================================
+  // ATUALIZAR TEXTO DO PREÇO
+  // ==========================================
+
+  if(extraPrice){
+
+    extraPrice.innerHTML = `
+      <span style="font-size:12px;">
+        Partida adicional
+        <span style="color:#ffc857;font-weight:800;">
+          (caso necessário)
+        </span>
+        : é cobrado
+        <strong style="color:#ffc857;font-weight:800;">
+          ${money(extraGame)} por partida
+        </strong>
+      </span>
+    `;
+
+  }
+
+}
+
+
+// ==========================================
+// CHECKBOX - QUERO PARTIDAS ADICIONAIS
+// ==========================================
+
+$("recalExtrasCheck")?.addEventListener("change", () => {
+
+  updateRecalExtras();
+
+  updateAll();
+
+});
+
+
+// ==========================================
+// CHECKBOX - JÁ TEM RECALIBRAÇÃO
+// ==========================================
+
+$("recalExistingService")?.addEventListener("change", () => {
+
+  updateRecalExtras();
+
+  updateAll();
+
+});
+
+
+// ==========================================
+// QUANTIDADE DE PARTIDAS
+// ==========================================
+
+$("recalExtraGames")?.addEventListener("input", () => {
+
+  updateAll();
+
+});
+
+
+// ==========================================
+// QUANDO INCLUIR / DESATIVAR RECALIBRAÇÃO
+// ==========================================
+
+$("useRecal")?.addEventListener("change", () => {
+
+  updateRecalExtras();
+
+  updateAll();
+
+});
+
+
+// ==========================================
+// INICIALIZAÇÃO
+// ==========================================
+
+updateRecalExtras();
 
 updateAll();
 
