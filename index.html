@@ -7210,9 +7210,25 @@ function calcRecal(){
   `;
 
 
-  // ==========================================
+// ==========================================
 // RETORNO
 // ==========================================
+
+let extraDetails = "";
+
+if(extraGames > 0){
+
+  extraDetails =
+`➕ PARTIDA ADICIONAL
+* Partidas adicionais: ${extraGames} x ${money(extraGame)} = ${money(extraGamesValue)}`;
+
+}else{
+
+  extraDetails =
+`➕ PARTIDA ADICIONAL
+* (Partida adicional caso necessário): é cobrado ${money(extraGame)} por partida`;
+
+}
 
 return {
   selected: true,
@@ -7243,17 +7259,7 @@ return {
 * Pacote: ${packageGames} partidas
 * Valor do serviço base: ${money(serviceValue)}
 
-${
-  extrasCheck
-    ? (
-        extraGames > 0
-          ? `➕ PARTIDA ADICIONAL
-* Partidas adicionais: ${extraGames} x ${money(extraGame)} = ${money(extraGamesValue)}`
-          : `➕ PARTIDA ADICIONAL
-* (Partida adicional caso necessário): ${money(extraGame)} por partida`
-      )
-    : ""
-}`
+${extraDetails}`
 };
 
 }
@@ -7670,6 +7676,17 @@ function calcCoach(
 
 
   /* =========================
+     LINHA DA PROMOÇÃO
+     ========================= */
+
+  const promoLine =
+    disc > 0
+      ? `* Promoção existente: - ${money(disc)}
+`
+      : "";
+
+
+  /* =========================
      RETORNO
      ========================= */
 
@@ -7689,8 +7706,7 @@ function calcCoach(
 * Parte 1: ${p1 ? "Sim" : "Não"}
 * Parte 2: ${p2 ? "Sim" : "Não"}
 * Valor base: ${money(base)}
-* Promoção existente: ${disc > 0 ? "- " + money(disc) : "Nenhuma"}
-* Valor do serviço: ${money(total)}`
+${promoLine}* Valor do serviço: ${money(total)}`
   };
 
 }
@@ -9582,14 +9598,178 @@ const bs = $("globalBS").checked;
 const customerName = $("customerName")?.value || "";
 const validCustomerName = isValidCustomerName(customerName);
 
-  let total = 0;
+ let total = 0;
 let totalNoPromo = 0;
 let items = [];
 let floatItems = [];
 let invalid = [];
+
 let offLines = [];
 let offTotal = 0;
+let offOriginalTotal = 0;
 
+
+// =====================================================
+// 📡 INFORMAÇÕES DO OFF STREAM
+// =====================================================
+
+function getOffStreamInfo(obj){
+
+  let quantidade = 1;
+  let valorOriginalPorUnidade = 20;
+
+  // ==========================================
+  // BOOST TRADICIONAL
+  // ==========================================
+
+  if(obj === trad){
+
+    quantidade =
+      Math.max(
+        1,
+        Math.floor(
+          (Number($("tradDesejado")?.value || 0) -
+           Number($("tradAtual")?.value || 0)) / 125
+        )
+      );
+
+    valorOriginalPorUnidade = 20;
+  }
+
+  // ==========================================
+  // DOUBLE MMR
+  // ==========================================
+
+  else if(obj === dbl){
+
+    quantidade =
+      Math.max(
+        1,
+        Math.floor(
+          Number($("doubleDays")?.value || 1)
+        )
+      );
+
+    valorOriginalPorUnidade = 20;
+  }
+
+  // ==========================================
+  // BOOST CASUAL
+  // ==========================================
+
+  else if(obj === cas){
+
+    quantidade =
+      Math.max(
+        1,
+        Math.floor(
+          Number($("casualDays")?.value || 1)
+        )
+      );
+
+    valorOriginalPorUnidade = 20;
+  }
+
+  // ==========================================
+  // ROLE FARM
+  // ==========================================
+
+  else if(obj === rolefarm){
+
+    quantidade =
+      Math.max(
+        1,
+        Math.floor(
+          Number($("roleFarmDays")?.value || 1)
+        )
+      );
+
+    valorOriginalPorUnidade = 20;
+  }
+
+  // ==========================================
+  // RECALIBRAÇÃO
+  // ==========================================
+
+  else if(obj === rec){
+
+    // A taxa atual da Recalibração é R$ 40,00
+    // equivalente a 2 x R$ 20,00
+    quantidade = Math.max(
+      1,
+      Math.round(
+        (obj.offOriginal || 20) / 20
+      )
+    );
+
+    valorOriginalPorUnidade = 20;
+  }
+
+  // ==========================================
+  // REPLAY
+  // ==========================================
+
+  else if(obj === rep){
+
+    quantidade =
+      Math.max(
+        1,
+        Math.floor(
+          Number($("repDias")?.value || 1)
+        )
+      );
+
+    // Replay usa R$ 10 por dia quando
+    // são até 3 análises/dia.
+    valorOriginalPorUnidade =
+      quantidade > 0
+        ? (obj.offOriginal / quantidade)
+        : 20;
+  }
+
+  // ==========================================
+  // LOW PRIORITY
+  // ==========================================
+
+  else if(obj === low){
+
+    quantidade = 1;
+    valorOriginalPorUnidade = 20;
+  }
+
+  // ==========================================
+  // OUTROS SERVIÇOS
+  // ==========================================
+
+  else{
+
+    quantidade = 1;
+
+    valorOriginalPorUnidade =
+      obj.offOriginal > 0
+        ? obj.offOriginal
+        : 20;
+  }
+
+
+  const offOriginal =
+    obj.offOriginal > 0
+      ? obj.offOriginal
+      : 0;
+
+  const offValue =
+    obj.offValue > 0
+      ? obj.offValue
+      : 0;
+
+
+  return {
+    quantidade,
+    valorOriginalPorUnidade,
+    offOriginal,
+    offValue
+  };
+}
 
     [trad,dbl,cas,rolefarm,rec,rep,coach,low,turbo,dark].forEach(obj => {
   if(obj.selected){
@@ -9626,11 +9806,116 @@ let offTotal = 0;
         items.push(`• Boost Tradicional — OFF SUPER PROMO: -${money(obj.superPromoDiscount)}`);
       }
 
-      // 🔹 captura OFF STREAM
-      if(obj.offValue && obj.offValue > 0){
-        offLines.push(`• ${obj.offLabel}: ${money(obj.offValue)}`);
-        offTotal += obj.offValue;
-      }
+      // =====================================================
+// 📡 CAPTURA OFF STREAM
+// =====================================================
+
+if(
+  obj.offOriginal !== undefined &&
+  obj.offOriginal > 0
+){
+
+  const offInfo =
+    getOffStreamInfo(obj);
+
+  const quantidade =
+    offInfo.quantidade;
+
+  const offOriginal =
+    offInfo.offOriginal;
+
+  const offValue =
+    offInfo.offValue;
+
+  const valorOriginalPorUnidade =
+    offInfo.valorOriginalPorUnidade;
+
+
+  // ==========================================
+  // ECONOMIA
+  // ==========================================
+
+  const economia =
+    Math.max(
+      0,
+      offOriginal - offValue
+    );
+
+
+  // ==========================================
+  // PERCENTUAL
+  // ==========================================
+
+  const percentual =
+    offOriginal > 0 && economia > 0
+      ? Math.round(
+          (economia / offOriginal) * 100
+        )
+      : 0;
+
+
+  // ==========================================
+  // SEM DESCONTO
+  // ==========================================
+
+  if(economia <= 0){
+
+    if(quantidade > 1){
+
+      offLines.push(
+        `• ${obj.offLabel}: ${quantidade} x ${money(valorOriginalPorUnidade)} = ${money(offOriginal)}`
+      );
+
+    }else{
+
+      offLines.push(
+        `• ${obj.offLabel}: ${money(offOriginal)}`
+      );
+
+    }
+
+  }
+
+
+  // ==========================================
+  // COM DESCONTO
+  // ==========================================
+
+  else{
+
+    const valorFinalPorUnidade =
+      quantidade > 0
+        ? offValue / quantidade
+        : offValue;
+
+
+    if(quantidade > 1){
+
+      offLines.push(
+        `• ${obj.offLabel}: ${quantidade} x ${money(valorOriginalPorUnidade)} = ${money(offOriginal)} → ` +
+        `${quantidade} x ${money(valorFinalPorUnidade)} = ${money(offValue)} ` +
+        `(${percentual}% OFF)`
+      );
+
+    }else{
+
+      offLines.push(
+        `• ${obj.offLabel}: ${money(offOriginal)} → ${money(offValue)} ` +
+        `(${percentual}% OFF)`
+      );
+
+    }
+
+  }
+
+
+  // Valor final usado no total
+  offTotal += offValue;
+
+  // Valor original usado para mostrar
+  // quanto seria sem promoção
+  offOriginalTotal += offOriginal;
+}
     }
   }
 });
@@ -9957,17 +10242,60 @@ if(
 }
 
 
-// Taxas Off-stream
+// =====================================================
+// 📡 TAXAS OFF STREAM - RESUMO VISUAL
+// =====================================================
+
 let offStreamLines = "";
 
 if(offLines.length){
+
+  const offEconomiaTotal =
+    Math.max(
+      0,
+      offOriginalTotal - offTotal
+    );
+
+
   offStreamLines = `
     <br><br>
+
     <strong>📡 Taxas Off-stream:</strong><br>
+
     ${offLines.join("<br>")}
+
     <br>
+
     <strong>Total Off-stream:</strong>
-    ${money(offTotal)}
+    ${
+      offEconomiaTotal > 0
+        ? `
+          <span class="oldPrice">
+            ${money(offOriginalTotal)}
+          </span>
+
+          <span style="margin:0 6px;color:var(--muted)">
+            →
+          </span>
+
+          <span class="newPrice">
+            ${money(offTotal)}
+          </span>
+        `
+        : money(offTotal)
+    }
+
+    ${
+      offEconomiaTotal > 0
+        ? `
+          <br>
+          <strong>💰 Economia no Off-stream:</strong>
+          <span class="ok">
+            ${money(offEconomiaTotal)}
+          </span>
+        `
+        : ""
+    }
   `;
 }
 
@@ -10025,12 +10353,113 @@ $("zapBtn").onclick = () => {
 });
   let offLines = [];
 let offTotal = 0;
+let offOriginalTotal = 0;
+
+
+// =====================================================
+// 📡 TAXAS OFF STREAM - WHATSAPP
+// =====================================================
 
 [trad,dbl,cas,rolefarm,rec,rep,coach,low,turbo,dark].forEach(obj => {
-    if(obj.selected && obj.ok && obj.offValue > 0){
-        offLines.push(`• ${obj.offLabel}: ${money(obj.offValue)}`);
-        offTotal += obj.offValue;
+
+  if(
+    obj.selected &&
+    obj.ok &&
+    obj.offOriginal !== undefined &&
+    obj.offOriginal > 0
+  ){
+
+    const offInfo =
+      getOffStreamInfo(obj);
+
+    const quantidade =
+      offInfo.quantidade;
+
+    const offOriginal =
+      offInfo.offOriginal;
+
+    const offValue =
+      offInfo.offValue;
+
+    const valorOriginalPorUnidade =
+      offInfo.valorOriginalPorUnidade;
+
+
+    const economia =
+      Math.max(
+        0,
+        offOriginal - offValue
+      );
+
+
+    const percentual =
+      offOriginal > 0 && economia > 0
+        ? Math.round(
+            (economia / offOriginal) * 100
+          )
+        : 0;
+
+
+    // ==========================================
+    // SEM DESCONTO
+    // ==========================================
+
+    if(economia <= 0){
+
+      if(quantidade > 1){
+
+        offLines.push(
+          `• ${obj.offLabel}: ${quantidade} x ${money(valorOriginalPorUnidade)} = ${money(offOriginal)}`
+        );
+
+      }else{
+
+        offLines.push(
+          `• ${obj.offLabel}: ${money(offOriginal)}`
+        );
+
+      }
+
     }
+
+
+    // ==========================================
+    // COM DESCONTO
+    // ==========================================
+
+    else{
+
+      const valorFinalPorUnidade =
+        quantidade > 0
+          ? offValue / quantidade
+          : offValue;
+
+
+      if(quantidade > 1){
+
+        offLines.push(
+          `• ${obj.offLabel}: ${quantidade} x ${money(valorOriginalPorUnidade)} = ${money(offOriginal)} → ` +
+          `${quantidade} x ${money(valorFinalPorUnidade)} = ${money(offValue)} ` +
+          `(${percentual}% OFF)`
+        );
+
+      }else{
+
+        offLines.push(
+          `• ${obj.offLabel}: ${money(offOriginal)} → ${money(offValue)} ` +
+          `(${percentual}% OFF)`
+        );
+
+      }
+
+    }
+
+
+    offTotal += offValue;
+    offOriginalTotal += offOriginal;
+
+  }
+
 });
 
 
@@ -10045,11 +10474,29 @@ const msg = encodeURIComponent(
   detalhes.join("\n\n") +
 
   (offLines.length
-    ? "\n\n📡 *TAXAS OFF STREAM*\n" +
+  ? (
+      "\n\n📡 *TAXAS OFF STREAM*\n" +
       offLines.join("\n") +
-      "\n• Total Off stream: " + money(offTotal)
-    : ""
-  ) +
+
+      (
+        offOriginalTotal > offTotal
+          ? (
+              "\n• Total Off stream: " +
+              money(offOriginalTotal) +
+              " → " +
+              money(offTotal) +
+
+              "\n• Economia no Off stream: " +
+              money(offOriginalTotal - offTotal)
+            )
+          : (
+              "\n• Total Off stream: " +
+              money(offTotal)
+            )
+      )
+    )
+  : ""
+) +
 
   "\n\n📊 *RESUMO GERAL*" +
   "\n• Total sem descontos: " + money(totalNoPromo) +
