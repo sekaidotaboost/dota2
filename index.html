@@ -6593,11 +6593,19 @@ const base = calcTradBaseProgressivo(atual, desCalculo);
   ok: true,
 
   baseValue,
+
+  // 📡 OFF-STREAM
+  offOriginal: off
+    ? Math.max(1, Math.floor(delta / 125)) * 20
+    : 0,
+
   offValue,
+
   offLabel: "Boost Tradicional",
 
   total,
   totalNoPromo,
+
   tradSpend: baseValue,
 
   superPromoApplied,
@@ -6907,12 +6915,17 @@ function calcRoleFarm(disableDiscounts = false){
   ok: true,
 
   baseValue,
+
+  // 📡 OFF-STREAM
+  offOriginal,
   offValue,
   offLabel: "Role Farm",
 
   total,
   totalNoPromo,
 
+  // Apenas o valor do serviço.
+  // A taxa Off-stream será mostrada separadamente.
   text: `Role Farm: ${days} dia(s) | Total: ${money(baseValue)}`,
 
   details:
@@ -7242,16 +7255,22 @@ return {
   serviceValue,
   existingService,
 
+  // 📡 OFF-STREAM
   offOriginal,
   offValue,
-
-  total,
-  totalNoPromo: total,
-
   offLabel: "Recalibração",
 
+  total,
+
+  // Valor original do serviço + partidas adicionais.
+  // O Off-stream fica separado.
+  totalNoPromo:
+    serviceValue +
+    extraGamesValue +
+    offOriginal,
+
   text:
-    `Recalibração (${packageGames} partidas) | Total: ${money(total)}`,
+    `Recalibração (${packageGames} partidas) | Total: ${money(serviceValue)}`,
 
   details:
 `🔄 RECALIBRAÇÃO
@@ -7960,25 +7979,38 @@ function calcLowPriority(){
 
   return {
 
-    selected:true,
-    ok:true,
+  selected:true,
+  ok:true,
 
-    total,
-    totalNoPromo,
+  total,
 
-    baseValue,
-    offValue,
+  // Valor original do serviço + taxa Off-stream original
+  totalNoPromo:
+    baseOriginal +
+    (off ? 20 : 0),
 
-    offLabel:
-      "Low Priority",
+  baseValue,
 
-    discountPct,
-    discountValue,
+  // 📡 OFF-STREAM
+  offOriginal:
+    off
+      ? 20
+      : 0,
 
-    text:
-      `Low Priority: ${qty} vitória(s) | Total: ${money(total)}`,
+  offValue,
 
-    details:
+  offLabel:
+    "Low Priority",
+
+  discountPct,
+  discountValue,
+
+  // Somente o serviço.
+  // Off-stream aparece separadamente no resumo geral.
+  text:
+    `Low Priority: ${qty} vitória(s) | Total: ${money(baseValue)}`,
+
+  details:
 `🚫 LOW PRIORITY
 * Serviço: Remoção de Low Priority
 * Vitórias contratadas: ${qty}
@@ -7986,8 +8018,8 @@ function calcLowPriority(){
 * Desconto aplicado: ${discountPct > 0 ? discountPct + "% OFF" : "Nenhum"}
 * Valor do serviço: ${money(baseValue)}`,
 
-    blocksDiscounts:true
-  };
+  blocksDiscounts:true
+};
 
 }
 
@@ -8104,15 +8136,21 @@ function calcTurboXP(){
 
 
   const base =
-    days * PRICE_DAY;
+  days * PRICE_DAY;
 
-  const offValue =
-    off
-      ? days * OFF_DAY
-      : 0;
+const offOriginal =
+  off
+    ? days * OFF_DAY
+    : 0;
 
-  const total =
-    base + offValue;
+const offValue =
+  offOriginal;
+
+const total =
+  base + offValue;
+
+const totalNoPromo =
+  base + offOriginal;
 
 
   /* =========================
@@ -8182,29 +8220,37 @@ function calcTurboXP(){
 
   return {
 
-    selected:true,
-    ok:true,
+  selected:true,
+  ok:true,
 
-    total,
-    totalNoPromo:total,
+  days,
+  wins,
+  simDays,
 
-    baseValue:base,
-    offValue,
+  baseValue: base,
 
-    offLabel:
-      "Turbo Evento de XP",
+  // 📡 OFF-STREAM
+  offOriginal,
+  offValue,
+  offLabel:
+    "Turbo Evento de XP",
 
-    text:
-      `Turbo Evento de XP: ${days} dia(s) | Total: ${money(total)}`,
+  total,
+  totalNoPromo,
 
-    details:
+  // Somente o serviço
+  text:
+    `Turbo Evento de XP: ${days} dia(s) | Total: ${money(base)}`,
+
+  details:
 `⚡ TURBO EVENTO DE XP
-* Dias: ${days}
-* Jogos: ${days * 8}
+* Dias contratados: ${days}
+* Total de jogos: ${days * 8}
+* Vitórias por dia: ${wins}
 * Valor do serviço: ${money(base)}`,
 
-    blocksDiscounts:true
-  };
+  blocksDiscounts:false
+};
 
 }
 
@@ -9827,19 +9873,15 @@ if(
   const offValue =
     offInfo.offValue;
 
-  const valorOriginalPorUnidade =
-    offInfo.valorOriginalPorUnidade;
+  const valorOriginalPorUnidade = offInfo.valorOriginalPorUnidade;
 
+  
+const valorFinalPorUnidade =
+  quantidade > 0
+    ? offValue / quantidade
+    : offValue;
 
-  // ==========================================
-  // ECONOMIA
-  // ==========================================
-
-  const economia =
-    Math.max(
-      0,
-      offOriginal - offValue
-    );
+const economia = Math.max(0, offOriginal - offValue);
 
 
   // ==========================================
