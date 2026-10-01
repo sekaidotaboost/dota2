@@ -2997,78 +2997,156 @@ input[type=text]:focus{
     </div>
 
 <!-- Double MMR -->
-    <div class="card service-card" data-service="double">
-      <h2>
-        <span>Double MMR</span>
-        <span class="pill">⚡ Mais prático</span>
-        <span class="pill">
-          <label class="check" style="margin:0">
-            <input type="checkbox" id="useDouble"> Incluir
-          </label>
-        </span>
-      </h2>
+<div class="card service-card" data-service="double">
+  <h2>
+    <span>Double MMR</span>
+    <span class="pill">⚡ Mais prático</span>
+    <span class="pill">
+      <label class="check" style="margin:0">
+        <input type="checkbox" id="useDouble"> Incluir
+      </label>
+    </span>
+  </h2>
 
-      <div class="serviceBody" id="bodyDouble">
-        <label>MMR Atual</label>
-<input type="number" id="doubleMMR" min="1" max="6000" placeholder="Ex: 3200" disabled>
+  <div class="serviceBody" id="bodyDouble">
 
-<div class="servicePreviewBox" id="doublePreviewBox">
-  <img id="doublePreviewImg" src="medalhas/SeasonalRank1-1.png" alt="Medalha Double MMR">
-  <div class="servicePreviewText">
-    <span>Medalha detectada</span>
-    <strong id="doublePreviewText">Arauto I</strong>
-  </div>
-</div>
+    <label>MMR Atual</label>
+    <input
+      type="number"
+      id="doubleMMR"
+      min="1"
+      max="6000"
+      placeholder="Ex: 3200"
+      disabled
+    >
 
-        <label>Dias contratados (1 a 7)</label>
-        <input type="number" id="doubleDays" min="1" max="7" value="1" disabled>
+    <div class="servicePreviewBox" id="doublePreviewBox">
+      <img
+        id="doublePreviewImg"
+        src="medalhas/SeasonalRank1-1.png"
+        alt="Medalha Double MMR"
+      >
 
-        <label class="check premiumCheck">
-  <input type="checkbox" id="doubleOff" disabled>
-  <span id="doubleOffText">Serviço com live off-stream?</span>
-</label>
-
-        <!-- SAIBA MAIS -->
-        <details>
-  <summary>Saiba mais sobre o Double MMR</summary>
-
-  <p><strong>🎴 Como funciona</strong></p>
-  <ul>
-    <li>O Double MMR utiliza fichas de Double Down</li>
-    <li>Cada dia contém <strong>7 partidas</strong></li>
-    <li>O cálculo é feito <strong>dia por dia</strong>, conforme o MMR atual</li>
-  </ul>
-
-  <p><strong>💰 Preço por faixa de MMR</strong></p>
-  <ul>
-    <li>🟢 <strong>1 a 2.000 MMR</strong> → R$ 70,00 por dia</li>
-<li>🔵 <strong>2.001 a 3.000 MMR</strong> → R$ 95,00 por dia</li>
-<li>🟣 <strong>3.001 a 4.000 MMR</strong> → R$ 140,00 por dia</li>
-<li>🟠 <strong>4.001 a 5.000 MMR</strong> → R$ 195,00 por dia</li>
-<li>🔴 <strong>5.001 a 6.000 MMR</strong> → R$ 235,00 por dia</li>
-  </ul>
-
-  <p><strong>⚠️ Importante</strong></p>
-  <ul>
-    <li>O valor pode mudar durante o serviço conforme o MMR sobe</li>
-    <li>Cada nova diária é cobrada pelo MMR atual do dia</li>
-    <li>Máximo permitido: <strong>8.500 MMR</strong></li>
-    <li>Máximo de contratação: <strong>7 dias</strong></li>
-  </ul>
-
-  <p><strong>📌 Exemplo prático</strong></p>
-  <p>
-    MMR inicial: 4.900 <br>
-    Dia 1 → R$ 195,00 <br>
-    Dia 2 → R$ 235,00 <br>
-    <strong>Total:</strong> R$ 430,00
-  </p>
-</details>
-
-<div class="result" id="doubleRes">Selecione as opções para ver o valor.</div>
-<div class="alert" id="doubleAlert"></div>
+      <div class="servicePreviewText">
+        <span>Medalha detectada</span>
+        <strong id="doublePreviewText">Arauto I</strong>
       </div>
     </div>
+
+
+    <label>Dias contratados (1 a 7)</label>
+    <input
+      type="number"
+      id="doubleDays"
+      min="1"
+      max="7"
+      value="1"
+      disabled
+    >
+
+
+    <!-- PRÉVIA DO SERVIÇO -->
+    <div class="servicePreviewBox" id="doubleServicePreviewBox">
+
+      <img
+        id="doubleServicePreviewImg"
+        src="medalhas/doublemmr.png"
+        alt="Double MMR"
+      >
+
+      <div class="servicePreviewText">
+
+        <span>Serviço selecionado</span>
+
+        <strong>Double MMR</strong>
+
+        <div id="doublePreviewDetails">
+          Quantidade de partidas: 7<br>
+          Dias contratados: 1
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <label class="check premiumCheck">
+      <input
+        type="checkbox"
+        id="doubleOff"
+        disabled
+      >
+
+      <span id="doubleOffText">
+        Serviço com live off-stream?
+      </span>
+    </label>
+
+
+    <!-- SAIBA MAIS -->
+    <details>
+
+      <summary>
+        Saiba mais sobre o Double MMR
+      </summary>
+
+
+      <p><strong>🎴 Como funciona</strong></p>
+
+      <ul>
+        <li>O Double MMR utiliza fichas de Double Down</li>
+        <li>Cada dia contém <strong>7 partidas</strong></li>
+        <li>O cálculo é feito <strong>dia por dia</strong>, conforme o MMR atual</li>
+      </ul>
+
+
+      <p><strong>💰 Preço por faixa de MMR</strong></p>
+
+      <ul>
+        <li>🟢 <strong>1 a 2.000 MMR</strong> → R$ 70,00 por dia</li>
+        <li>🔵 <strong>2.001 a 3.000 MMR</strong> → R$ 95,00 por dia</li>
+        <li>🟣 <strong>3.001 a 4.000 MMR</strong> → R$ 140,00 por dia</li>
+        <li>🟠 <strong>4.001 a 5.000 MMR</strong> → R$ 195,00 por dia</li>
+        <li>🔴 <strong>5.001 a 6.000 MMR</strong> → R$ 235,00 por dia</li>
+      </ul>
+
+
+      <p><strong>⚠️ Importante</strong></p>
+
+      <ul>
+        <li>O valor pode mudar durante o serviço conforme o MMR sobe</li>
+        <li>Cada nova diária é cobrada pelo MMR atual do dia</li>
+        <li>Máximo permitido: <strong>8.500 MMR</strong></li>
+        <li>Máximo de contratação: <strong>7 dias</strong></li>
+      </ul>
+
+
+      <p><strong>📌 Exemplo prático</strong></p>
+
+      <p>
+        MMR inicial: 4.900 <br>
+        Dia 1 → R$ 195,00 <br>
+        Dia 2 → R$ 235,00 <br>
+        <strong>Total:</strong> R$ 430,00
+      </p>
+
+    </details>
+
+
+    <div
+      class="result"
+      id="doubleRes"
+    >
+      Selecione as opções para ver o valor.
+    </div>
+
+    <div
+      class="alert"
+      id="doubleAlert"
+    ></div>
+
+  </div>
+</div>
 
     
     <!-- Boost Casual -->
@@ -3100,7 +3178,7 @@ input[type=text]:focus{
   </div>
 </div>
 
-<label>Quantos dias de serviço? (1 a 30)</label>
+<label>Dias contratados (1 a 30)</label>
 <input type="number" id="casualDays" min="1" max="30" value="1" disabled>
 
 <div class="servicePreviewBox" id="casualPreviewBox">
@@ -3167,7 +3245,35 @@ input[type=text]:focus{
   <div class="serviceBody" id="bodyRoleFarm">
 
     <label>MMR atual (1 a 8500)</label>
-<input type="number" id="roleFarmMMR" min="1" max="8500" placeholder="Ex: 3200" disabled>
+
+<input
+  type="number"
+  id="roleFarmMMR"
+  min="1"
+  max="8500"
+  placeholder="Ex: 3200"
+  disabled
+>
+
+<div class="servicePreviewBox" id="roleFarmMedalPreviewBox">
+
+  <img
+    id="roleFarmMedalPreviewImg"
+    src="medalhas/SeasonalRank1-1.png"
+    alt="Medalha detectada"
+  >
+
+  <div class="servicePreviewText">
+
+    <span>Medalha detectada</span>
+
+    <strong id="roleFarmMedalPreviewText">
+      Arauto I
+    </strong>
+
+  </div>
+
+</div>
 
 <label>Dias de serviço (1 a 2)</label>
 <input type="number" id="roleFarmDays" min="1" max="2" value="1" disabled>
@@ -8400,7 +8506,7 @@ function calcDarkCarnival(){
 * Não é possível escolher heróis.
 * Os bilhetes obtidos são aleatórios.`,
 
-    blocksDiscounts:true
+   blocksDiscounts:true
 
   };
 
@@ -8413,6 +8519,11 @@ function updateDoublePreview(){
     Number(
       $("doubleMMR")?.value || 0
     );
+
+
+  // ==============================
+  // MEDALHA DETECTADA
+  // ==============================
 
   const rank =
     getRankByMMR(mmr);
@@ -8433,6 +8544,33 @@ function updateDoublePreview(){
 
     $("doublePreviewText").textContent =
       rank.fullLabel;
+
+  }
+
+
+  // ==============================
+  // DIAS / PARTIDAS
+  // ==============================
+
+  const days =
+    Number(
+      $("doubleDays")?.value || 1
+    );
+
+
+  const partidas =
+    days * 7;
+
+
+  const details =
+    $("doublePreviewDetails");
+
+
+  if(details){
+
+    details.innerHTML =
+      `Quantidade de partidas: ${partidas}<br>
+       Dias contratados: ${days}`;
 
   }
 
@@ -8588,6 +8726,50 @@ function updateCasualPreview(){
 }
 
 
+// ======================================================
+// ROLE FARM — PREVIEW DA MEDALHA
+// ======================================================
+
+function updateRoleFarmPreview(){
+
+  const mmr =
+    Number(
+      $("roleFarmMMR")?.value || 0
+    );
+
+
+  const medalImg =
+    $("roleFarmMedalPreviewImg");
+
+  const medalText =
+    $("roleFarmMedalPreviewText");
+
+
+  if(medalImg && medalText){
+
+    const detected =
+      getRankByMMR(mmr);
+
+
+    if(detected){
+
+      medalImg.src =
+        detected.img;
+
+      medalText.textContent =
+        detected.fullLabel;
+
+    }
+
+  }
+
+}
+
+
+// ======================================================
+// OFF-STREAM DO BOOST CASUAL
+// ======================================================
+
 function updateCasualOffText(){
 
   const mmr =
@@ -8670,6 +8852,9 @@ function updateRoleFarmOffText(){
 }
 
 
+
+
+
 function updateLowPreview(){
 
   const qty =
@@ -8723,7 +8908,7 @@ function updateRecalCards(fromClick = false){
   const mmrInput =
     $("recalMMR");
 
-
+    
   if(
     !r1 ||
     !r2 ||
@@ -8916,6 +9101,7 @@ function updateAll(){
 updateDoublePreview();
 updateReplayPreview();
 updateCasualPreview();
+updateRoleFarmPreview();
 updateCasualOffText();
 updateRoleFarmOffText();
 updateLowPreview();
@@ -10838,6 +11024,7 @@ initTradRankPickers();
 updateDoublePreview();
 updateReplayPreview();
 updateCasualPreview();
+updateRoleFarmPreview();
 updateCasualOffText();
 updateRoleFarmOffText();
 updateTurboPreview();
