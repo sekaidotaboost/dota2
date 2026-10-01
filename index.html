@@ -7294,14 +7294,14 @@ function calcRecal(){
 
 
     // Detalhes para a comanda/pedido
-    details:
+details:
 `🔄 RECALIBRAÇÃO
 • MMR atual: ${mmr}
 • Pacote: ${packageGames} partidas
 • Valor do serviço: ${money(serviceValue)}
 ${
   extrasCheck
-    ? `• Partida adicional <span style="color:#ffc857;font-weight:normal;">(caso necessário)</span>: ${money(extraGame)} por partida
+    ? `• Partida adicional (caso necessário): ${money(extraGame)} por partida
 • Partidas adicionais: ${extraGames > 0
     ? `${extraGames} x ${money(extraGame)} = ${money(extraGamesValue)}`
     : "Nenhuma partida adicional selecionada"}`
