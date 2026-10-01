@@ -9890,20 +9890,17 @@ if(
 
     if(quantidade > 1){
 
-      offLines.push(
-        `• ${obj.offLabel}: ${quantidade} x ${money(valorOriginalPorUnidade)} = ${money(offOriginal)} → ` +
-        `${quantidade} x ${money(valorFinalPorUnidade)} = ${money(offValue)} ` +
-        `(${percentual}% OFF)`
-      );
+  offLinesZap.push(
+    `* ${obj.offLabel}: ${quantidade} x ${money(valorOriginalPorUnidade)} = ~${money(offOriginal)}~ → ${money(offValue)} (${percentual}% OFF)`
+  );
 
-    }else{
+}else{
 
-      offLines.push(
-        `• ${obj.offLabel}: ${money(offOriginal)} → ${money(offValue)} ` +
-        `(${percentual}% OFF)`
-      );
+  offLinesZap.push(
+    `* ${obj.offLabel}: ~${money(offOriginal)}~ → ${money(offValue)} (${percentual}% OFF)`
+  );
 
-    }
+}
 
   }
 
