@@ -7301,15 +7301,16 @@ details:
 • Valor do serviço: ${money(serviceValue)}
 ${
   extrasCheck
-    ? `• Partida adicional (caso necessário): ${money(extraGame)} por partida
-• Partidas adicionais: ${extraGames > 0
-    ? `${extraGames} x ${money(extraGame)} = ${money(extraGamesValue)}`
-    : "Nenhuma partida adicional selecionada"}`
+    ? (
+        extraGames > 0
+          ? `• Partidas adicionais: ${extraGames} x ${money(extraGame)} = ${money(extraGamesValue)}`
+          : `• Partida adicional (caso necessário): ${money(extraGame)} por partida`
+      )
     : ""
 }
 • Off Stream: ${off ? money(offValue) : "Não"}
 • Total: ${money(total)}`
-  };
+};
 
 }
 
