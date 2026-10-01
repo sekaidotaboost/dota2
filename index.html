@@ -2615,6 +2615,137 @@ input[type=text]:focus{
   border-radius:12px;
 }
 
+
+/* =========================================================
+   REPLAY — OPÇÕES DE QUANTIDADE
+   ========================================================= */
+
+.replayOptions{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:10px;
+  margin-top:12px;
+  margin-bottom:16px;
+}
+
+.replayOption{
+  position:relative;
+  min-height:95px;
+  padding:12px 68px 12px 14px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+
+  text-align:left;
+
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:13px;
+
+  background:rgba(255,255,255,.035);
+
+  cursor:pointer;
+  box-sizing:border-box;
+
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    background .18s ease,
+    box-shadow .18s ease;
+}
+
+.replayOption:hover{
+  transform:translateY(-2px);
+  background:rgba(255,255,255,.055);
+  border-color:rgba(255,255,255,.18);
+}
+
+.replayOption.active{
+  border-color:rgba(255,255,255,.35);
+  background:rgba(255,255,255,.075);
+
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.08),
+    0 6px 18px rgba(0,0,0,.18);
+}
+
+/* IMAGEM DO CARD */
+.replayOption img{
+  position:absolute;
+
+  right:12px;
+  top:50%;
+
+  transform:translateY(-50%);
+
+  width:48px;
+  height:48px;
+
+  object-fit:contain;
+
+  margin:0;
+}
+
+/* TÍTULO */
+.replayOptionTitle{
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:4px;
+}
+
+/* PREÇO */
+.replayOptionPrice{
+  font-size:12px;
+  line-height:1.35;
+}
+
+.replayOptionPrice strong{
+  display:block;
+  font-size:13px;
+  font-weight:900;
+}
+
+.replayOptionPrice .oldPrice{
+  display:block;
+  text-decoration:line-through;
+  opacity:.55;
+  font-size:10px;
+}
+
+/* RADIO INVISÍVEL */
+.replayOption > input{
+  position:absolute;
+  width:1px;
+  height:1px;
+  opacity:0;
+  pointer-events:none;
+}
+
+#repDias{
+  max-width:120px;
+}
+
+/* CELULAR */
+@media(max-width:600px){
+
+  .replayOptions{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+
+  .replayOption{
+    min-height:90px;
+    padding:10px 58px 10px 11px;
+  }
+
+  .replayOption img{
+    width:42px;
+    height:42px;
+    right:9px;
+  }
+}
+
 /* ===========================
    DARK CARNIVAL
 ===========================*/
@@ -4172,19 +4303,94 @@ input[type=text]:focus{
       </h2>
 
       <div class="serviceBody" id="bodyReplay">
-        <label>Quantidade de análises</label>
-<input type="number" id="repQtd" min="1" value="1" disabled>
+        
+<div class="replayOptions">
+
+  <label class="replayOption active" data-replay-qty="1">
+    <input type="radio" name="replayQty" id="replayQty1" disabled checked>
+    <img src="medalhas/analise1.png" alt="1 análise">
+    <div class="replayOptionTitle">1 análise</div>
+    <div class="replayOptionPrice"></div>
+  </label>
+
+  <label class="replayOption" data-replay-qty="2">
+    <input type="radio" name="replayQty" id="replayQty2" disabled>
+    <img src="medalhas/analise2.png" alt="2 análises">
+    <div class="replayOptionTitle">2 análises</div>
+    <div class="replayOptionPrice"></div>
+  </label>
+
+  <label class="replayOption" data-replay-qty="3">
+    <input type="radio" name="replayQty" id="replayQty3" disabled>
+    <img src="medalhas/analise3.png" alt="3 análises">
+    <div class="replayOptionTitle">3 análises</div>
+    <div class="replayOptionPrice"></div>
+  </label>
+
+  <label class="replayOption" data-replay-qty="4">
+    <input type="radio" name="replayQty" id="replayQty4" disabled>
+    <img src="medalhas/analise4.png" alt="4 análises">
+    <div class="replayOptionTitle">4 análises</div>
+    <div class="replayOptionPrice"></div>
+  </label>
+
+  <label class="replayOption" data-replay-qty="5">
+    <input type="radio" name="replayQty" id="replayQty5" disabled>
+    <img src="medalhas/analise5.png" alt="5 análises">
+    <div class="replayOptionTitle">5 análises</div>
+    <div class="replayOptionPrice"></div>
+  </label>
+
+  <label class="replayOption" data-replay-qty="6">
+    <input type="radio" name="replayQty" id="replayQty6" disabled>
+    <img src="medalhas/analise6.png" alt="6 análises">
+    <div class="replayOptionTitle">6 análises</div>
+    <div class="replayOptionPrice"></div>
+  </label>
+
+</div>
+
+
+
+<!-- Mantém o campo que seu sistema já utiliza -->
+<input
+  type="number"
+  id="repQtd"
+  min="1"
+  max="6"
+  value="1"
+  disabled
+  style="display:none;"
+>
+
 
 <label>Em quantos dias deseja dividir?</label>
-<input type="number" id="repDias" min="1" value="1" disabled>
+
+<input
+  type="number"
+  id="repDias"
+  min="1"
+  max="6"
+  value="1"
+  disabled
+>
+
 
 <div class="servicePreviewBox" id="replayPreviewBox">
   <img id="replayPreviewImg" src="medalhas/repley.png" alt="Replay">
+
   <div class="servicePreviewText">
     <span>Modo do serviço</span>
     <strong id="replayPreviewText">Análise de Replay</strong>
+
+    <div id="replayPreviewDetails">
+      Quantidade de partidas: 1<br>
+      Dias contratados: 1
+    </div>
   </div>
 </div>
+
+
 
 <label class="check premiumCheck">
   <input type="checkbox" id="repOff" disabled>
@@ -8921,6 +9127,7 @@ function updateDoublePreview(){
 }
 
 
+
 function updateReplayPreview(){
 
   const qtd =
@@ -8933,44 +9140,186 @@ function updateReplayPreview(){
       $("repDias")?.value || 1
     );
 
+  // DESTACA O CARD SELECIONADO
+  document
+    .querySelectorAll(".replayOption")
+    .forEach(option => {
 
-  const img =
-    $("replayPreviewImg");
+      const optionQty =
+        Number(option.dataset.replayQty);
 
-  const text =
-    $("replayPreviewText");
+      option.classList.toggle(
+        "active",
+        optionQty === qtd
+      );
+    });
 
-
-  if(!img || !text)
-    return;
-
-
-  const porDia =
+  // VERIFICA SE O SERVIÇO SELECIONADO ESTÁ EM PROMOÇÃO
+  const porDiaSelecionado =
     Math.ceil(qtd / dias);
 
+  const previewEmPromo =
+    porDiaSelecionado >= 2 &&
+    porDiaSelecionado <= 3;
 
-  if(
-    porDia >= 2 &&
-    porDia <= 3
-  ){
+  // IMAGEM DO PREVIEW INFERIOR
+  // ESTA SIM MUDA QUANDO ESTÁ EM PROMOÇÃO
+  const previewImg =
+    $("replayPreviewImg");
 
-    img.src =
-      "medalhas/repleypromo.png";
+  if(previewImg){
 
-    text.textContent =
-      "Replay com promoção";
-
-  }else{
-
-    img.src =
-      "medalhas/repley.png";
-
-    text.textContent =
-      "Análise de Replay";
-
+    previewImg.src =
+      previewEmPromo
+        ? "medalhas/repleypromo.png"
+        : "medalhas/repley.png";
   }
 
+  // ATUALIZA DETALHES DO PREVIEW
+  const details =
+    $("replayPreviewDetails");
+
+  if(details){
+
+    details.innerHTML =
+      `Quantidade de partidas: ${qtd}<br>
+       Dias contratados: ${dias}`;
+  }
+
+  // CALCULA OS PREÇOS DOS 6 CARDS
+  document
+    .querySelectorAll(".replayOption")
+    .forEach(option => {
+
+      const optionQty =
+        Number(option.dataset.replayQty);
+
+      if(
+        !Number.isFinite(optionQty) ||
+        optionQty < 1
+      ){
+        return;
+      }
+
+      const porDia =
+        Math.ceil(optionQty / dias);
+
+      const baseNoPromo =
+        optionQty * 50;
+
+      let baseValue =
+        baseNoPromo;
+
+      // DESCONTO DE 2 A 3 ANÁLISES POR DIA
+      if(
+        porDia >= 2 &&
+        porDia <= 3
+      ){
+        baseValue =
+          optionQty * 40;
+      }
+
+      const priceElement =
+        option.querySelector(
+          ".replayOptionPrice"
+        );
+
+      if(!priceElement){
+        return;
+      }
+
+      // MOSTRA PREÇO NORMAL OU PREÇO COM PROMO
+      if(baseValue < baseNoPromo){
+
+        priceElement.innerHTML = `
+          <span class="oldPrice">
+            ${money(baseNoPromo)}
+          </span>
+
+          <strong>
+            ${money(baseValue)}
+          </strong>
+        `;
+
+      }else{
+
+        priceElement.innerHTML = `
+          <strong>
+            ${money(baseValue)}
+          </strong>
+        `;
+      }
+
+    });
 }
+
+
+
+
+
+
+
+function updateReplayOptions(){
+
+  const options =
+    document.querySelectorAll(
+      ".replayOption"
+    );
+
+  options.forEach(option => {
+
+    option.addEventListener(
+      "click",
+      function(){
+
+        const qty =
+          Number(
+            this.dataset.replayQty
+          );
+
+        const input =
+          $("repQtd");
+
+        if(input){
+          input.value = qty;
+        }
+
+        // Atualiza os radios
+        options.forEach(item => {
+
+          const radio =
+            item.querySelector(
+              'input[type="radio"]'
+            );
+
+          if(radio){
+            radio.checked =
+              item === this;
+          }
+
+          item.classList.toggle(
+            "active",
+            item === this
+          );
+
+        });
+
+        // Atualiza preços e preview
+        updateReplayPreview();
+
+        // Atualiza todo o cálculo
+        updateAll();
+
+      }
+    );
+
+  });
+
+}
+
+
+
+
 
 
 function updateTurboPreview(){
@@ -12013,10 +12362,17 @@ if(useDark && darkCard){
 
 }
 
+// ==========================================
+// INICIALIZAÇÃO
+// ==========================================
+
+updateReplayOptions();
+updateReplayPreview();
+
 updateLowPriorityOptions();
 updateLowPreview();
-updateAll();
 
+updateAll();
 
 
 
