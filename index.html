@@ -9805,7 +9805,7 @@ function getOffStreamInfo(obj){
         items.push(`• Boost Tradicional — OFF SUPER PROMO: -${money(obj.superPromoDiscount)}`);
       }
 
-      // =====================================================
+// =====================================================
 // 📡 CAPTURA OFF STREAM
 // =====================================================
 
@@ -9879,42 +9879,36 @@ if(
   // ==========================================
   // COM DESCONTO
   // ==========================================
-
   else{
-
-    const valorFinalPorUnidade =
-      quantidade > 0
-        ? offValue / quantidade
-        : offValue;
-
 
     if(quantidade > 1){
 
-  offLinesZap.push(
-    `* ${obj.offLabel}: ${quantidade} x ${money(valorOriginalPorUnidade)} = ~${money(offOriginal)}~ → ${money(offValue)} (${percentual}% OFF)`
-  );
+      offLines.push(
+        `• ${obj.offLabel}: ${quantidade} x ${money(valorOriginalPorUnidade)} = ${money(offOriginal)} → ${money(offValue)} (${percentual}% OFF)`
+      );
 
-}else{
+    }else{
 
-  offLinesZap.push(
-    `* ${obj.offLabel}: ~${money(offOriginal)}~ → ${money(offValue)} (${percentual}% OFF)`
-  );
+      offLines.push(
+        `• ${obj.offLabel}: ${money(offOriginal)} → ${money(offValue)} (${percentual}% OFF)`
+      );
 
-}
+    }
 
   }
 
 
-  // Valor final usado no total
+  // ==========================================
+  // TOTAL OFF STREAM
+  // ==========================================
+
   offTotal += offValue;
 
-  // Valor original usado para mostrar
-  // quanto seria sem promoção
   offOriginalTotal += offOriginal;
+
 }
-    }
   }
-});
+}
 
 
 // =====================================================
