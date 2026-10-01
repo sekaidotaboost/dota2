@@ -6903,12 +6903,13 @@ function calcRoleFarm(disableDiscounts = false){
      <strong>Total:</strong> <span class="newPrice">${money(total)}</span>`;
 
   return {
-  selected:true,
-  ok:true,
+  selected: true,
+  ok: true,
+
   baseValue,
-  offOriginal,
   offValue,
-  offLabel:"Role Farm",
+  offLabel: "Role Farm",
+
   total,
   totalNoPromo,
 
@@ -9805,7 +9806,7 @@ function getOffStreamInfo(obj){
         items.push(`• Boost Tradicional — OFF SUPER PROMO: -${money(obj.superPromoDiscount)}`);
       }
 
-// =====================================================
+      // =====================================================
 // 📡 CAPTURA OFF STREAM
 // =====================================================
 
@@ -9879,18 +9880,28 @@ if(
   // ==========================================
   // COM DESCONTO
   // ==========================================
+
   else{
+
+    const valorFinalPorUnidade =
+      quantidade > 0
+        ? offValue / quantidade
+        : offValue;
+
 
     if(quantidade > 1){
 
       offLines.push(
-        `• ${obj.offLabel}: ${quantidade} x ${money(valorOriginalPorUnidade)} = ${money(offOriginal)} → ${money(offValue)} (${percentual}% OFF)`
+        `• ${obj.offLabel}: ${quantidade} x ${money(valorOriginalPorUnidade)} = ${money(offOriginal)} → ` +
+        `${quantidade} x ${money(valorFinalPorUnidade)} = ${money(offValue)} ` +
+        `(${percentual}% OFF)`
       );
 
     }else{
 
       offLines.push(
-        `• ${obj.offLabel}: ${money(offOriginal)} → ${money(offValue)} (${percentual}% OFF)`
+        `• ${obj.offLabel}: ${money(offOriginal)} → ${money(offValue)} ` +
+        `(${percentual}% OFF)`
       );
 
     }
@@ -9898,17 +9909,16 @@ if(
   }
 
 
-  // ==========================================
-  // TOTAL OFF STREAM
-  // ==========================================
-
+  // Valor final usado no total
   offTotal += offValue;
 
+  // Valor original usado para mostrar
+  // quanto seria sem promoção
   offOriginalTotal += offOriginal;
-
 }
+    }
   }
-}
+});
 
 
 // =====================================================
