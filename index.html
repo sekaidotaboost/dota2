@@ -874,6 +874,96 @@ input[type=range]::-moz-range-thumb{
 
 }
 
+
+/* =========================================================
+   LOW PRIORITY — CARDS COMPACTOS
+   ========================================================= */
+
+.lowPriorityGrid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:12px;
+  margin-top:12px;
+}
+
+.lowPriorityCard{
+  position:relative;
+
+  min-height:110px;
+  padding:12px 70px 12px 14px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+
+  text-align:left;
+  cursor:pointer;
+
+  box-sizing:border-box;
+}
+
+/* Medalha fica à direita */
+.lowPriorityCard img{
+  position:absolute;
+
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+
+  width:52px;
+  height:52px;
+
+  object-fit:contain;
+}
+
+/* Título */
+.lowPriorityCard .coachCardTitle{
+  margin:0 0 5px 0;
+
+  font-size:13px;
+  font-weight:800;
+}
+
+/* Informações */
+.lowPriorityCard .coachCardDesc{
+  margin:0;
+
+  font-size:12px;
+  line-height:1.45;
+}
+
+/* Preço antigo */
+.lowPriorityCard .oldPrice{
+  text-decoration:line-through;
+  opacity:.65;
+}
+
+/* Preço promocional */
+.lowPriorityCard .promoPrice{
+  font-weight:800;
+}
+
+/* Responsivo */
+@media (max-width:600px){
+
+  .lowPriorityGrid{
+    gap:8px;
+  }
+
+  .lowPriorityCard{
+    min-height:100px;
+    padding:10px 60px 10px 11px;
+  }
+
+  .lowPriorityCard img{
+    width:44px;
+    height:44px;
+    right:9px;
+  }
+
+}
+
 .coachCard{
   border:1px solid rgba(139,92,246,.16);
   background:rgba(255,255,255,.03);
@@ -3275,7 +3365,7 @@ input[type=text]:focus{
 
 </div>
 
-<label>Dias de serviço (1 a 2)</label>
+<label>Dias contratados (1 a 2)</label>
 <input type="number" id="roleFarmDays" min="1" max="2" value="1" disabled>
 
 <div class="servicePreviewBox roleFarmPreviewBox">
@@ -3756,9 +3846,12 @@ input[type=text]:focus{
 </div>
 <!-- Low Priority -->
 <div class="card service-card" data-service="low">
+
   <h2>
     <span>Low Priority</span>
+
     <span class="pill">🚨 Ajuda</span>
+
     <span class="pill">
       <label class="check" style="margin:0">
         <input type="checkbox" id="useLow"> Incluir
@@ -3766,52 +3859,303 @@ input[type=text]:focus{
     </span>
   </h2>
 
+
   <div class="serviceBody" id="bodyLow">
+
     <p style="font-size:13px;line-height:1.5">
-      • Preço base: <strong>R$ 40,00 por vitória</strong><br>
       • Serviço focado em <strong>entregar a conta sem Low Priority</strong><br>
-      • Quantidade representa o <strong>limite operacional</strong>
+      • Selecione abaixo a quantidade desejada para o serviço
     </p>
 
-    <label>Quantidade de vitórias contratadas (2 a 5)</label>
-    <input type="range" id="lowQty" min="2" max="5" step="1" value="2" disabled>
 
-    <div class="result" id="lowQtyView" style="display:none;"></div>
+    <!-- ========================================== -->
+    <!-- OPÇÕES DE LOW PRIORITY                     -->
+    <!-- ========================================== -->
 
-    <div class="servicePreviewBox" id="lowPreviewBox">
-      <img id="lowPreviewImg" src="medalhas/lowpriority.png" alt="Low Priority">
+    <div class="coachGrid lowPriorityGrid">
+
+  <!-- 2 PARTIDAS -->
+  <label
+    class="coachCard lowPriorityCard active"
+    id="lowCard2"
+    data-low-qty="2"
+  >
+
+    <input
+      type="radio"
+      name="lowPriorityMode"
+      id="lowMode2"
+      disabled
+      checked
+    >
+
+    <img
+      src="medalhas/lowpriority2.png"
+      alt="Low Priority 2"
+    >
+
+    <div class="coachCardTitle">
+      LOW PRIORITY
+    </div>
+
+    <div class="coachCardDesc">
+      <strong>2 partidas</strong><br>
+      R$ 80,00
+    </div>
+
+  </label>
+
+
+  <!-- 3 PARTIDAS -->
+  <label
+    class="coachCard lowPriorityCard"
+    id="lowCard3"
+    data-low-qty="3"
+  >
+
+    <input
+      type="radio"
+      name="lowPriorityMode"
+      id="lowMode3"
+      disabled
+    >
+
+    <img
+      src="medalhas/lowpriority3.png"
+      alt="Low Priority 3"
+    >
+
+    <div class="coachCardTitle">
+      LOW PRIORITY
+    </div>
+
+    <div class="coachCardDesc">
+
+      <span class="oldPrice">
+        R$ 120,00
+      </span><br>
+
+      <strong>3 partidas</strong><br>
+
+      <span class="promoPrice">
+        R$ 115,00
+      </span>
+
+    </div>
+
+  </label>
+
+
+  <!-- 4 PARTIDAS -->
+  <label
+    class="coachCard lowPriorityCard"
+    id="lowCard4"
+    data-low-qty="4"
+  >
+
+    <input
+      type="radio"
+      name="lowPriorityMode"
+      id="lowMode4"
+      disabled
+    >
+
+    <img
+      src="medalhas/lowpriority4.png"
+      alt="Low Priority 4"
+    >
+
+    <div class="coachCardTitle">
+      LOW PRIORITY
+    </div>
+
+    <div class="coachCardDesc">
+
+      <span class="oldPrice">
+        R$ 160,00
+      </span><br>
+
+      <strong>4 partidas</strong><br>
+
+      <span class="promoPrice">
+        R$ 150,00
+      </span>
+
+    </div>
+
+  </label>
+
+
+  <!-- 5 PARTIDAS -->
+  <label
+    class="coachCard lowPriorityCard"
+    id="lowCard5"
+    data-low-qty="5"
+  >
+
+    <input
+      type="radio"
+      name="lowPriorityMode"
+      id="lowMode5"
+      disabled
+    >
+
+    <img
+      src="medalhas/lowpriority5.png"
+      alt="Low Priority 5"
+    >
+
+    <div class="coachCardTitle">
+      LOW PRIORITY
+    </div>
+
+    <div class="coachCardDesc">
+
+      <span class="oldPrice">
+        R$ 200,00
+      </span><br>
+
+      <strong>5 partidas</strong><br>
+
+      <span class="promoPrice">
+        R$ 180,00
+      </span>
+
+    </div>
+
+  </label>
+
+</div>
+
+
+    <!-- ========================================== -->
+    <!-- INPUT ANTIGO — MANTIDO PARA O SISTEMA     -->
+    <!-- ========================================== -->
+
+    <input
+      type="range"
+      id="lowQty"
+      min="2"
+      max="5"
+      step="1"
+      value="2"
+      disabled
+      style="display:none;"
+    >
+
+
+    <div
+      class="result"
+      id="lowQtyView"
+      style="display:none;"
+    ></div>
+
+
+    <!-- ========================================== -->
+    <!-- PRÉVIA DO SERVIÇO SELECIONADO             -->
+    <!-- ========================================== -->
+
+    <div
+      class="servicePreviewBox"
+      id="lowPreviewBox"
+    >
+
+      <!-- ESTA IMAGEM É SEMPRE lowpriority.png -->
+      <img
+        id="lowPreviewImg"
+        src="medalhas/lowpriority.png"
+        alt="Low Priority"
+      >
+
       <div class="servicePreviewText">
-        <span>Serviço selecionado</span>
-        <strong>Serviço de remoção de Low Priority</strong>
+
+        <span>
+          Serviço selecionado
+        </span>
+
+        <strong>
+          Serviço de remoção de Low Priority
+        </strong>
+
         <div id="lowPreviewDetails">
           Vitórias contratadas: 2
         </div>
+
       </div>
+
     </div>
 
 
+    <!-- ========================================== -->
+    <!-- OFF-STREAM                                -->
+    <!-- ========================================== -->
+
     <label class="check premiumCheck">
-  <input type="checkbox" id="lowOff" disabled>
-  <span id="lowOffText">Serviço com live off-stream?</span>
-</label>
+
+      <input
+        type="checkbox"
+        id="lowOff"
+        disabled
+      >
+
+      <span id="lowOffText">
+        Serviço com live off-stream?
+      </span>
+
+    </label>
+
+
+    <!-- ========================================== -->
+    <!-- SAIBA MAIS                                -->
+    <!-- ========================================== -->
 
     <details>
-      <summary>Saiba mais sobre a Low Priority</summary>
-      <p><strong>📘 Sobre o serviço de Low Priority</strong></p>
+
+      <summary>
+        Saiba mais sobre a Low Priority
+      </summary>
+
+      <p>
+        <strong>
+          📘 Sobre o serviço de Low Priority
+        </strong>
+      </p>
+
       <p>
         Este serviço tem como objetivo entregar a conta sem Low Priority.
-        A quantidade selecionada representa um limite operacional, usado
-        para garantir a execução correta do serviço.
+        A quantidade selecionada representa um limite operacional,
+        usado para garantir a execução correta do serviço.
       </p>
+
       <p>
-        A penalidade pode variar conforme histórico da conta e sistema do jogo.
-        Por isso, o serviço é focado em resultado final, não em número exato de partidas.
+        A penalidade pode variar conforme histórico da conta e sistema
+        do jogo. Por isso, o serviço é focado em resultado final,
+        não em número exato de partidas.
       </p>
+
     </details>
 
-    <div class="result" id="lowRes">Selecione as opções para ver o valor.</div>
-    <div class="alert" id="lowAlert"></div>
+
+    <!-- ========================================== -->
+    <!-- RESULTADO                                 -->
+    <!-- ========================================== -->
+
+    <div
+      class="result"
+      id="lowRes"
+    >
+      Selecione as opções para ver o valor.
+    </div>
+
+
+    <div
+      class="alert"
+      id="lowAlert"
+    ></div>
+
+
   </div>
+
 </div>
 
 
@@ -8874,6 +9218,136 @@ function updateLowPreview(){
 
   }
 
+
+  // ==============================
+  // DESTACA A OPÇÃO SELECIONADA
+  // ==============================
+
+  document
+  .querySelectorAll(".lowPriorityCard")
+    .forEach(option => {
+
+      const optionQty =
+        Number(
+          option.dataset.lowQty
+        );
+
+
+      option.classList.toggle(
+        "active",
+        optionQty === qty
+      );
+
+    });
+
+}
+
+function updateLowPreview(){
+
+  const qty =
+    Number(
+      $("lowQty")?.value || 2
+    );
+
+  const details =
+    $("lowPreviewDetails");
+
+  if(details){
+
+    details.innerHTML =
+      `Vitórias contratadas: ${qty}`;
+
+  }
+
+  document
+    .querySelectorAll(".lowPriorityOption")
+    .forEach(option => {
+
+      const optionQty =
+        Number(
+          option.dataset.lowQty
+        );
+
+      option.classList.toggle(
+        "active",
+        optionQty === qty
+      );
+
+    });
+
+}
+
+
+// COLE AQUI A NOVA FUNÇÃO
+function updateLowPriorityOptions(){
+
+  const options =
+    document.querySelectorAll(
+      ".lowPriorityCard"
+    );
+
+
+  options.forEach(option => {
+
+    option.addEventListener(
+      "click",
+      function(){
+
+        const qty =
+          Number(
+            this.dataset.lowQty
+          );
+
+
+        // Define a quantidade
+        const input =
+          $("lowQty");
+
+
+        if(input){
+
+          input.value =
+            qty;
+
+        }
+
+
+        // Atualiza os radios
+        options.forEach(item => {
+
+          const radio =
+            item.querySelector(
+              'input[type="radio"]'
+            );
+
+          if(radio){
+
+            radio.checked =
+              item === this;
+
+          }
+
+
+          item.classList.toggle(
+            "active",
+            item === this
+          );
+
+        });
+
+
+        // Atualiza a prévia
+        updateLowPreview();
+
+
+        // Atualiza os cálculos
+        updateAll();
+
+      }
+    );
+
+  });
+
 }
 
 
@@ -11538,6 +12012,10 @@ if(useDark && darkCard){
   atualizarDarkCard();
 
 }
+
+updateLowPriorityOptions();
+updateLowPreview();
+updateAll();
 
 
 
