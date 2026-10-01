@@ -9883,10 +9883,7 @@ if(
 
   else{
 
-    const valorFinalPorUnidade =
-      quantidade > 0
-        ? offValue / quantidade
-        : offValue;
+    
 
 
     if(quantidade > 1){
@@ -10484,17 +10481,17 @@ $("zapBtn").onclick = () => {
 
         if(quantidade > 1){
 
-          offLinesZap.push(
-            `* ${obj.offLabel}: ${quantidade} x ${money(valorOriginalPorUnidade)} = ${money(offOriginal)} → ${quantidade} x ${money(valorFinalPorUnidade)} = ${money(offValue)} (${percentual}% OFF)`
-          );
+  offLinesZap.push(
+    `* ${obj.offLabel}: ${quantidade} x ${money(valorOriginalPorUnidade)} = ~${money(offOriginal)}~ → ${money(offValue)} (${percentual}% OFF)`
+  );
 
-        }else{
+}else{
 
-          offLinesZap.push(
-            `* ${obj.offLabel}: ${money(offOriginal)} → ${money(offValue)} (${percentual}% OFF)`
-          );
+  offLinesZap.push(
+    `* ${obj.offLabel}: ~${money(offOriginal)}~ → ${money(offValue)} (${percentual}% OFF)`
+  );
 
-        }
+}
 
       }
 
