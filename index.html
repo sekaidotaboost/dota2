@@ -6589,35 +6589,33 @@ const base = calcTradBaseProgressivo(atual, desCalculo);
   }
 
   return {
-    selected: true,
-    ok: true,
+  selected: true,
+  ok: true,
 
-    baseValue,
-    offValue,
-    offLabel: "Boost Tradicional",
+  baseValue,
+  offValue,
+  offLabel: "Boost Tradicional",
 
-    total,
-    totalNoPromo,
-    tradSpend: baseValue,
+  total,
+  totalNoPromo,
+  tradSpend: baseValue,
 
-    superPromoApplied,
-    superPromoDiscount,
-    superPromoPct,
+  superPromoApplied,
+  superPromoDiscount,
+  superPromoPct,
 
-    text: `Boost Tradicional: +${delta} MMR | Total: ${money(baseValue)}`,
+  text: `Boost Tradicional: +${delta} MMR | Total: ${money(baseValue)}`,
 
-    details:
+  details:
 `🆙 BOOST TRADICIONAL
-• MMR atual: ${atual}
-• MMR desejado: ${desCalculo}
-• Quantidade: ${delta} MMR
-• Valor base: ${money(base)}
-• Desconto padrão do site: ${pct > 0 ? Math.round(pct * 100) + "% OFF" : "Nenhum"}
-• OFF SUPER PROMO: ${superPromoApplied ? Math.round(superPromoPct * 100) + "% OFF" : "Não"}
-• Valor do serviço: ${money(baseValue)}
-• Off stream: ${off ? money(offValue) : "Não"}
-• Total: ${money(total)}`
-  };
+* MMR atual: ${atual}
+* MMR desejado: ${desCalculo}
+* Quantidade: ${delta} MMR
+* Valor base: ${money(base)}
+* Desconto padrão do site: ${pct > 0 ? Math.round(pct * 100) + "% OFF" : "Nenhum"}
+* OFF SUPER PROMO: ${superPromoApplied ? Math.round(superPromoPct * 100) + "% OFF" : "Não"}
+* Valor do serviço: ${money(baseValue)}`
+};
 }
 
 
@@ -6698,26 +6696,25 @@ $("doubleRes").innerHTML =
    <strong>Total:</strong> <span class="newPrice">${money(total)}</span>`;
 
   return {
-    selected:true,
-    ok:true,
+  selected: true,
+  ok: true,
 
-    baseValue,
-    offOriginal,
-    offValue,
-    offLabel:"Double MMR",
+  baseValue,
+  offOriginal,
+  offValue,
+  offLabel: "Double MMR",
 
-    total,
-    totalNoPromo,
+  total,
+  totalNoPromo,
 
-    text:`Double MMR: ${days} dia(s) | Total: ${money(baseValue)}`,
-    details:
+  text: `Double MMR: ${days} dia(s) | Total: ${money(baseValue)}`,
+
+  details:
 `⚡ DOUBLE MMR
-• MMR inicial: ${mmrAtual}
-• Dias contratados: ${days}
-• Valor do serviço: ${money(baseValue)}
-• Off stream: ${off ? money(offValue) : "Não"}
-• Total: ${money(total)}`
-  };
+* MMR inicial: ${mmrAtual}
+* Dias contratados: ${days}
+* Valor do serviço: ${money(baseValue)}`
+};
 }
 
 
@@ -6807,8 +6804,8 @@ $("casualRes").innerHTML =
    <strong>Total:</strong> <span class="newPrice">${money(total)}</span>`;
 
 return {
-  selected:true,
-  ok:true,
+  selected: true,
+  ok: true,
 
   days,
 
@@ -6820,24 +6817,16 @@ return {
   offLabel: "Boost Casual",
 
   total,
-  totalNoPromo, // ✅ AGORA EXISTE
+  totalNoPromo,
 
-  text:`Boost Casual: ${days} dia(s) | Total: ${money(baseValue)}`,
+  text: `Boost Casual: ${days} dia(s) | Total: ${money(baseValue)}`,
+
   details:
 `💰 BOOST CASUAL
-• MMR atual: ${mmr}
-• Preço por dia: ${money(pricePerDay)}
-• Dias contratados: ${days}
-• Valor do serviço: ${money(baseValue)}
-• Off stream: ${
-  off
-    ? (offOriginal > 0 && offValue === 0
-        ? money(offOriginal) + " → Grátis"
-        : money(offValue))
-    : "Não"
-}
-• Total: ${money(total)}`
-
+* MMR atual: ${mmr}
+* Preço por dia: ${money(pricePerDay)}
+* Dias contratados: ${days}
+* Valor do serviço: ${money(baseValue)}`
 };
 
 
@@ -6914,35 +6903,27 @@ function calcRoleFarm(disableDiscounts = false){
      <strong>Total:</strong> <span class="newPrice">${money(total)}</span>`;
 
   return {
-    selected:true,
-    ok:true,
+  selected: true,
+  ok: true,
 
-    baseValue,
-    offValue,
-    offLabel:"Role Farm",
+  baseValue,
+  offValue,
+  offLabel: "Role Farm",
 
-    total,
-    totalNoPromo,
+  total,
+  totalNoPromo,
 
-    text:`Role Farm: ${days} dia(s) | Total: ${money(baseValue)}`,
+  text: `Role Farm: ${days} dia(s) | Total: ${money(baseValue)}`,
 
-    details:
+  details:
 `🎮 ROLE FARM
-• MMR atual: ${mmr}
-• Preço por dia: ${money(pricePerDay)}
-• Dias contratados: ${days}
-• Partidas: ${partidas}
-• • Fichas farmadas: ${fichasMin} até ${fichasMax}
-• Valor do serviço: ${money(baseValue)}
-• Off stream: ${
-  off
-    ? (offOriginal > 0 && offValue === 0
-        ? money(offOriginal) + " → Grátis"
-        : money(offValue))
-    : "Não"
-}
-• Total: ${money(total)}`
-  };
+* MMR atual: ${mmr}
+* Preço por dia: ${money(pricePerDay)}
+* Dias contratados: ${days}
+* Partidas: ${partidas}
+* Fichas farmadas: ${fichasMin} até ${fichasMax}
+* Valor do serviço: ${money(baseValue)}`
+};
 }
 
 function updateDarkPreview() {
@@ -7230,254 +7211,387 @@ function calcRecal(){
 
 
   // ==========================================
-  // RETORNO
-  // ==========================================
+// RETORNO
+// ==========================================
 
-  return {
+return {
+  selected: true,
+  ok: true,
 
-    selected:true,
+  baseValue,
+  extraGame,
+  extraGames,
+  extraGamesValue,
 
-    ok:true,
+  serviceValue,
+  existingService,
 
+  offOriginal,
+  offValue,
 
-    // Valor original da faixa
-    baseValue,
+  total,
+  totalNoPromo: total,
 
+  offLabel: "Recalibração",
 
-    // Preço de cada partida adicional
-    extraGame,
+  text:
+    `Recalibração (${packageGames} partidas) | Total: ${money(total)}`,
 
-
-    // Quantidade de partidas adicionais
-    extraGames,
-
-
-    // Valor total das partidas adicionais
-    extraGamesValue,
-
-
-    // Se já tinha serviço, fica 0
-    serviceValue,
-
-
-    // Informação se já tinha serviço
-    existingService,
-
-
-    // Off Stream
-    offOriginal,
-    offValue,
-
-
-    promoApplied:false,
-
-    offPromoText:"",
-
-    offLabel:"Recalibração",
-
-
-    // Total final
-    total,
-
-
-    // Total sem promoção
-    totalNoPromo:
-      serviceValue +
-      extraGamesValue +
-      offOriginal,
-
-      
-
-    // Texto resumido
-    text:
-      `Recalibração (${packageGames} partidas) | Total: ${money(total)}`,
-
-
-    // Detalhes para a comanda/pedido
-details:
+  details:
 `🔄 RECALIBRAÇÃO
-• MMR atual: ${mmr}
-• Pacote: ${packageGames} partidas
-• Valor do serviço: ${money(serviceValue)}
+* MMR atual: ${mmr}
+* Pacote: ${packageGames} partidas
+* Valor do serviço base: ${money(serviceValue)}
+
 ${
   extrasCheck
     ? (
         extraGames > 0
-          ? `• Partidas adicionais: ${extraGames} x ${money(extraGame)} = ${money(extraGamesValue)}`
-          : `• Partida adicional (caso necessário): ${money(extraGame)} por partida`
+          ? `➕ PARTIDA ADICIONAL
+* Partidas adicionais: ${extraGames} x ${money(extraGame)} = ${money(extraGamesValue)}`
+          : `➕ PARTIDA ADICIONAL
+* (Partida adicional caso necessário): ${money(extraGame)} por partida`
       )
     : ""
-}
-• Off Stream: ${off ? money(offValue) : "Não"}
-• Total: ${money(total)}`
+}`
 };
 
 }
+
 
 /* ========= Replay (CORRIGIDO) ========= */
+
 function calcReplay(disableDiscounts = false){
+
   if(!$("useReplay").checked){
-    $("repRes").innerHTML = "Preencha os dados para ver o valor.";
-    return { selected:false, ok:true, total:0, totalNoPromo:0 };
+
+    $("repRes").innerHTML =
+      "Preencha os dados para ver o valor.";
+
+    return {
+      selected:false,
+      ok:true,
+      total:0,
+      totalNoPromo:0
+    };
   }
 
-  const qtd  = clampInt(Number($("repQtd").value), 1, 999);
-  const dias = clampInt(Number($("repDias").value), 1, 999);
-  const off  = $("repOff").checked;
+
+  const qtd =
+    clampInt(
+      Number($("repQtd").value),
+      1,
+      999
+    );
+
+  const dias =
+    clampInt(
+      Number($("repDias").value),
+      1,
+      999
+    );
+
+  const off =
+    $("repOff").checked;
+
 
   if(qtd === null || dias === null){
-    $("repRes").innerHTML = "Dados inválidos.";
-    return { selected:true, ok:false, total:0, totalNoPromo:0 };
+
+    $("repRes").innerHTML =
+      "Dados inválidos.";
+
+    return {
+      selected:true,
+      ok:false,
+      total:0,
+      totalNoPromo:0
+    };
   }
 
-  const porDia = Math.ceil(qtd / dias);
+
+  const porDia =
+    Math.ceil(qtd / dias);
+
 
   if(porDia > 6){
-    $("repRes").innerHTML = "<strong>Preço: INVÁLIDO</strong>";
-    $("repAlert").textContent = "🔴 Máximo de 6 análises por dia.";
-    return { selected:true, ok:false, total:0, totalNoPromo:0 };
+
+    $("repRes").innerHTML =
+      "<strong>Preço: INVÁLIDO</strong>";
+
+    $("repAlert").textContent =
+      "🔴 Máximo de 6 análises por dia.";
+
+    return {
+      selected:true,
+      ok:false,
+      total:0,
+      totalNoPromo:0
+    };
   }
 
-  /* 🔹 SERVIÇO */
-  let baseNoPromo = qtd * 50;
-let baseValue = baseNoPromo;
-let descontoReplay = 0;
 
-// 🔥 DESCONTO POR VOLUME (2 ou 3 análises no mesmo dia)
-if(!disableDiscounts && porDia >= 2 && porDia <= 3){
-  baseValue = qtd * 40; // preço com desconto
-  descontoReplay = baseNoPromo - baseValue;
-}
+  /* =========================
+     SERVIÇO
+     ========================= */
 
-  let promoApplied = false;
+  let baseNoPromo =
+    qtd * 50;
 
-    if(
-  !disableDiscounts &&
-  activePromo === null &&
-  $("useCoach").checked &&
-  $("coachP1").checked &&
-  qtd === 1
-){
-  baseValue = qtd * 40; // 20% OFF
-  promoApplied = true;
-  activePromo = "Coach + Replay";
-  promoMessage = "🔥 Desconto da promoção Coach + Replay ativada.";
-}
+  let baseValue =
+    baseNoPromo;
+
+  let descontoReplay =
+    0;
 
 
-  /* 🔹 OFF STREAM */
-  let offOriginal = 0;
-  let offValue = 0;
-  let offPromoText = "";
+  // 🔥 DESCONTO POR VOLUME
+  if(
+    !disableDiscounts &&
+    porDia >= 2 &&
+    porDia <= 3
+  ){
+
+    baseValue =
+      qtd * 40;
+
+    descontoReplay =
+      baseNoPromo - baseValue;
+  }
+
+
+  let promoApplied =
+    false;
+
+
+  // 🔥 COACH + REPLAY
+  if(
+    !disableDiscounts &&
+    activePromo === null &&
+    $("useCoach").checked &&
+    $("coachP1").checked &&
+    qtd === 1
+  ){
+
+    baseValue =
+      qtd * 40;
+
+    promoApplied =
+      true;
+
+    activePromo =
+      "Coach + Replay";
+
+    promoMessage =
+      "🔥 Desconto da promoção Coach + Replay ativada.";
+  }
+
+
+  /* =========================
+     OFF STREAM
+     ========================= */
+
+  let offOriginal =
+    0;
+
+  let offValue =
+    0;
+
+  let offPromoText =
+    "";
+
 
   if(off){
-  offOriginal = dias * (porDia > 3 ? 20 : 10);
 
-  if(!disableDiscounts && porDia <= 3){
-    offValue = dias * 10;
-    offPromoText = "Promoção: até 3 análises por dia";
-  }else{
-    offValue = offOriginal;
+    offOriginal =
+      dias * (
+        porDia > 3
+          ? 20
+          : 10
+      );
+
+
+    if(
+      !disableDiscounts &&
+      porDia <= 3
+    ){
+
+      offValue =
+        dias * 10;
+
+      offPromoText =
+        "Promoção: até 3 análises por dia";
+
+    }else{
+
+      offValue =
+        offOriginal;
+
+    }
+
   }
-}
 
-  const total = baseValue + offValue;
-  const totalNoPromo = baseNoPromo + offOriginal;
+
+  /* =========================
+     TOTAL
+     ========================= */
+
+  const total =
+    baseValue +
+    offValue;
+
+  const totalNoPromo =
+    baseNoPromo +
+    offOriginal;
+
+
+  /* =========================
+     RESULTADO NA TELA
+     ========================= */
 
   let replayHTML = `
-  <strong>Análises:</strong> ${qtd}<br>
-  <strong>Dias:</strong> ${dias}<br>
-`;
+    <strong>Análises:</strong>
+    ${qtd}<br>
 
-if(descontoReplay > 0){
-  const pct = Math.round((descontoReplay / baseNoPromo) * 100);
+    <strong>Dias:</strong>
+    ${dias}<br>
+  `;
+
+
+  if(descontoReplay > 0){
+
+    const pct =
+      Math.round(
+        (descontoReplay / baseNoPromo) * 100
+      );
+
+
+    replayHTML += `
+      <strong>Valor base:</strong>
+      ${money(baseNoPromo)}<br>
+
+      <strong>Desconto aplicado:</strong>
+      🔥 ${pct}% OFF<br>
+
+      <strong>Valor com desconto:</strong>
+      <span class="newPrice">
+        ${money(baseValue)}
+      </span><br>
+    `;
+
+  }else{
+
+    replayHTML += `
+      <strong>Valor do serviço:</strong>
+      ${money(baseValue)}<br>
+    `;
+
+  }
+
 
   replayHTML += `
-    <strong>Valor base:</strong> ${money(baseNoPromo)}<br>
-    <strong>Desconto aplicado:</strong> 🔥 ${pct}% OFF<br>
-    <strong>Valor com desconto:</strong> <span class="newPrice">${money(baseValue)}</span><br>
+    <strong>Off stream:</strong>
+    ${off ? money(offValue) : money(0)}<br>
+
+    <strong>Total:</strong>
+    <span class="newPrice">
+      ${money(total)}
+    </span>
   `;
-}else{
-  replayHTML += `
-    <strong>Valor do serviço:</strong> ${money(baseValue)}<br>
-  `;
-}
 
-replayHTML += `
-  <strong>Off stream:</strong> ${off ? money(offValue) : money(0)}<br>
-  <strong>Total:</strong> <span class="newPrice">${money(total)}</span>
-`;
 
-$("repRes").innerHTML = replayHTML;
+  $("repRes").innerHTML =
+    replayHTML;
 
+
+  /* =========================
+     RETORNO
+     ========================= */
 
   return {
-  selected:true,
-  ok:true,
 
-  qtd,
-  dias,
+    selected:true,
+    ok:true,
 
-  baseValue,
-  offOriginal,
-  offValue,
-  offLabel: "Replay",
+    qtd,
+    dias,
 
-  total,
-  totalNoPromo,
+    baseValue,
+    offOriginal,
+    offValue,
 
-  descontoReplay, // 🔥 NOVO
+    offLabel:
+      "Replay",
 
-  text:`Replay: ${qtd} análise(s) divididos em ${dias} dia(s) | Total: ${money(baseValue)}`,
+    total,
+    totalNoPromo,
 
- details:
+    descontoReplay,
+
+    text:
+      `Replay: ${qtd} análise(s) divididos em ${dias} dia(s) | Total: ${money(baseValue)}`,
+
+    details:
 `📊 ANÁLISE DE REPLAY
-• Análises: ${qtd}
-• Dias: ${dias}
-• Valor base: ${money(baseNoPromo)}
-${descontoReplay > 0 
-  ? `• Desconto aplicado: 🔥 ${Math.round((descontoReplay / baseNoPromo) * 100)}% OFF`
-  : `• Desconto aplicado: Nenhum`}
-• Valor com desconto: ${money(baseValue)}
-• Off stream: ${off ? money(offValue) : "R$ 0,00"}
-• Total: ${money(total)}`
-
-};
-
-
+* Análises: ${qtd}
+* Dias: ${dias}
+* Valor base: ${money(baseNoPromo)}
+${
+  descontoReplay > 0
+    ? `* Desconto aplicado: 🔥 ${Math.round((descontoReplay / baseNoPromo) * 100)}% OFF
+* Valor com desconto: ${money(baseValue)}`
+    : `* Desconto aplicado: Nenhum
+* Valor do serviço: ${money(baseValue)}`
+}`
+  };
 
 }
 
 
 /* ========= Coach ========= */
 
-function calcCoach(tradEligible, disableDiscounts = false){
+function calcCoach(
+  tradEligible,
+  disableDiscounts = false
+){
 
   if(!$("useCoach").checked){
 
     $("coachRes").innerHTML =
       "Selecione as opções para ver o valor.";
 
-    $("coachAlert").textContent = "";
+    $("coachAlert").textContent =
+      "";
 
     return {
+
       selected:false,
       ok:true,
+
       total:0,
       totalNoPromo:0,
+
       text:"",
+
       coachDiscount:0
     };
   }
 
 
-  const p1 = $("coachP1").checked;
-  const p2 = $("coachP2").checked;
+  const p1 =
+    $("coachP1").checked;
 
-  $("coachAlert").textContent = "";
+  const p2 =
+    $("coachP2").checked;
 
 
-  /* Parte 2 sem Parte 1 */
+  $("coachAlert").textContent =
+    "";
+
+
+  /* =========================
+     PARTE 2 SEM PARTE 1
+     ========================= */
+
   if(p2 && !p1){
 
     $("coachAlert").textContent =
@@ -7489,11 +7603,14 @@ function calcCoach(tradEligible, disableDiscounts = false){
      VALOR BASE
      ========================= */
 
-  let base = 0;
+  let base =
+    0;
+
 
   if(p1){
     base += 200;
   }
+
 
   if(p2){
     base += 200;
@@ -7505,7 +7622,9 @@ function calcCoach(tradEligible, disableDiscounts = false){
      50% OFF NA PARTE 2
      ========================= */
 
-  let disc = 0;
+  let disc =
+    0;
+
 
   if(
     !disableDiscounts &&
@@ -7514,13 +7633,16 @@ function calcCoach(tradEligible, disableDiscounts = false){
     tradEligible
   ){
 
-    disc = 100;
+    disc =
+      100;
   }
 
 
-  const total = base - disc;
+  const total =
+    base - disc;
 
-  const totalNoPromo = base;
+  const totalNoPromo =
+    base;
 
 
   /* =========================
@@ -7547,6 +7669,10 @@ function calcCoach(tradEligible, disableDiscounts = false){
      <strong>Total:</strong> ${money(total)}`;
 
 
+  /* =========================
+     RETORNO
+     ========================= */
+
   return {
 
     selected:true,
@@ -7560,302 +7686,485 @@ function calcCoach(tradEligible, disableDiscounts = false){
 
     details:
 `🎓 COACH
-• Parte 1: ${p1 ? "Sim" : "Não"}
-• Parte 2: ${p2 ? "Sim" : "Não"}
-• Valor base: ${money(base)}
-• Promoção existente: ${disc > 0 ? "- " + money(disc) : "Nenhuma"}
-• Total: ${money(total)}`
+* Parte 1: ${p1 ? "Sim" : "Não"}
+* Parte 2: ${p2 ? "Sim" : "Não"}
+* Valor base: ${money(base)}
+* Promoção existente: ${disc > 0 ? "- " + money(disc) : "Nenhuma"}
+* Valor do serviço: ${money(total)}`
   };
+
 }
 
 
 /* ========= Combo controlado ========= */
-function comboCasualReplay(cas, rep, disableDiscounts = false){
+
+function comboCasualReplay(
+  cas,
+  rep,
+  disableDiscounts = false
+){
 
   // 🔥 Combo: Boost Casual + Replay
   if(
     !disableDiscounts &&
     activePromo === null &&
-    cas.selected && cas.ok &&
-    rep.selected && rep.ok &&
+    cas.selected &&
+    cas.ok &&
+    rep.selected &&
+    rep.ok &&
     cas.days === 1 &&
     rep.qtd === 2 &&
     rep.dias === 1
   ){
-    activePromo = "Boost Casual + Replay";
-    promoMessage = "🔥 Desconto da promoção Boost Casual + Replay ativada.";
+
+    activePromo =
+      "Boost Casual + Replay";
+
+    promoMessage =
+      "🔥 Desconto da promoção Boost Casual + Replay ativada.";
 
     return {
-      active: true,
-      delta: -10
+
+      active:true,
+      delta:-10
+
     };
   }
 
+
   return {
-    active: false,
-    delta: 0
+
+    active:false,
+    delta:0
+
   };
 }
 
 
 function offBoostPerDay(){
-  return 20; // valor padrão
+
+  return 20;
+
 }
 
+
+/* ========= Low Priority ========= */
 
 function calcLowPriority(){
+
   if(!$("useLow").checked){
-    $("lowRes").innerHTML = "Selecione as opções para ver o valor.";
-    $("lowAlert").textContent = "";
-    $("lowQtyView").innerHTML = `Vitórias contratadas: <strong>${$("lowQty").value}</strong>`;
+
+    $("lowRes").innerHTML =
+      "Selecione as opções para ver o valor.";
+
+    $("lowAlert").textContent =
+      "";
+
+    $("lowQtyView").innerHTML =
+      `Vitórias contratadas: <strong>${$("lowQty").value}</strong>`;
+
     return {
+
       selected:false,
       ok:true,
+
       total:0,
       totalNoPromo:0,
+
       text:"",
       details:"",
+
       blocksDiscounts:false
     };
   }
 
-  const qty = clampInt(Number($("lowQty").value), 2, 5);
-  const off = $("lowOff").checked;
 
-  $("lowAlert").textContent = "";
-  $("lowQtyView").innerHTML = `Vitórias contratadas: <strong>${qty}</strong>`;
+  const qty =
+    clampInt(
+      Number($("lowQty").value),
+      2,
+      5
+    );
+
+  const off =
+    $("lowOff").checked;
+
+
+  $("lowAlert").textContent =
+    "";
+
+  $("lowQtyView").innerHTML =
+    `Vitórias contratadas: <strong>${qty}</strong>`;
+
 
   if(qty === null){
-    $("lowRes").innerHTML = "<strong>Preço: INVÁLIDO</strong>";
-    $("lowAlert").textContent = "🔴 Quantidade inválida.";
+
+    $("lowRes").innerHTML =
+      "<strong>Preço: INVÁLIDO</strong>";
+
+    $("lowAlert").textContent =
+      "🔴 Quantidade inválida.";
+
     return {
+
       selected:true,
       ok:false,
+
       total:0,
       totalNoPromo:0,
+
       text:"",
       details:"",
+
       blocksDiscounts:true
     };
   }
 
-  let baseOriginal = qty * 40;
-  let baseValue = baseOriginal;
-  let discountPct = 0;
-  let discountValue = 0;
+
+  let baseOriginal =
+    qty * 40;
+
+  let baseValue =
+    baseOriginal;
+
+  let discountPct =
+    0;
+
+  let discountValue =
+    0;
+
 
   if(qty === 3){
-    baseValue = 115;
-    discountPct = 4;
+
+    baseValue =
+      115;
+
+    discountPct =
+      4;
+
   }else if(qty === 4){
-    baseValue = 150;
-    discountPct = 6;
+
+    baseValue =
+      150;
+
+    discountPct =
+      6;
+
   }else if(qty === 5){
-    baseValue = 180;
-    discountPct = 10;
+
+    baseValue =
+      180;
+
+    discountPct =
+      10;
+
   }
 
-  discountValue = baseOriginal - baseValue;
 
-  const offValue = off ? 20 : 0;
-  const total = baseValue + offValue;
-  const totalNoPromo = baseOriginal + offValue;
+  discountValue =
+    baseOriginal -
+    baseValue;
+
+
+  const offValue =
+    off
+      ? 20
+      : 0;
+
+
+  const total =
+    baseValue +
+    offValue;
+
+
+  const totalNoPromo =
+    baseOriginal +
+    offValue;
+
+
+  /* =========================
+     RESULTADO NA TELA
+     ========================= */
 
   let html = `
-    <strong>Vitórias contratadas:</strong> ${qty}<br>
+    <strong>Vitórias contratadas:</strong>
+    ${qty}<br>
   `;
+
 
   if(discountPct > 0){
+
     html += `
-      <strong>Valor base:</strong> <span class="oldPrice">${money(baseOriginal)}</span><br>
-      <strong>Desconto aplicado:</strong> <span class="promoTag">🔥 ${discountPct}% OFF</span><br>
-      <strong>Valor com desconto:</strong> <span class="newPrice">${money(baseValue)}</span><br>
+      <strong>Valor base:</strong>
+      <span class="oldPrice">
+        ${money(baseOriginal)}
+      </span><br>
+
+      <strong>Desconto aplicado:</strong>
+      <span class="promoTag">
+        🔥 ${discountPct}% OFF
+      </span><br>
+
+      <strong>Valor com desconto:</strong>
+      <span class="newPrice">
+        ${money(baseValue)}
+      </span><br>
     `;
+
   }else{
+
     html += `
-      <strong>Valor do serviço:</strong> <span class="newPrice">${money(baseValue)}</span><br>
+      <strong>Valor do serviço:</strong>
+      <span class="newPrice">
+        ${money(baseValue)}
+      </span><br>
     `;
+
   }
 
+
   html += `
-    <strong>Off stream:</strong> ${off ? money(offValue) : money(0)}<br>
-    <strong>Total:</strong> <span class="newPrice">${money(total)}</span>
+    <strong>Off stream:</strong>
+    ${off ? money(offValue) : money(0)}<br>
+
+    <strong>Total:</strong>
+    <span class="newPrice">
+      ${money(total)}
+    </span>
   `;
 
-  $("lowRes").innerHTML = html;
+
+  $("lowRes").innerHTML =
+    html;
+
+
+  /* =========================
+     RETORNO
+     ========================= */
 
   return {
+
     selected:true,
     ok:true,
+
     total,
     totalNoPromo,
+
     baseValue,
     offValue,
-    offLabel: "Low Priority",
+
+    offLabel:
+      "Low Priority",
+
     discountPct,
     discountValue,
-    text:`Low Priority: ${qty} vitória(s) | Total: ${money(total)}`,
+
+    text:
+      `Low Priority: ${qty} vitória(s) | Total: ${money(total)}`,
+
     details:
 `🚫 LOW PRIORITY
-• Serviço: Remoção de Low Priority
-• Vitórias contratadas: ${qty}
-• Valor base: ${money(baseOriginal)}
-• Desconto aplicado: ${discountPct > 0 ? discountPct + "% OFF" : "Nenhum"}
-• Valor do serviço: ${money(baseValue)}
-• Off stream: ${off ? money(offValue) : "Não"}
-• Total: ${money(total)}`,
+* Serviço: Remoção de Low Priority
+* Vitórias contratadas: ${qty}
+* Valor base: ${money(baseOriginal)}
+* Desconto aplicado: ${discountPct > 0 ? discountPct + "% OFF" : "Nenhum"}
+* Valor do serviço: ${money(baseValue)}`,
+
     blocksDiscounts:true
   };
+
 }
+
 
 /* ========= Turbo Evento de XP ========= */
+
 function formatXP(v){
-  return v.toLocaleString("pt-BR") + " XP";
+
+  return v.toLocaleString("pt-BR") +
+    " XP";
+
 }
 
+
 function calcTurboXP(){
+
   if(!$("useTurbo").checked){
-    $("turboRes").innerHTML = "Selecione as opções para ver o valor.";
-    $("turboAlert").textContent = "";
-    $("turboSimRes").innerHTML = "A simulação de XP aparecerá aqui.";
+
+    $("turboRes").innerHTML =
+      "Selecione as opções para ver o valor.";
+
+    $("turboAlert").textContent =
+      "";
+
+    $("turboSimRes").innerHTML =
+      "A simulação de XP aparecerá aqui.";
+
     return {
+
       selected:false,
       ok:true,
+
       total:0,
       totalNoPromo:0,
+
       text:"",
       details:"",
+
       blocksDiscounts:false
     };
   }
 
-  const days = clampInt(Number($("turboDays").value), 1, 30);
-  const off = $("turboOff").checked;
 
-  const wins = clampInt(Number($("turboWins").value), 1, 8);
-  const simDays = clampInt(Number($("turboSimDays").value), 1, 30);
+  const days =
+    clampInt(
+      Number($("turboDays").value),
+      1,
+      30
+    );
 
-  $("turboWinsTxt").textContent = wins ?? 1;
-  $("turboSimDaysTxt").textContent = simDays ?? 1;
-  $("turboAlert").textContent = "";
+  const off =
+    $("turboOff").checked;
+
+  const wins =
+    clampInt(
+      Number($("turboWins").value),
+      1,
+      8
+    );
+
+  const simDays =
+    clampInt(
+      Number($("turboSimDays").value),
+      1,
+      30
+    );
+
+
+  $("turboWinsTxt").textContent =
+    wins ?? 1;
+
+  $("turboSimDaysTxt").textContent =
+    simDays ?? 1;
+
+  $("turboAlert").textContent =
+    "";
+
 
   if(days === null){
-    $("turboRes").innerHTML = "<strong>Preço: INVÁLIDO</strong>";
-    $("turboAlert").textContent = "🔴 Dias inválidos.";
+
+    $("turboRes").innerHTML =
+      "<strong>Preço: INVÁLIDO</strong>";
+
+    $("turboAlert").textContent =
+      "🔴 Dias inválidos.";
+
     return {
+
       selected:true,
       ok:false,
+
       total:0,
       totalNoPromo:0,
+
       text:"",
       details:"",
+
       blocksDiscounts:true
     };
   }
 
-  const PRICE_DAY = 100;
-  const OFF_DAY = 20;
-  const XP_WIN = 425;
-  const XP_LOSS = 175;
 
-  const base = days * PRICE_DAY;
-  const offValue = off ? days * OFF_DAY : 0;
-  const total = base + offValue;
+  const PRICE_DAY =
+    100;
+
+  const OFF_DAY =
+    20;
+
+  const XP_WIN =
+    425;
+
+  const XP_LOSS =
+    175;
+
+
+  const base =
+    days * PRICE_DAY;
+
+  const offValue =
+    off
+      ? days * OFF_DAY
+      : 0;
+
+  const total =
+    base + offValue;
+
+
+  /* =========================
+     RESULTADO NA TELA
+     ========================= */
 
   $("turboRes").innerHTML = `
-    <strong>📆 Dias contratados:</strong> ${days}<br>
-    <strong>🎮 Total de jogos:</strong> ${days * 8}<br>
-    <strong>Off stream:</strong> ${off ? money(offValue) : money(0)}<br>
+    <strong>📆 Dias contratados:</strong>
+    ${days}<br>
+
+    <strong>🎮 Total de jogos:</strong>
+    ${days * 8}<br>
+
+    <strong>Off stream:</strong>
+    ${off ? money(offValue) : money(0)}<br>
+
     <div class="hr"></div>
-    <strong>Total:</strong> <span class="newPrice">${money(total)}</span>
+
+    <strong>Total:</strong>
+    <span class="newPrice">
+      ${money(total)}
+    </span>
   `;
 
-  const losses = 8 - wins;
-  const xpWins = wins * XP_WIN * simDays;
-  const xpLoss = losses * XP_LOSS * simDays;
-  const xpTotal = xpWins + xpLoss;
+
+  /* =========================
+     SIMULAÇÃO DE XP
+     ========================= */
+
+  const losses =
+    8 - wins;
+
+  const xpWins =
+    wins *
+    XP_WIN *
+    simDays;
+
+  const xpLoss =
+    losses *
+    XP_LOSS *
+    simDays;
+
+  const xpTotal =
+    xpWins +
+    xpLoss;
+
 
   $("turboSimRes").innerHTML = `
-    <strong>XP com vitórias:</strong> ${formatXP(xpWins)}<br>
-    <strong>XP com derrotas:</strong> ${formatXP(xpLoss)}<br>
+    <strong>XP com vitórias:</strong>
+    ${formatXP(xpWins)}<br>
+
+    <strong>XP com derrotas:</strong>
+    ${formatXP(xpLoss)}<br>
+
     <div class="hr"></div>
-    <strong>Total estimado de XP:</strong> <span class="newPrice">${formatXP(xpTotal)}</span>
+
+    <strong>Total estimado de XP:</strong>
+    <span class="newPrice">
+      ${formatXP(xpTotal)}
+    </span>
   `;
+
+
+  /* =========================
+     RETORNO
+     ========================= */
 
   return {
-    selected:true,
-    ok:true,
-    total,
-    totalNoPromo: total,
-    baseValue: base,
-    offValue,
-    offLabel: "Turbo Evento de XP",
-    text:`Turbo Evento de XP: ${days} dia(s) | Total: ${money(total)}`,
-    details:
-`⚡ TURBO EVENTO DE XP
-• Dias: ${days}
-• Jogos: ${days * 8}
-• Valor do serviço: ${money(base)}
-• Off stream: ${off ? money(offValue) : "Não"}
-• Total: ${money(total)}`,
-    blocksDiscounts:true
-  };
-}
-
-  /* ========= Dark Carnival ========= */
-function calcDarkCarnival(){
-
-  if(!$("useDark").checked){
-    $("darkRes").innerHTML = "Selecione as opções para ver o valor.";
-    $("darkAlert").textContent = "";
-
-    return{
-      selected:false,
-      ok:true,
-      total:0,
-      totalNoPromo:0,
-      text:"",
-      details:"",
-      blocksDiscounts:true
-    };
-  }
-
-  const days = clampInt(Number($("darkDays").value),1,30);
-  const off = false;
-
-  $("darkAlert").textContent = "";
-
-  if(days === null){
-
-    $("darkRes").innerHTML = "<strong>Preço: INVÁLIDO</strong>";
-    $("darkAlert").textContent = "🔴 Quantidade de diárias inválida.";
-
-    return{
-      selected:true,
-      ok:false,
-      total:0,
-      totalNoPromo:0,
-      text:"",
-      details:"",
-      blocksDiscounts:true
-    };
-  }
-
-  const PRICE_DAY = 100;
-
-const base = days * PRICE_DAY;
-const total = base;
-
-  $("darkRes").innerHTML = `
-    <strong>📆 Diárias contratadas:</strong> ${days}<br>
-    <strong>🎮 Total de partidas:</strong> ${days*8}<br>
-    <strong>🎟️ Bilhetes por vitória:</strong> 2<br>
-<div class="hr"></div>
-    <strong>Total:</strong>
-    <span class="newPrice">${money(total)}</span>
-  `;
-
-  return{
 
     selected:true,
     ok:true,
@@ -7863,80 +8172,282 @@ const total = base;
     total,
     totalNoPromo:total,
 
-    baseValue: base,
-offValue: 0,
+    baseValue:base,
+    offValue,
 
-offLabel: "",
+    offLabel:
+      "Turbo Evento de XP",
 
-    text:`Dark Carnival: ${days} diária(s) | Total: ${money(total)}`,
+    text:
+      `Turbo Evento de XP: ${days} dia(s) | Total: ${money(total)}`,
+
+    details:
+`⚡ TURBO EVENTO DE XP
+* Dias: ${days}
+* Jogos: ${days * 8}
+* Valor do serviço: ${money(base)}`,
+
+    blocksDiscounts:true
+  };
+
+}
+
+
+/* ========= Dark Carnival ========= */
+
+function calcDarkCarnival(){
+
+  if(!$("useDark").checked){
+
+    $("darkRes").innerHTML =
+      "Selecione as opções para ver o valor.";
+
+    $("darkAlert").textContent =
+      "";
+
+    return {
+
+      selected:false,
+      ok:true,
+
+      total:0,
+      totalNoPromo:0,
+
+      text:"",
+      details:"",
+
+      blocksDiscounts:true
+    };
+  }
+
+
+  const days =
+    clampInt(
+      Number($("darkDays").value),
+      1,
+      30
+    );
+
+  const off =
+    false;
+
+
+  $("darkAlert").textContent =
+    "";
+
+
+  if(days === null){
+
+    $("darkRes").innerHTML =
+      "<strong>Preço: INVÁLIDO</strong>";
+
+    $("darkAlert").textContent =
+      "🔴 Quantidade de diárias inválida.";
+
+    return {
+
+      selected:true,
+      ok:false,
+
+      total:0,
+      totalNoPromo:0,
+
+      text:"",
+      details:"",
+
+      blocksDiscounts:true
+    };
+  }
+
+
+  const PRICE_DAY =
+    100;
+
+
+  const base =
+    days * PRICE_DAY;
+
+  const total =
+    base;
+
+
+  /* =========================
+     RESULTADO NA TELA
+     ========================= */
+
+  $("darkRes").innerHTML = `
+    <strong>📆 Diárias contratadas:</strong>
+    ${days}<br>
+
+    <strong>🎮 Total de partidas:</strong>
+    ${days * 8}<br>
+
+    <strong>🎟️ Bilhetes por vitória:</strong>
+    2<br>
+
+    <div class="hr"></div>
+
+    <strong>Total:</strong>
+    <span class="newPrice">
+      ${money(total)}
+    </span>
+  `;
+
+
+  /* =========================
+     RETORNO
+     ========================= */
+
+  return {
+
+    selected:true,
+    ok:true,
+
+    total,
+    totalNoPromo:total,
+
+    baseValue:base,
+    offValue:0,
+
+    offLabel:"",
+
+    text:
+      `Dark Carnival: ${days} diária(s) | Total: ${money(total)}`,
 
     details:
 `🎴 FARM DE BILHETES - DARK CARNIVAL
-• Diárias: ${days}
-• Partidas: ${days * 8}
-• Valor do serviço: ${money(total)}
+* Diárias: ${days}
+* Partidas: ${days * 8}
+* Valor do serviço: ${money(total)}
 
-Observação:
-• Serviço vendido por diária.
-• Cada diária inclui 8 partidas de Turbo.
-• Cada vitória concede 2 bilhetes.
-• Não há garantia de vitórias.
-• Não é possível escolher heróis.
-• Os bilhetes obtidos são aleatórios.`,
+📌 OBSERVAÇÕES
+* Serviço vendido por diária.
+* Cada diária inclui 8 partidas de Turbo.
+* Cada vitória concede 2 bilhetes.
+* Não há garantia de vitórias.
+* Não é possível escolher heróis.
+* Os bilhetes obtidos são aleatórios.`,
 
     blocksDiscounts:true
 
   };
 
 }
+
+
 function updateDoublePreview(){
-  const mmr = Number($("doubleMMR")?.value || 0);
-  const rank = getRankByMMR(mmr);
+
+  const mmr =
+    Number(
+      $("doubleMMR")?.value || 0
+    );
+
+  const rank =
+    getRankByMMR(mmr);
+
 
   if($("doublePreviewImg")){
-    $("doublePreviewImg").src = rank.img;
-    $("doublePreviewImg").alt = rank.fullLabel;
+
+    $("doublePreviewImg").src =
+      rank.img;
+
+    $("doublePreviewImg").alt =
+      rank.fullLabel;
+
   }
+
 
   if($("doublePreviewText")){
-    $("doublePreviewText").textContent = rank.fullLabel;
+
+    $("doublePreviewText").textContent =
+      rank.fullLabel;
+
   }
+
 }
+
 
 function updateReplayPreview(){
-  const qtd = Number($("repQtd")?.value || 1);
-  const dias = Number($("repDias")?.value || 1);
 
-  const img = $("replayPreviewImg");
-  const text = $("replayPreviewText");
+  const qtd =
+    Number(
+      $("repQtd")?.value || 1
+    );
 
-  if(!img || !text) return;
+  const dias =
+    Number(
+      $("repDias")?.value || 1
+    );
 
-  const porDia = Math.ceil(qtd / dias);
 
-  if(porDia >= 2 && porDia <= 3){
-    img.src = "medalhas/repleypromo.png";
-    text.textContent = "Replay com promoção";
+  const img =
+    $("replayPreviewImg");
+
+  const text =
+    $("replayPreviewText");
+
+
+  if(!img || !text)
+    return;
+
+
+  const porDia =
+    Math.ceil(qtd / dias);
+
+
+  if(
+    porDia >= 2 &&
+    porDia <= 3
+  ){
+
+    img.src =
+      "medalhas/repleypromo.png";
+
+    text.textContent =
+      "Replay com promoção";
+
   }else{
-    img.src = "medalhas/repley.png";
-    text.textContent = "Análise de Replay";
+
+    img.src =
+      "medalhas/repley.png";
+
+    text.textContent =
+      "Análise de Replay";
+
   }
+
 }
 
+
 function updateTurboPreview(){
-  const days = Number($("turboDays")?.value || 1);
 
-  const totalJogos = days * 8;
-  const xpAproximado = days * 2900;
+  const days =
+    Number(
+      $("turboDays")?.value || 1
+    );
 
-  const details = $("turboPreviewDetails");
+
+  const totalJogos =
+    days * 8;
+
+  const xpAproximado =
+    days * 2900;
+
+
+  const details =
+    $("turboPreviewDetails");
+
 
   if(details){
+
     details.innerHTML =
       `Total de jogos: ${totalJogos}<br>
        XP aproximadamente de: ${xpAproximado.toLocaleString("pt-BR")} XP`;
+
   }
+
 }
+
 
 function updateCasualPreview(){
 
@@ -7944,19 +8455,32 @@ function updateCasualPreview(){
   // MMR / MEDALHA
   // ==============================
 
-  const mmr = Number($("casualMMR")?.value || 0);
+  const mmr =
+    Number(
+      $("casualMMR")?.value || 0
+    );
 
-  const medalImg = $("casualMedalPreviewImg");
-  const medalText = $("casualMedalPreviewText");
+
+  const medalImg =
+    $("casualMedalPreviewImg");
+
+  const medalText =
+    $("casualMedalPreviewText");
+
 
   if(medalImg && medalText){
 
-    const detected = getRankByMMR(mmr);
+    const detected =
+      getRankByMMR(mmr);
+
 
     if(detected){
 
-      medalImg.src = detected.img;
-      medalText.textContent = detected.fullLabel;
+      medalImg.src =
+        detected.img;
+
+      medalText.textContent =
+        detected.fullLabel;
 
     }
 
@@ -7967,11 +8491,19 @@ function updateCasualPreview(){
   // DIAS / PARTIDAS
   // ==============================
 
-  const days = Number($("casualDays")?.value || 1);
+  const days =
+    Number(
+      $("casualDays")?.value || 1
+    );
 
-  const partidas = days * 7;
 
-  const details = $("casualPreviewDetails");
+  const partidas =
+    days * 7;
+
+
+  const details =
+    $("casualPreviewDetails");
+
 
   if(details){
 
@@ -7983,103 +8515,210 @@ function updateCasualPreview(){
 
 }
 
+
 function updateCasualOffText(){
-  const mmr = Number($("casualMMR")?.value || 0);
-  const text = $("casualOffText");
 
-  if(!text) return;
+  const mmr =
+    Number(
+      $("casualMMR")?.value || 0
+    );
 
-  if(mmr >= 6501 && mmr <= 8500){
+  const text =
+    $("casualOffText");
+
+
+  if(!text)
+    return;
+
+
+  if(
+    mmr >= 6501 &&
+    mmr <= 8500
+  ){
+
     text.innerHTML = `
       Serviço com live off-stream
-      <span style="color:var(--success);font-weight:700;">GRÁTIS</span>?
+      <span style="color:var(--success);font-weight:700;">
+        GRÁTIS
+      </span>?
     `;
+
   }else{
+
     text.innerHTML = `
       Serviço com live off-stream com
-      <span style="color:var(--success);font-weight:700;">25% OFF</span>?
+      <span style="color:var(--success);font-weight:700;">
+        25% OFF
+      </span>?
     `;
+
   }
+
 }
+
 
 function updateRoleFarmOffText(){
-  const mmr = Number($("roleFarmMMR")?.value || 0);
-  const text = $("roleFarmOffText");
 
-  if(!text) return;
+  const mmr =
+    Number(
+      $("roleFarmMMR")?.value || 0
+    );
 
-  if(mmr >= 6501 && mmr <= 8500){
+  const text =
+    $("roleFarmOffText");
+
+
+  if(!text)
+    return;
+
+
+  if(
+    mmr >= 6501 &&
+    mmr <= 8500
+  ){
+
     text.innerHTML = `
       Serviço com live off-stream
-      <span style="color:var(--success);font-weight:700;">GRÁTIS</span>?
+      <span style="color:var(--success);font-weight:700;">
+        GRÁTIS
+      </span>?
     `;
+
   }else{
+
     text.innerHTML = `
       Serviço com live off-stream com
-      <span style="color:var(--success);font-weight:700;">25% OFF</span>?
+      <span style="color:var(--success);font-weight:700;">
+        25% OFF
+      </span>?
     `;
+
   }
+
 }
+
 
 function updateLowPreview(){
-  const qty = Number($("lowQty")?.value || 2);
-  const details = $("lowPreviewDetails");
+
+  const qty =
+    Number(
+      $("lowQty")?.value || 2
+    );
+
+
+  const details =
+    $("lowPreviewDetails");
+
 
   if(details){
-    details.innerHTML = `Vitórias contratadas: ${qty}`;
+
+    details.innerHTML =
+      `Vitórias contratadas: ${qty}`;
+
   }
+
 }
+
 
 function updateRecalCards(fromClick = false){
 
-  const c1 = $("recalCard1");
-  const c2 = $("recalCard2");
-  const c3 = $("recalCard3");
-  const c4 = $("recalCard4");
+  const c1 =
+    $("recalCard1");
 
-  const r1 = $("recalMode1");
-  const r2 = $("recalMode2");
-  const r3 = $("recalMode3");
-  const r4 = $("recalMode4");
+  const c2 =
+    $("recalCard2");
 
-  const mmrInput = $("recalMMR");
+  const c3 =
+    $("recalCard3");
 
-  if(!r1 || !r2 || !r3 || !r4 || !mmrInput) return;
+  const c4 =
+    $("recalCard4");
 
 
-  let mmr = Number(mmrInput.value || 0);
+  const r1 =
+    $("recalMode1");
+
+  const r2 =
+    $("recalMode2");
+
+  const r3 =
+    $("recalMode3");
+
+  const r4 =
+    $("recalMode4");
 
 
-  // Clique nos cards
+  const mmrInput =
+    $("recalMMR");
+
+
+  if(
+    !r1 ||
+    !r2 ||
+    !r3 ||
+    !r4 ||
+    !mmrInput
+  )
+    return;
+
+
+  let mmr =
+    Number(
+      mmrInput.value || 0
+    );
+
+
+  // ==============================
+  // CLIQUE NOS CARDS
+  // ==============================
+
   if(fromClick){
 
     if(r1.checked){
-      mmrInput.value = 1000;
-      mmr = 1000;
+
+      mmrInput.value =
+        1000;
+
+      mmr =
+        1000;
 
     }else if(r2.checked){
 
-      mmrInput.value = 3000;
-      mmr = 3000;
+      mmrInput.value =
+        3000;
+
+      mmr =
+        3000;
 
     }else if(r3.checked){
 
-      mmrInput.value = 5000;
-      mmr = 5000;
+      mmrInput.value =
+        5000;
+
+      mmr =
+        5000;
 
     }else if(r4.checked){
 
-      mmrInput.value = 6500;
-      mmr = 6500;
+      mmrInput.value =
+        6500;
+
+      mmr =
+        6500;
 
     }
 
 
   }else{
 
-    // Digitação manual do MMR
+    // ==============================
+    // DIGITAÇÃO MANUAL DO MMR
+    // ==============================
 
-    if(mmr >= 0 && mmr <= 2000){
+    if(
+      mmr >= 0 &&
+      mmr <= 2000
+    ){
 
       r1.checked = true;
       r2.checked = false;
@@ -8087,7 +8726,10 @@ function updateRecalCards(fromClick = false){
       r4.checked = false;
 
 
-    }else if(mmr >= 2001 && mmr <= 4000){
+    }else if(
+      mmr >= 2001 &&
+      mmr <= 4000
+    ){
 
       r1.checked = false;
       r2.checked = true;
@@ -8095,7 +8737,10 @@ function updateRecalCards(fromClick = false){
       r4.checked = false;
 
 
-    }else if(mmr >= 4001 && mmr <= 6000){
+    }else if(
+      mmr >= 4001 &&
+      mmr <= 6000
+    ){
 
       r1.checked = false;
       r2.checked = false;
@@ -8103,7 +8748,9 @@ function updateRecalCards(fromClick = false){
       r4.checked = false;
 
 
-    }else if(mmr >= 6001){
+    }else if(
+      mmr >= 6001
+    ){
 
       r1.checked = false;
       r2.checked = false;
@@ -8123,25 +8770,66 @@ function updateRecalCards(fromClick = false){
   }
 
 
-  // efeito visual dos cards
+  // ==============================
+  // EFEITO VISUAL DOS CARDS
+  // ==============================
 
-  if(c1) c1.classList.toggle("active", r1.checked);
-  if(c2) c2.classList.toggle("active", r2.checked);
-  if(c3) c3.classList.toggle("active", r3.checked);
-  if(c4) c4.classList.toggle("active", r4.checked);
+  if(c1)
+    c1.classList.toggle(
+      "active",
+      r1.checked
+    );
+
+  if(c2)
+    c2.classList.toggle(
+      "active",
+      r2.checked
+    );
+
+  if(c3)
+    c3.classList.toggle(
+      "active",
+      r3.checked
+    );
+
+  if(c4)
+    c4.classList.toggle(
+      "active",
+      r4.checked
+    );
 
 }
+
 
 function updateCoachCards(){
-  const card1 = $("coachCard1");
-  const card2 = $("coachCard2");
-  const p1 = $("coachP1")?.checked;
-  const p2 = $("coachP2")?.checked;
 
-  if(card1) card1.classList.toggle("active", !!p1);
-  if(card2) card2.classList.toggle("active", !!p2);
+  const card1 =
+    $("coachCard1");
+
+  const card2 =
+    $("coachCard2");
+
+  const p1 =
+    $("coachP1")?.checked;
+
+  const p2 =
+    $("coachP2")?.checked;
+
+
+  if(card1)
+    card1.classList.toggle(
+      "active",
+      !!p1
+    );
+
+
+  if(card2)
+    card2.classList.toggle(
+      "active",
+      !!p2
+    );
+
 }
-
 /* ========= update all ========= */
 function updateAll(){
 
