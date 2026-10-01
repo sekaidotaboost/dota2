@@ -6620,9 +6620,15 @@ const base = calcTradBaseProgressivo(atual, desCalculo);
 * MMR desejado: ${desCalculo}
 * Quantidade: ${delta} MMR
 * Valor base: ${money(base)}
-* Desconto padrão do site: ${pct > 0 ? Math.round(pct * 100) + "% OFF" : "Nenhum"}
-* OFF SUPER PROMO: ${superPromoApplied ? Math.round(superPromoPct * 100) + "% OFF" : "Não"}
-* Valor do serviço: ${money(baseValue)}`
+${pct > 0
+  ? `* Desconto padrão do site: ${Math.round(pct * 100)}% OFF`
+  : ""}
+${superPromoApplied
+  ? `* OFF SUPER PROMO: ${Math.round(superPromoPct * 100)}% OFF`
+  : ""}
+${pct > 0 || superPromoApplied
+  ? `* Valor do serviço: ${money(baseValue)}`
+  : ""}`
 };
 }
 
@@ -7103,36 +7109,40 @@ function calcRecal(){
      - cobra somente as partidas adicionais
   */
 
-  const serviceValue =
-    existingService
-      ? 0
-      : baseValue;
+  const serviceValue = existingService ? 0 : baseValue;
 
+// 📡 OFF-STREAM DA RECALIBRAÇÃO
+let offOriginal = 0;
+let offValue = 0;
 
-  // ==========================================
-  // OFF STREAM
-  // ==========================================
+if(off){
+  // Taxa base de 2 dias / 15 partidas
+  // Só existe quando o cliente NÃO possui uma recalibração em andamento.
+  const offBase = existingService ? 0 : 40;
 
-  /*
-     Mantém exatamente o funcionamento anterior.
-  */
+  // Partidas adicionais:
+  // 1 até 7  = +20
+  // 8 até 14 = +40
+  // 15 até 21 = +60
+  // ...
+  const offAdicional =
+    extraGames > 0
+      ? Math.ceil(extraGames / 7) * 20
+      : 0;
 
-  const offOriginal =
-    off ? 40 : 0;
+  offOriginal = offBase + offAdicional;
+  offValue = offOriginal;
+}
 
-  const offValue =
-    offOriginal;
+const total =
+  serviceValue +
+  extraGamesValue +
+  offValue;
 
-
-  // ==========================================
-  // TOTAL
-  // ==========================================
-
-  const total =
-    serviceValue +
-    extraGamesValue +
-    offValue;
-
+const totalNoPromo =
+  serviceValue +
+  extraGamesValue +
+  offOriginal;
 
   // ==========================================
   // TEXTO DAS PARTIDAS ADICIONAIS
