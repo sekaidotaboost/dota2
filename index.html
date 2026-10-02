@@ -4021,6 +4021,736 @@ input[type=text]:focus{
 }
 
 
+
+/* =========================================================
+   CORREÇÃO MOBILE — NÃO ALTERA O DESKTOP
+   ========================================================= */
+
+@media (max-width: 700px){
+
+  /* ---------- BASE ---------- */
+
+  html,
+  body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+  }
+
+  body{
+    min-width:0;
+  }
+
+  .app-shell{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+  }
+
+  .wrap{
+    width:100%;
+    max-width:100%;
+    padding:10px;
+    margin:0;
+  }
+
+
+  /* ---------- TOPO ---------- */
+
+  .topbar{
+    width:100%;
+    padding:9px 10px;
+    gap:8px;
+  }
+
+  .brandBlock{
+    min-width:0;
+    flex:1;
+    gap:9px;
+  }
+
+  .brandLogoWrap{
+    width:44px;
+    height:44px;
+    min-width:44px;
+    border-radius:13px;
+  }
+
+  .brandOrb{
+    width:44px;
+    height:44px;
+    min-width:44px;
+  }
+
+  .brandTexts{
+    min-width:0;
+  }
+
+  .brandTexts h1{
+    font-size:14px;
+    line-height:1.15;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .brandTexts .sub{
+    font-size:10px;
+    line-height:1.25;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .topRight{
+    flex-shrink:0;
+    gap:6px;
+  }
+
+  .sekaiInfoBtn{
+    padding:9px 10px;
+    font-size:11px;
+    border-radius:12px;
+  }
+
+  .topMenuBtn{
+    padding:5px 7px;
+    border-radius:14px;
+    gap:5px;
+  }
+
+  .topMenuIconBox{
+    width:40px;
+    height:40px;
+    border-radius:11px;
+  }
+
+  .topMenuBars{
+    padding:0 3px 0 0;
+  }
+
+
+  /* ---------- HERO ---------- */
+
+  .heroPanel{
+    width:100%;
+    margin-bottom:12px;
+    padding:12px;
+    border-radius:18px;
+  }
+
+  .heroTop{
+    display:block;
+    margin-bottom:11px;
+  }
+
+  .heroTitle{
+    font-size:17px;
+    line-height:1.25;
+  }
+
+  .heroText{
+    font-size:12px;
+    line-height:1.45;
+  }
+
+  .filterBar{
+    width:100%;
+    max-width:100%;
+    overflow-x:auto;
+    padding-bottom:5px;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .categoryBtn,
+  .promoToggleBtn{
+    flex-shrink:0;
+    white-space:nowrap;
+  }
+
+
+  /* ---------- GRID PRINCIPAL ---------- */
+
+  .grid{
+    width:100%;
+    max-width:100%;
+    grid-template-columns:1fr !important;
+    gap:10px;
+  }
+
+  .card{
+    width:100%;
+    min-width:0;
+    max-width:100%;
+    padding:12px;
+    border-radius:18px;
+    overflow:hidden;
+  }
+
+  .card h2{
+    flex-wrap:wrap;
+    align-items:center;
+    font-size:14px;
+  }
+
+  .pill{
+    font-size:10px;
+    padding:5px 8px;
+  }
+
+
+  /* ---------- CAMPOS ---------- */
+
+  input[type="number"],
+  input[type="text"],
+  select,
+  textarea{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+  }
+
+  .two{
+    width:100%;
+    grid-template-columns:1fr !important;
+  }
+
+  .result{
+    width:100%;
+    max-width:100%;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+  }
+
+
+  /* ---------- SERVIÇOS ---------- */
+
+  .service-card{
+    width:100%;
+    min-width:0;
+    max-width:100%;
+  }
+
+  .serviceBody{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    overflow:hidden;
+  }
+
+  .servicePreviewBox{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    padding:9px;
+    gap:9px;
+  }
+
+  .servicePreviewBox img{
+    flex-shrink:0;
+    max-width:54px;
+  }
+
+  .servicePreviewText{
+    min-width:0;
+    overflow-wrap:anywhere;
+  }
+
+
+  /* ---------- RANK PICKER ---------- */
+
+  .rankPickerWrap{
+    width:100%;
+    max-width:100%;
+    padding:9px;
+    overflow:hidden;
+  }
+
+  .rankPreviewBox{
+    width:100%;
+    min-width:0;
+    gap:9px;
+    padding:8px;
+  }
+
+  .rankPreviewBox img{
+    width:48px;
+    height:48px;
+    flex-shrink:0;
+  }
+
+  .rankPreviewName{
+    font-size:14px;
+    overflow-wrap:anywhere;
+  }
+
+  .rankGrid{
+    width:100%;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:6px;
+  }
+
+  .rankMedalBtn{
+    width:100%;
+    min-width:0;
+    padding:6px 2px;
+  }
+
+  .rankMedalBtn img{
+    width:30px;
+    height:30px;
+  }
+
+  .rankMedalBtn span{
+    font-size:9px;
+    overflow-wrap:anywhere;
+  }
+
+  .rankStars{
+    gap:5px;
+  }
+
+  .rankStarBtn{
+    min-width:0;
+    padding:8px 2px;
+  }
+
+
+  /* ---------- COACH ---------- */
+
+  .coachGrid{
+    width:100%;
+    grid-template-columns:1fr !important;
+    gap:8px;
+  }
+
+  .coachCard{
+    width:100%;
+    min-width:0;
+  }
+
+  #bodyCoach .coachCard{
+    width:100%;
+    min-width:0;
+  }
+
+  #bodyCoach .coachCard img{
+    max-width:65px;
+    height:65px;
+  }
+
+
+  /* ---------- RECALIBRAÇÃO ---------- */
+
+  #bodyRecal .coachGrid{
+    width:100%;
+    grid-template-columns:1fr !important;
+    gap:9px;
+  }
+
+  #bodyRecal .coachCard{
+    width:100%;
+    min-width:0;
+    grid-template-columns:1fr 60px;
+  }
+
+  #bodyRecal .coachCard img{
+    width:52px;
+    height:52px;
+    max-width:52px;
+  }
+
+  #bodyRecal .coachCardTitle,
+  #bodyRecal .coachCardDesc{
+    min-width:0;
+    overflow-wrap:anywhere;
+  }
+
+
+  /* ---------- LOW PRIORITY ---------- */
+
+  .lowPriorityGrid{
+    width:100%;
+    grid-template-columns:1fr !important;
+    gap:8px;
+  }
+
+  .lowPriorityCard{
+    width:100%;
+    min-width:0;
+    padding:10px 58px 10px 11px;
+  }
+
+  .lowPriorityCard img{
+    width:42px;
+    height:42px;
+    right:8px;
+  }
+
+
+  /* ---------- REPLAY ---------- */
+
+  .replayOptions{
+    width:100%;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:8px;
+  }
+
+  .replayOption{
+    width:100%;
+    min-width:0;
+    padding:10px 55px 10px 10px;
+  }
+
+  .replayOption img{
+    width:40px;
+    height:40px;
+    right:8px;
+  }
+
+  .replayOptionTitle,
+  .replayOptionPrice{
+    max-width:100%;
+    overflow-wrap:anywhere;
+  }
+
+
+  /* ---------- PROMOÇÕES ---------- */
+
+  .promoGrid{
+    width:100%;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:8px;
+  }
+
+  .promoCard{
+    width:100%;
+    min-width:0;
+    min-height:105px;
+    padding:9px 7px;
+  }
+
+  .promoIcon{
+    font-size:23px;
+  }
+
+  .promoTitle{
+    font-size:11px;
+  }
+
+  .promoDesc{
+    font-size:10px;
+  }
+
+
+  /* ---------- EXITLAG ---------- */
+
+  .exitlagCard{
+    width:100%;
+    max-width:100%;
+    padding:8px;
+  }
+
+  .exitlagImage{
+    width:100%;
+    max-width:100%;
+    height:auto;
+  }
+
+
+  /* ---------- PIX ---------- */
+
+  .pixModalCard{
+    width:100%;
+    max-width:100%;
+  }
+
+  .pixKeyInput{
+    width:100%;
+    min-width:0;
+  }
+
+  .pixCopyBtn,
+  .pixQrBtn{
+    width:100%;
+    min-width:0;
+  }
+
+  .pixQrImg{
+    max-width:220px;
+  }
+
+
+  /* ---------- MODAIS ---------- */
+
+  .modalOverlay{
+    padding:8px;
+    align-items:flex-start;
+  }
+
+  .modalCard{
+    width:100%;
+    max-width:100%;
+    max-height:calc(100vh - 16px);
+    padding:14px;
+    border-radius:20px;
+    overflow-x:hidden;
+  }
+
+  .modalHeader{
+    gap:8px;
+  }
+
+  .modalTitle{
+    font-size:18px;
+    line-height:1.2;
+  }
+
+  .modalClose{
+    flex-shrink:0;
+    min-width:42px;
+    padding:9px 11px;
+  }
+
+
+  /* ---------- PERFIL SEKAI ---------- */
+
+  .sekaiProfileTop{
+    width:100%;
+    grid-template-columns:1fr !important;
+    gap:10px;
+  }
+
+  .sekaiPhotoCard,
+  .sekaiInfoCard{
+    width:100%;
+    min-width:0;
+    padding:12px;
+  }
+
+  .sekaiMainPhoto{
+    width:100%;
+    height:auto;
+    max-height:320px;
+    object-fit:cover;
+  }
+
+  .sekaiRankPhoto{
+    width:100%;
+    max-width:220px;
+    height:auto;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .sekaiInfoGrid{
+    grid-template-columns:1fr !important;
+    gap:8px;
+  }
+
+
+  /* ---------- HERÓIS ---------- */
+
+  .rolesWrap{
+    width:100%;
+    gap:12px;
+  }
+
+  .rolesRow,
+  .rolesRow.top,
+  .rolesRow.bottom{
+    width:100%;
+    grid-template-columns:1fr !important;
+    gap:10px;
+  }
+
+  .heroRoleBlock{
+    width:100%;
+    min-width:0;
+    padding:13px;
+    border-radius:18px;
+  }
+
+  .heroRoleTitle{
+    font-size:20px;
+    margin-bottom:13px;
+  }
+
+  .heroRoleGrid{
+    width:100%;
+    grid-template-columns:repeat(3,minmax(0,72px)) !important;
+    justify-content:center;
+    gap:8px;
+  }
+
+  .heroCardTall{
+    width:72px;
+    max-width:72px;
+    min-width:0;
+  }
+
+  .heroCardTall img{
+    width:100%;
+    height:auto !important;
+    aspect-ratio:9 / 16;
+    object-fit:cover;
+  }
+
+  .heroCardTall .heroItemName{
+    font-size:9px;
+    min-height:22px;
+    overflow-wrap:anywhere;
+  }
+
+
+  /* ---------- APP MODAL ---------- */
+
+  .appModalTop{
+    width:100%;
+    padding:12px;
+    gap:10px;
+  }
+
+  .appModalLogo{
+    width:56px;
+    height:56px;
+    flex-shrink:0;
+  }
+
+  .appModalAppName{
+    font-size:18px;
+  }
+
+  .appModalMini{
+    font-size:11px;
+  }
+
+  .appModalText{
+    padding:12px;
+    font-size:12px;
+    line-height:1.55;
+  }
+
+
+  /* ---------- MENU DROPDOWN ---------- */
+
+  .topDropdown{
+    position:fixed;
+    top:64px;
+    right:8px;
+    left:8px;
+    width:auto;
+    min-width:0;
+    max-width:none;
+    max-height:calc(100vh - 74px);
+    overflow-y:auto;
+    border-radius:18px;
+  }
+
+  .menuItemBtn{
+    padding:12px;
+  }
+
+
+  /* ---------- CARRINHO FLUTUANTE ---------- */
+
+  .floating-total{
+    left:10px;
+    right:10px;
+    bottom:10px;
+    width:auto;
+    min-width:0;
+    max-width:none;
+    padding:11px 13px;
+    border-radius:14px;
+  }
+
+  .ft-items{
+    max-height:90px;
+    overflow-y:auto;
+  }
+
+  .ft-item{
+    white-space:normal;
+    overflow-wrap:anywhere;
+  }
+
+  .ft-price{
+    font-size:17px;
+  }
+
+
+  /* ---------- BOTÕES ---------- */
+
+  button{
+    max-width:100%;
+  }
+
+  .exitlagToggleBtn{
+    width:max-content;
+    max-width:100%;
+  }
+
+}
+
+
+/* =========================================================
+   CELULARES MUITO PEQUENOS
+   ========================================================= */
+
+@media (max-width: 380px){
+
+  .wrap{
+    padding:8px;
+  }
+
+  .topbar{
+    padding:8px;
+  }
+
+  .brandTexts h1{
+    font-size:13px;
+  }
+
+  .brandTexts .sub{
+    font-size:9px;
+  }
+
+  .sekaiInfoBtn{
+    font-size:10px;
+    padding:8px;
+  }
+
+  .topMenuIconBox{
+    width:36px;
+    height:36px;
+  }
+
+  .heroRoleGrid{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  }
+
+  .heroCardTall{
+    width:100%;
+    max-width:72px;
+    justify-self:center;
+  }
+
+  .rankGrid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+
+  .promoGrid{
+    grid-template-columns:1fr !important;
+  }
+
+  .replayOptions{
+    grid-template-columns:1fr !important;
+  }
+
+}
+
+
 </style>
 </head>
 <body>
